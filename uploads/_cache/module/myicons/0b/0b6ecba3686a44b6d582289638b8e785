@@ -1,0 +1,12 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M20,13.444v5.667    C20,20.154,19.154,21,18.111,21H4.889C3.846,21,3,20.154,3,19.111V5.889C3,4.846,3.846,4,4.889,4h5.667"></path>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" x1="18.222" y1="9.556" x2="18.222" y2="2"></line>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" x1="14.444" y1="5.778" x2="22" y2="5.778"></line>
+	</g>
+	<rect id="_Transparent_Rectangle__1_" fill="none" width="24" height="24"></rect>
+</g>
+</svg>

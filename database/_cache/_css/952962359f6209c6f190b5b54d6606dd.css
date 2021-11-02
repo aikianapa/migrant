@@ -1,0 +1,30 @@
+.filepicker .listview {
+  padding: 10px;
+}
+.filepicker .card .card-body {
+  padding: 0.25rem;
+}
+.filepicker .card figure > .cart-img-top {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+.filepicker .card > i {
+  font-size: 150px;
+}
+.filepicker .card img[loading] {
+  background: url(/engine/modules/filepicker/assets/img/loader.gif) 50% 50% no-repeat;
+  background-size: contain;
+}
+.filepicker .card figcaption {
+  position: absolute;
+  display: none;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+}
+.filepicker .card:hover figcaption {
+  display: flex;
+}
