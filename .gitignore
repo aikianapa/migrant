@@ -9,3 +9,9 @@ forms/news
 forms/pages
 
 tpl/page.php
+
+forms/comments
+
+forms/quotes
+
+forms/users
