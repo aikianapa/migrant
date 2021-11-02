@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buznex – Business Bootstrap 5 Template</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <!-- <link rel="stylesheet" href="assets/css/vendor/simple-line-icons.css" />
+<link rel="stylesheet" href="assets/css/vendor/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/vendor/metropolis.css" />
+<link rel="stylesheet" href="assets/css/vendor/material-design-iconic.min.css" />
+<link rel="stylesheet" href="assets/css/vendor/font-awesome.css" />
+<link rel="stylesheet" href="assets/css/plugins/animate.min.css" />
+<link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" /> -->
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+
+    <!--  Minified  css  -->
+
+    <!--  # vendor min css,plugins min css,style min css -->
+
+    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/style.min.css" />
+
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class="modal fade offcanvas-modal" id="exampleModal">
+        <div class="modal-dialog offcanvas-dialog">
+            <div class="modal-content">
+                <div class="modal-header offcanvas-header">
+                    <a class="offcanvas-logo" href="index.html"><img src="assets/images/logo/logo.png" alt="logo" /></a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- offcanvas-mobile-menu start -->
+
+                <nav id="offcanvasNav" class="offcanvas-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li>
+                            <a href="javascript:void(0)">Service</a>
+
+                            <ul>
+                                <li><a href="service.html">service</a></li>
+                                <li><a href="single-service.html">single service</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">Pages</a>
+                            <ul>
+                                <li><a href="faq.html">faq</a></li>
+                                <li><a href="team.html">team</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">Blog</a>
+                            <ul>
+                                <li>
+                                    <a href="blog.html">blog</a>
+                                </li>
+                                <li>
+                                    <a href="blog-grid-left-sidebar.html">blog grid left sidebar</a>
+                                </li>
+                                <li>
+                                    <a href="blog-grid-right-sidebar.html">blog grid right sidebar</a>
+                                </li>
+                                <li><a href="blog-details.html">blog details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+
+
+                </nav>
+                <!-- offcanvas-mobile-menu end -->
+            </div>
+        </div>
+    </div>
+    <header id="active-sticky" class="header-section">
+        <!-- Header  Start -->
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Header Logo Start -->
+                <div class="col">
+                    <div class="header-logo">
+                        <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a>
+                    </div>
+                </div>
+                <!-- Header Logo End -->
+
+                <!-- Header Menu Start -->
+                <div class="col text-end">
+                    <nav class="main-menu d-none d-lg-block">
+                        <ul class="d-flex">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li>
+                                <a href="blog-grid-right-sidebar.html#">Service</a>
+
+                                <ul class="sub-menu">
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="service.html">Service</a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="single-service.html">single service</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="blog-grid-right-sidebar.html#">Pages</a>
+                                <ul class="sub-menu">
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="faq.html">faq</a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="team.html">team</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="blog-grid-right-sidebar.html#">Blog</a>
+                                <ul class="sub-menu">
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="blog.html">Blog</a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="blog-grid-left-sidebar.html">blog grid left sidebar</a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="blog-grid-right-sidebar.html">blog grid right sidebar</a>
+                                    </li>
+                                    <li class="sub-menu-item">
+                                        <a class="sub-menu-link" href="blog-details.html">blog details</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="toggle" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <span class="icon-top"></span>
+                        <span class="icon-middle"></span>
+                        <span class="icon-bottom"></span>
+                    </button>
+                </div>
+                <!-- Header Menu End -->
+            </div>
+        </div>
+        <!-- Header  End -->
+    </header>
+
+    <!-- Banner Section Start -->
+
+    <section class="banner-section position-relative">
+        <img class="banner-shape" src="assets/images/banner/shape1.png" alt="shape" />
+        <div class="container">
+            <div class="row">
+                <!-- Banner-Content Start -->
+                <div class="col-md-6">
+                    <div class="banner-content banner-padding">
+                        <h3 class="title">Blog Post</h3>
+                        <p>
+                            Pleasure rationally encounter consequences <br />
+              are extremely painful great oppurtunity
+                        </p>
+                    </div>
+                </div>
+                <!-- Banner-Content End -->
+
+                <!-- Banner-Content Start -->
+                <div class="col-md-6 mt-7 mt-md-0">
+                    <div class="banner-content scene banner-img">
+                        <div data-depth="0.2">
+                            <img src="assets/images/blog/banner.png" alt="img" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Banner-Content End -->
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section End -->
+
+    <!-- Blog Section Start -->
+    <section class="blog-section section-py">
+        <div class="container">
+            <div class="row mb-n7">
+                <div class="col-xl-8 col-lg-8 mb-7">
+                    <div class="row mb-n7 row-cols-1 row-cols-sm-2">
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/4.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Adam - 25 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">Business Development Conferrence 2021</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/6.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Kristina - 25 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">Investment Planning for your Business</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/7.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Ethan - 25 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">New Strategy for new Startup Business</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/8.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Gilcrist - 18 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">How to be an successfull Business Entrepreneur</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/10.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Luice - 15 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">Branding playing a great role in Business</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/12.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Jack - 12 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">Business Development Conferrence 2021</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/11.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Michel - 10 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">Business Development Conferrence 2021</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+
+                        <!-- single blog start -->
+                        <div class="col mb-7">
+                            <div class="blog-card">
+                                <div class="thumb bg-light p-0 text-center">
+                                    <a href="blog-details.html">
+                                        <img src="assets/images/blog/9.png" alt="img" />
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <a href="blog-grid-right-sidebar.html#"><span class="blog-meta">Smith - 08 September, 2021</span></a>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">Importance of Campaign and PR for Business</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single blog end -->
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item"><a class="page-link" href="blog-grid-right-sidebar.html#">1</a></li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="blog-grid-right-sidebar.html#">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="blog-grid-right-sidebar.html#"><span class="pagination-hr"></span></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="blog-grid-right-sidebar.html#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="blog-grid-right-sidebar.html#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="blog-grid-right-sidebar.html#">5</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 mb-7  offset-xl-1">
+                    <div class="widget-wrapper widget-wrapper-nl">
+                        <!-- sidebar-widget start -->
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Search</h3>
+                            <div class="widget-content">
+                                <div class="widget-search">
+                                    <form action="blog-grid-right-sidebar.html#">
+                                        <input class="form-control" type="text" placeholder="Type your keyword..." />
+                                        <button class="widget-search-btn">
+                                            <i class="icofont-search"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sidebar-widget end -->
+
+                        <!-- sidebar-widget start -->
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Categories</h3>
+                            <div class="widget-list">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Digital Solution<span>328</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Business Plan<span>240</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Investment Planning<span>87</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Consultancy<span>20</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Marketing Policy<span>59</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Branding<span>72</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Campaign & PR<span>128</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- sidebar-widget end -->
+                        <!-- sidebar-widget start -->
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">popular post</h3>
+                            <!-- widget-post-list startrt -->
+                            <div class="widget-post-list">
+                                <a href="blog-grid-right-sidebar.html#" class="post-thumb">
+                                    <img src="assets/images/blog/post/1.png" alt="img" />
+                                </a>
+                                <div class="widget-post-content">
+                                    <h3 class="widget-sub-title">
+                                        <a href="blog-grid-right-sidebar.html#">Invesment policy for a Startup Business</a>
+                                    </h3>
+                                    <p class="post-meta">Septemer 10, 2021</p>
+                                </div>
+                            </div>
+                            <!-- widget-post-list startrt -->
+                            <!-- widget-post-list startrt -->
+                            <div class="widget-post-list">
+                                <a href="blog-grid-right-sidebar.html#" class="post-thumb">
+                                    <img src="assets/images/blog/post/2.png" alt="img" />
+                                </a>
+                                <div class="widget-post-content">
+                                    <h3 class="widget-sub-title">
+                                        <a href="blog-grid-right-sidebar.html#">Branding can play great role in Business</a>
+                                    </h3>
+                                    <p class="post-meta">September 05, 2021</p>
+                                </div>
+                            </div>
+                            <!-- widget-post-list startrt -->
+                            <!-- widget-post-list startrt -->
+                            <div class="widget-post-list">
+                                <a href="blog-grid-right-sidebar.html#" class="post-thumb">
+                                    <img src="assets/images/blog/post/3.png" alt="img" />
+                                </a>
+                                <div class="widget-post-content">
+                                    <h3 class="widget-sub-title">
+                                        <a href="blog-grid-right-sidebar.html#">Marketing training on new strategy </a>
+                                    </h3>
+                                    <p class="post-meta">September 02, 2021</p>
+                                </div>
+                            </div>
+                            <!-- widget-post-list startrt -->
+                        </div>
+                        <!-- sidebar-widget end -->
+
+                        <!-- sidebar-widget start -->
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Archive</h3>
+                            <div class="widget-list">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        September. 2021<span>70</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        August, 2021<span>90</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        July, 2021<span>120</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        June, 2020<span>110</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        May, 2021<span>90</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        April, 2021<span>59</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        March, 2021<span>60</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        February, 2021<span>128</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- sidebar-widget end -->
+
+                        <!-- sidebar-widget start -->
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">Tags</h3>
+                            <div class="widget-tags">
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Corporate</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Creative</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">interrior</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Marketing</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Business</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Invest</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Branding</a>
+                                <a class="widget-tag-link" href="JavaScript:Void(0);">Consultancy</a>
+                            </div>
+                        </div>
+
+                        <!-- sidebar-widget end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section ENd -->
+
+    <!-- News letter Section Start -->
+    <section class="news-letter-section section-pb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-xl-6 mx-auto">
+                    <div class="title-section mb-10 text-center">
+                        <span class="sub-title">NEWSLETTER</span>
+                        <h3 class="title mb-0">
+                            Subscribe <span class="text-primary">Newsletter</span> &
+                            <br class="d-none d-xl-block" />get latest update...
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-10 mx-auto">
+                    <form id="mc-form" class="news-letter-form d-flex">
+                        <input id="mc-email" class="form-control" type="email" placeholder="Enter Email here" name="email" required='' />
+                        <button class="search-btn" type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News letter Section End -->
+
+    <footer class="footer-section">
+        <div class="footer-top position-relative">
+
+            <img class="footer-shape" src="assets/images/footer/1.png" alt="shape">
+            <div class="container">
+                <div class="row mb-n7">
+                    <div class="col-lg-3 col-sm-6 mb-7">
+                        <div class="footer-widget">
+                            <a class="footer-logo mb-9" href="index.html">
+                                <img src="assets/images/logo/logo-footer.png" alt="footer-logo" />
+                            </a>
+                            <p>
+                                Pleasure rationally encounter consequences that extremely painful.
+                                Nor again is there
+                            </p>
+                            <ul class="footer-social-links">
+                                <li>
+                                    <a class="footer-social-link" href="blog-grid-right-sidebar.html#"><i class="icofont-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a class="footer-social-link" href="blog-grid-right-sidebar.html#"><i class="icofont-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a class="footer-social-link" href="blog-grid-right-sidebar.html#"><i class="icofont-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a class="footer-social-link" href="blog-grid-right-sidebar.html#"><i class="icofont-whatsapp"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-7 offset-xl-1">
+                        <div class="footer-widget">
+                            <h4 class="title">Quick Link</h4>
+                            <ul class="footer-menu">
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">About us</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Pricing Plan</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Conditions</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Blog Post</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Our Clients</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Contact us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6 mb-7">
+                        <div class="footer-widget">
+                            <h4 class="title">Services</h4>
+                            <ul class="footer-menu">
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Business Plan</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Creative Strategy</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Branding </a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Digital Solution</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Marketing Policy</a></li>
+                                <li><a class="footer-link" href="blog-grid-right-sidebar.html#">Campaign & PR</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-7">
+                        <div class="footer-widget">
+                            <h4 class="title">Contact info</h4>
+                            <p>245 Southern Street, Apt. 147 New York, USA</p>
+                            <ul class="address">
+                                <li>
+                                    <a class="address-link" href="tel:+12354569874">+12354 569 874</a>
+                                </li>
+                                <li>
+                                    <a class="address-link" href="tel:+98745612398">+98745 612 398</a>
+                                </li>
+                                <li>
+                                    <a class="address-link" href="mailto:info@example.com">info@example.com</a>
+                                </li>
+                                <li>
+                                    <a class="address-link" href="mailto:info@example.com">www.example.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- coppy right satrt -->
+        <div class="copy-right-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="copyright-info text-center">
+                            <p>
+                                Copyright &copy; <span id="currentYear"></span>
+                                Made with <i class="icofont-heart-alt"></i> By
+                                <a href="https://hasthemes.com/" target="_blank">
+                                    HasThemes</a>, All Rights Reserved
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- coppy right end -->
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Global Vendor, plugins JS -->
+
+    <!-- Vendor JS -->
+
+    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<script src="assets/js/vendor/parallax.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script>
+<script src="assets/js/ajax-contact.js"></script>
+<script src="assets/js/main.js"></script> -->
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+
+    <!-- #  Minified  js  -->
+
+    <!-- vendor,plugins and main js -->
+
+    <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/vendor/parallax.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/ajax-contact.js"></script>
+    <script src="assets/js/main.min.js"></script>
+
+</body>
+
+</html>

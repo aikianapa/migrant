@@ -1,0 +1,14 @@
+$link-hover-color: #59e3a7;
+
+nav {
+    &.main-menu {
+        .sub-menu {
+            left: auto;
+            right: 0;
+            width: auto;
+        }
+        .active {
+            color: $link-hover-color;
+        }
+    }
+}

@@ -1,1 +1,1 @@
-/home/www/wb3/modules/yonger/common/tpl/page.php
+/home/www/yonger.loc/modules/yonger/common/tpl/page.php
