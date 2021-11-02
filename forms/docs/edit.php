@@ -27,7 +27,7 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Код конверта с картой</label>
-                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой" required>
+                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
                         </div>
 
                         <div class="form-group">
@@ -96,7 +96,7 @@
 
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="text" name="doc_expired" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата окончания">
+                                        <input type="text" name="doc_expire" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата окончания">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -126,7 +126,7 @@
 
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="text" name="mc_expired" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата окончания">
+                                        <input type="text" name="mc_expire" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата окончания">
                                     </div>
                                 </div>
 
@@ -141,18 +141,18 @@
 
                                     <div class="form-group col-sm-9">
                                         <label class="form-control-label">Населённый пункт</label>
-                                        <input type="number" name="reg_city" class="form-control" placeholder="Населённый пункт">
+                                        <input type="text" name="reg_city" class="form-control" placeholder="Населённый пункт">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-3">
                                         <label class="form-control-label">Тип</label>
-                                        <input type="number" name="reg_street_type" class="form-control" placeholder="Тип улицы">
+                                        <input type="text" name="reg_street_type" class="form-control" placeholder="Тип улицы">
                                     </div>
 
                                     <div class="form-group col-sm-9">
                                         <label class="form-control-label">Название улицы</label>
-                                        <input type="number" name="reg_city" class="form-control" placeholder="Название улицы">
+                                        <input type="text" name="reg_street" class="form-control" placeholder="Название улицы">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="form-control-label">Корпус</label>
-                                        <input type="number" name="reg_corpse" class="form-control" placeholder="Корпус">
+                                        <input type="text" name="reg_corpse" class="form-control" placeholder="Корпус">
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="form-control-label">Квартира</label>
