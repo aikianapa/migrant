@@ -29,6 +29,7 @@ class modImport
     private function process()
     {
         $file = $this->app->route->path_app.$this->app->vars('_post.0.img');
+        $team = $this->app->vars('_post.team');
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
         $spreadsheet = $reader->load($file);
         $worksheet = $spreadsheet->getActiveSheet();
@@ -46,6 +47,7 @@ class modImport
             }
             if (count(explode(' ', $line['fullname'])) > 1 && is_numeric($line['doc_num'])) {
                 $checksum = $this->docs->checksum($line);
+                $line['team'] = $team;
                 if (in_array($checksum, $this->checklist)) {
                     $this->checklist[] = $checksum;
                     $line['birth_date'] = date('d.m.Y', strtotime($line['birth_date']));

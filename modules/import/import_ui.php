@@ -3,8 +3,18 @@
         <h3 class="tx-bold tx-spacing--2 order-1">Импорт из XLS</h3>
     </nav>
 
-    <div class="mod-data">
-        <input wb="module=filepicker&mode=button&ext=xls" name="file" wb-path="/uploads/tmp" wb-button="Файл XLS">
+    <div class="mod-data row">
+        <div class="col-auto col-form-label">
+            От кого
+        </div>
+        <div class="col">
+            <select name="team" class="form-control select2" placeholder="От кого" wb-tree="item=teams">
+                <option value="{{id}}">{{name}}</option>
+            </select>
+        </div>
+        <div class="col">
+            <input wb="module=filepicker&mode=button&ext=xls" name="file" wb-path="/uploads/tmp" wb-button="Файл XLS">            
+        </div>
     </div>
 
     <div class="mod-wait d-none">
@@ -43,9 +53,20 @@
     </ul>
 
     <script>
+        wbapp.loadStyles(['/engine/lib/js/select2/select2.min.css'],'select2-css');
+        wbapp.loadScripts(['/engine/lib/js/select2/select2.min.js'],'select2-js',function(){
+            $('#moduleImportXls [name=team]').select2().on("select2:select", function (e) { 
+                if ($(e.currentTarget).val() == '') {
+                    $('#moduleImportXls .btn, input[type=file]').prop('disabled',true);
+                } else {
+                    $('#moduleImportXls .btn, input[type=file]').prop('disabled',false);
+                }
+            }).trigger('select2:select');
+        });
         wbapp.storage('cms.list.modImport', null);
         $(document).undelegate('#moduleImportXls', 'mod-filepicker-done');
         $(document).delegate('#moduleImportXls', 'mod-filepicker-done', function(ev, data) {
+            data.team = $('#moduleImportXls [name=team]').val();
             if (!$(ev.currentTarget).is('#moduleImportXls')) return;
             $('#moduleImportXls .btn').hide();
             $('#moduleImportXls .mod-wait').removeClass('d-none');

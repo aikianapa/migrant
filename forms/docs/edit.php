@@ -24,12 +24,6 @@
 
                     <div class="col-lg-6">
 
-
-                        <div class="form-group">
-                            <label class="form-control-label">Код конверта с картой</label>
-                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
-                        </div>
-
                         <div class="form-group">
                             <label class="form-control-label">Ф.И.О.</label>
                             <input type="text" name="fullname" class="form-control" placeholder="Ф.И.О." required>
@@ -59,8 +53,8 @@
 
                                 <div class="form-group">
                                     <label class="form-control-label">Гражданство</label>
-                                    <select name="citizen" class="form-control" placeholder="Гражданство" wb-tree="item=countries">
-                                        <option value="{{_id}}">{{name}}</option>
+                                    <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false">
+                                        <option value="{{id}}">{{name}}</option>
                                     </select>
                                 </div>
 
@@ -176,6 +170,18 @@
 
                     </div>
                     <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Код конверта с картой</label>
+                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Источник</label>
+                            <select name="team" class="form-control select2" placeholder="От кого" wb-tree="item=teams">
+                                <option value="{{id}}">{{name}}</option>
+                            </select>
+                        </div>
+
                         <h5>Исходные</h5>
                         <div>
                             <wb-module name="attaches" wb="{

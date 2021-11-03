@@ -13,8 +13,8 @@
             <tr>
                 <th>Ф.И.О.</th>
                 <th>Дата рождения</th>
-                <th>Обращение</th>
-                <th>Статус</th>
+                <th>Серия</th>
+                <th>Номер</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,9 +23,9 @@
                 wb-filter="{'login':'{{_sess.user.login}}' }">
                 <tr>
                     <td>{{fullname}}</td>
-                    <td>{{birth_date}}</td>
-                    <td>{{message}}</td>
-                    <td>{{status}}</td>
+                    <td>{{wbDate("d.m.Y",{{birth_date}})}}</td>
+                    <td>{{doc_ser}}</td>
+                    <td>{{doc_num}}</td>
                     <td>
                         <a href="javascript:"
                             data-ajax="{'url':'/cms/ajax/form/docs/edit/{{id}}','html':'#yongerQuotes modals'}"
