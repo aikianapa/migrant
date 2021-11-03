@@ -68,7 +68,7 @@
         $(document).delegate('#moduleImportXls', 'mod-filepicker-done', function(ev, data) {
             data.team = $('#moduleImportXls [name=team]').val();
             if (!$(ev.currentTarget).is('#moduleImportXls')) return;
-            $('#moduleImportXls .btn').hide();
+            $('#moduleImportXls .mod-data').hide();
             $('#moduleImportXls .mod-wait').removeClass('d-none');
             wbapp.loading();
             wbapp.post('/module/import/process/', data, function(data) {
