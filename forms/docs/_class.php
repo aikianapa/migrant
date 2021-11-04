@@ -14,6 +14,12 @@ class docsClass extends cmsFormsClass
         }
     }
 
+    public function beforeItemEdit(&$item)
+    {
+        return $item;
+    }
+
+
     public function checklist() {
         $list = $this->app->itemList('docs');
         $list = $this->app->json($list)->from('list')->column('checksum');

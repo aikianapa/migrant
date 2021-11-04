@@ -12,9 +12,6 @@ body svg.mi[class*="size-"] {
   width: auto;
   height: auto;
 }
-body svg.mi [stroke] {
-  stroke: #92929D;
-}
 body .rounded {
   border-radius: 10px;
 }

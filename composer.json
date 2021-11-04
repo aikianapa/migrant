@@ -1,6 +1,7 @@
 {
     "require": {
         "thiagoalessio/tesseract_ocr": "^2.12",
-        "phpoffice/phpspreadsheet": "^1.19"
+        "phpoffice/phpspreadsheet": "^1.19",
+        "phpoffice/phpword": "^0.18.2"
     }
 }

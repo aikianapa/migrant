@@ -1,5 +1,5 @@
 <html>
-<div class="modal fade effect-scale show removable" id="modalQuotesEdit" data-backdrop="static" tabindex="-1" role="dialog"
+<div class="modal fade effect-scale show removable" id="modalDocsEdit" data-backdrop="static" tabindex="-1" role="dialog"
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -14,12 +14,24 @@
             </div>
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
-
+                    <input type="hidden" name="_id">
                     <script>
                         $('#{{_form}}EditForm .accordion').accordion({
                             heightStyle: 'content',
                             collapsible: true
                         });
+                        $('#modalDocsEdit').delegate('.btn.print',wbapp.evClick,function(){
+                            let data = $('#docsEditForm').serializeJson();
+                            let $form = $("<form />");
+                            $form.attr('method', 'POST').attr('target', '_blank').attr('action', '/module/printdocx');
+                            $.each(data, function(k,v){
+                                $form.append('<input type="hidden" name="' + k + '" value="' + v + '">');
+                            });
+                            console.log($form.html());
+                            $form.appendTo('body').submit();
+                            $form.remove();
+                        })
+
                     </script>
 
                     <div class="col-lg-6">
@@ -34,7 +46,7 @@
                             <div>
                                 <div class="form-group">
                                     <label class="form-control-label">Дата рождения</label>
-                                    <input type="text" wb-module="mask" wb-mask="99/99/9999" name="birth_date" class="form-control" placeholder="Дата рождения">
+                                    <input type="date"  name="birth_date" class="form-control" placeholder="Дата рождения">
                                 </div>
 
                                 <div class="form-group">
@@ -44,7 +56,7 @@
 
                                 <div class="form-group">
                                     <label class="form-control-label">Пол</label>
-                                    <select name="citizen" class="form-control" wb-select2 placeholder="Пол">
+                                    <select name="gender" class="form-control" wb-select2 placeholder="Пол">
                                         <option value="М">Мужской</option>
                                         <option value="Ж">Женский</option>
                                     </select>
@@ -85,12 +97,12 @@
                                 <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата выдачи</label>
-                                        <input type="text" name="doc_date" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата выдачи">
+                                        <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи">
                                     </div>
 
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="text" name="doc_expire" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата окончания">
+                                        <input type="date" name="doc_expire" class="form-control" placeholder="Дата окончания">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -115,12 +127,12 @@
                                 <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата выдачи</label>
-                                        <input type="text" name="mc_date" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата выдачи">
+                                        <input type="date" name="mc_date" class="form-control" placeholder="Дата выдачи">
                                     </div>
 
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="text" name="mc_expire" wb-module="mask" wb-mask="99/99/9999" class="form-control" placeholder="Дата окончания">
+                                        <input type="date" name="mc_expire" class="form-control" placeholder="Дата окончания">
                                     </div>
                                 </div>
 
@@ -201,6 +213,7 @@
             </div>
             <div class="modal-footer pd-x-20 pd-b-20 pd-t-0 bd-t-0">
                 <wb-include wb="{'form':'common_formsave.php'}" />
+                <a href="javascript:void(0)" class="btn btn-primary print"><svg wb-module="myicons" class="mi mi-printer size-20" stroke="FFFFFF"></svg>&nbsp;Печать</a>                
             </div>
         </div>
     </div>
