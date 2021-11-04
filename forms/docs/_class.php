@@ -4,6 +4,10 @@ class docsClass extends cmsFormsClass
 {
     public function beforeItemSave(&$item)
     {
+        $item['reg_city_type'] = strtolower($item['reg_city_type']);
+        $item['reg_street_type'] = strtolower($item['reg_street_type']);
+        $item['reg_city'] = ucfirst($item['reg_city']);
+        $item['reg_street'] = ucfirst($item['reg_street']);
         $item['checksum'] = $this->checksum($item);
     }
 
