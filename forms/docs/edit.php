@@ -15,25 +15,6 @@
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
                     <input type="hidden" name="_id">
-                    <script>
-                        $('#{{_form}}EditForm .accordion').accordion({
-                            heightStyle: 'content',
-                            collapsible: true
-                        });
-                        $('#modalDocsEdit').delegate('.btn.print',wbapp.evClick,function(){
-                            let data = $('#docsEditForm').serializeJson();
-                            let $form = $("<form />");
-                            $form.attr('method', 'POST').attr('target', '_blank').attr('action', '/module/printdocx');
-                            $.each(data, function(k,v){
-                                $form.append('<input type="hidden" name="' + k + '" value="' + v + '">');
-                            });
-                            console.log($form.html());
-                            $form.appendTo('body').submit();
-                            $form.remove();
-                        })
-
-                    </script>
-
                     <div class="col-lg-6">
 
                         <div class="form-group">
@@ -194,17 +175,30 @@
                             </select>
                         </div>
 
-                        <h5>Исходные</h5>
-                        <div>
+                        <div class="divider-text">Исходные</div>
+                        <div id="uploadSources">
                             <wb-module name="attaches" wb="{
                                 'module':'filepicker',
                                 'mode':'multi',
+                                'width':'100',
+                                'height':'60',
                                 'original': false
                             }" wb-path="/uploads/sources/{{wbDate()}}" />
-
+                            <textarea class="d-none" type="json" name="sources"></textarea>
                         </div>
 
-                        <h5>Действия</h5>
+
+                        <div class="divider-text">Договор</div>
+                        <div id="uploadOrder">
+                            <wb-module name="order" wb="{
+                                'module':'filepicker',
+                                'width':'100',
+                                'height':'60',
+                                'original': false
+                            }" wb-ext="pdf" wb-path="/uploads/sources/{{wbDate()}}" />
+                        </div>
+
+                        <div class="divider-text">Действия</div>
                         <div class="form-group">
                             <a href="#" class="btn btn-outline-primary my-2">Обработать</a>
                         </div>
@@ -218,5 +212,5 @@
         </div>
     </div>
 </div>
-
+<script wbapp remove src="/forms/docs/edit.js"></script>
 </html>
