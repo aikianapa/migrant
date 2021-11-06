@@ -26,13 +26,15 @@ class modPdfer
         // output file
         $target = $app->newid().'.jpg';
         // create a command string
-        exec('cd '.$this->dir.' && convert -verbose -scale 1024 -density 150 -depth 8 -quality 100  "'.$pdf .'"  "'.$target.'"', $output);
+	exec('cd '.$this->dir.' && /usr/bin/convert -verbose -scale 1024 -density 150 -depth 8 -quality 100  "'.$pdf .'"  "'.$target.'" 2>&1', $output);
         $files = [];
         foreach ((array)$output as $out) {
-            preg_match('/=>(.*)\[/m', $out, $matches);
-            $file = $matches[1];
+            preg_match_all('/=>(.*)\[/m', $out, $matches, PREG_PATTERN_ORDER);
+	    if ($matches[1][0] > '')  {
+            $file = $matches[1][0];
             $files[] = $this->path.'/'.$file;
             $this->faximile($this->dir.'/'.$file);
+	    }
         }
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
@@ -79,3 +81,4 @@ class modPdfer
         $im->writeImage($file);
     }
 }
+?>
