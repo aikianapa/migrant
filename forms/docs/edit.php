@@ -212,5 +212,5 @@
         </div>
     </div>
 </div>
-<script wbapp remove src="/forms/docs/edit.js"></script>
+<script wb-app remove src="/forms/docs/edit.js"></script>
 </html>

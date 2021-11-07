@@ -11,7 +11,7 @@ class modImport
         $this->app = &$app;
         $this->docs = $app->formClass('docs');
         $this->schema = $this->docs->schemaXls();
-        $this->checklist = $docs->checklist();
+        $this->checklist = $this->docs->checklist();
         $this->cDate = [1,7,10,36,37]; // ячейки с датами
         $mode = $app->route->mode;
         method_exists($this, $mode) ? $this->$mode() : die;

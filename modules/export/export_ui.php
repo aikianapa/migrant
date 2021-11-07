@@ -7,9 +7,8 @@
         <h3 class="tx-bold tx-spacing--2 order-1">Экспорт в XLS</h3>
     </nav>
 
-
     <ul class="list-group mb-3" id="moduleExportXlsAccept">
-        <wb-foreach wb="table=docs&bind=cms.list.modExport&tpl=true" wb-filter="{'code':{'$ne':''}}">
+        <wb-foreach wb="table=docs&bind=cms.list.modExport&tpl=true&size=10" wb-filter="{'code':{'$ne':''},'order':{'$ne':''}}">
             <li class="list-group-item">
                 <div>
                     <h6 class="tx-13 tx-inverse tx-semibold mg-b-0">{{fullname}}</h6>
