@@ -12,20 +12,23 @@
         <thead>
             <tr>
                 <th>Ф.И.О.</th>
-                <th>Дата рождения</th>
-                <th>Серия</th>
-                <th>Номер</th>
+                <th>Паспорт</th>
+                <th>Код</th>
+                <th>Статус</th>
                 <th></th>
             </tr>
         </thead>
         <tbody id="docsList">
-            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&size={{_sett.page_size}}"
+            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&sort=_created:d&size={{_sett.page_size}}"
                 wb-filter="{'login':'{{_sess.user.login}}' }">
                 <tr>
-                    <td>{{fullname}}</td>
-                    <td>{{wbDate("d.m.Y",{{birth_date}})}}</td>
-                    <td>{{doc_ser}}</td>
-                    <td>{{doc_num}}</td>
+                    <td>{{fullname}}<br/><small>{{wbDate("d.m.Y",{{birth_date}})}}</small></td>
+                    <td>{{doc_ser}} №{{doc_num}}</td>
+                    <td>{{code}}</td>
+                    <td>
+                        <img data-src="/module/myicons/pill-clock.svg?size=24&stroke=666666" wb-if="'{{order.0.img}}' == ''">
+                        <img data-src="/module/myicons/checkmark-circle-1.svg?size=24&stroke=10b759" wb-if="'{{order.0.img}}' > '' AND '{{code}}'>''">
+                    </td>
                     <td>
                         <a href="javascript:"
                             data-ajax="{'url':'/cms/ajax/form/docs/edit/{{id}}','html':'#yongerQuotes modals'}"
