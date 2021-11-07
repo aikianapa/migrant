@@ -9,9 +9,8 @@ class modImport
     public function __construct($app)
     {
         $this->app = &$app;
-        $docs = $app->formClass('docs');
-        $this->docs = $docs;
-        $this->schema = $docs->schemaXls();
+        $this->docs = $app->formClass('docs');
+        $this->schema = $this->docs->schemaXls();
         $this->checklist = $docs->checklist();
         $this->cDate = [1,7,10,36,37]; // ячейки с датами
         $mode = $app->route->mode;

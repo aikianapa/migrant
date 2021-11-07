@@ -26,6 +26,7 @@ class modPrintdocx
 
         foreach ($data as $k => $v) {
             strpos(' '.$k, 'date') ? $data[$k] = date('d.m.Y', strtotime($v)) : null;
+            strpos(' '.$k, 'expire') ? $data[$k] = date('d.m.Y', strtotime($v)) : null;
         }
         $data['gender'] == 'М' ? $data['gender'] = 'мужской' : null;
         $data['gender'] == 'Ж' ? $data['gender'] = 'женский' : null;

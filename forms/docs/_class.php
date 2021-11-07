@@ -23,7 +23,6 @@ class docsClass extends cmsFormsClass
         return $item;
     }
 
-
     public function checklist() {
         $list = $this->app->itemList('docs');
         $list = $this->app->json($list)->from('list')->column('checksum');
