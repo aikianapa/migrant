@@ -11,6 +11,15 @@ class docsClass extends cmsFormsClass
         $item['checksum'] = $this->checksum($item);
     }
 
+    public function afterItemRead(&$item) {
+        $item ? null : $item=(array)$item;
+        $data = $this->app->Dot($item);
+        $data->get('status') ? null : $item['status'] = 'new';
+        $data->get('source.0.img') > '' OR $data->get('code') > '' ? $item['status'] = 'progress' : null;
+        $data->get('order.0.img') > '' AND $data->get('code') > '' ? $item['status'] = 'ready' : null;
+        $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
+    }
+
     public function beforeItemRemove(&$item)
     {
         foreach($item['attaches'] as $atc) {

@@ -12,15 +12,37 @@ class modExport
         $this->app = $app;
         $this->docs = $app->formClass('docs');
         $this->schema = $this->docs->schemaXls();
+        $this->filter = json_decode('{"filter" : {
+                "code": {"$ne":""},
+                "order":{"$ne":""},
+                "archive":{"$ne":"on"}
+        }}', true);
     }
 
     public function init()
     {
         $out = $this->app->fromFile(__DIR__.'/export_ui.php');
-        $out->fetch();
+        $list = $this->app->itemList('docs', $this->filter);
+        $out->fetch($list);
         echo $out->outer();
         die;
     }
+
+    public function archive() {
+        $app = &$this->app;
+        $checked = $app->vars('_post.items');
+        $list = $app->itemList('docs', $this->filter);
+        $list['list'] = array_intersect_key($list['list'], array_flip($checked));
+        foreach ($list['list'] as $item) {
+            $item['archive'] = 'on';
+            $app->itemSave('docs', $item, false);
+        }
+        $app->tableFlush('docs');
+        header('Content-Type: application/json');
+        echo json_encode(['error'=>false]);
+        die;
+    }
+
 
     public function process()
     {
@@ -28,13 +50,12 @@ class modExport
         $reader = new Xls();
         $spreadsheet = $reader->load($app->route->path_app.'/ocr/export.xls');
         $sheet = $spreadsheet->getActiveSheet();
-        $list = $app->itemList('docs', json_decode('{
-            "filter" : {"code": {"$ne":""},"order":{"$ne":""}}
-        }', true));
+        $list = $app->itemList('docs', $this->filter);
         $writer = new Xlsx($spreadsheet);
         $schema = array_flip($this->schema);
-
+        $checked = $app->vars('_post.items');
         $row = 3;
+        $list['list'] = array_intersect_key($list['list'], array_flip($checked));
         foreach ($list['list'] as $item) {
             $c=0;
             foreach ($item as $fld => $val) {
