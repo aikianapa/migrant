@@ -16,13 +16,13 @@ class modPrintdocx
     public function init()
     {
         //sudo apt-get install libreoffice-java-common
-        $tid = $this->app->newId();
         $app = $this->app;
+        $data = $app->itemToArray($app->vars('_post'));
+        $tid = str_replace('__','_',date('dmY',strtotime($data['_created'])).'_'.$data['doc_ser'].'_'.$data['doc_num']);
         $path = $app->route->path_app.'/ocr/';
         $file = $path.'approve.docx';
         $tmp = $path.$tid.'.docx';
         $pdf = $path.$tid.'.pdf';
-        $data = $app->itemToArray($app->vars('_post'));
 
         foreach ($data as $k => $v) {
             strpos(' '.$k, 'date') ? $data[$k] = date('d.m.Y', strtotime($v)) : null;
@@ -36,6 +36,7 @@ class modPrintdocx
         $data['reg_street'] = ucfirst($data['reg_street']);
         $data['reg_corpse'] > ' ' ? $data['reg_corpse'] = ', к.'.$data['reg_corpse'] : null;
         $data['reg_flat'] > ' ' ? $data['reg_flat'] = ', кв.'.$data['reg_flat'] : null;
+        $data['doc_ser'] > ' ' ? $data['doc_ser'] = 'Серия '.$data['doc_ser'] : null;
 
 
         $ccodes = $app->treeRead('countries');
@@ -56,7 +57,7 @@ class modPrintdocx
 
   $data = file_get_contents($pdf);
   header('Content-type: application/pdf');
-  header('Content-Disposition: inline; filename="approve.pdf"');
+  header('Content-Disposition: inline; filename="'.$tid.'.pdf"');
   unlink($pdf);
 
 

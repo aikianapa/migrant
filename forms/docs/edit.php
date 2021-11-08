@@ -175,7 +175,8 @@
                             </select>
                         </div>
 
-                        <div class="divider-text">Исходные</div>
+                        <div class="divider-text">Исходные документы</div>
+                        <p class="tx-12">Загрузите PDF файл с исходными документами и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.<></p>
                         <div id="uploadSources">
                             <wb-module name="attaches" wb="{
                                 'module':'filepicker',
@@ -189,6 +190,7 @@
 
 
                         <div class="divider-text">Договор</div>
+                        <p class="tx-12">Загрузите PDF файл с подписанным <a href="javascript:void(0);" id="docViewPdf">Договором</a>.</p>
                         <div id="uploadOrder">
                             <wb-module name="order" wb="{
                                 'module':'filepicker',
@@ -197,11 +199,13 @@
                                 'original': false
                             }" wb-ext="pdf" wb-path="/uploads/sources/{{wbDate()}}" />
                         </div>
-
+                        <input type="hidden" name="_created">
+<!--
                         <div class="divider-text">Действия</div>
                         <div class="form-group">
                             <a href="#" class="btn btn-outline-primary my-2">Обработать</a>
                         </div>
+-->
                     </div>
                 </form>
             </div>

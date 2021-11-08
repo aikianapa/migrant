@@ -48,23 +48,24 @@ class modPdfer
         $pdfsrc = str_replace('//', '/', $app->route->path_app.$app->vars('_post.pdf'));
         $srcpdf = $app->vars('_post.srcpdf');
         $sources = $app->vars('_post.sources');
+        $dstpdf = $app->vars('_post.dstpdf').'.pdf';
         $images = '';
         foreach ($sources as $img) {
             $img = str_replace($this->path.'/', '', $img);
             $images .= $img.' ';
         }
         $tmpsrc = 'tmp_'.$this->app->newId().'.pdf';
-        $docpdf = 'doc_'.$this->app->newId().'.pdf';
         exec('cd '.$this->dir.' && convert '.$images.' '.$tmpsrc);
         // sudo apt install poppler-utils
-        exec('cd '.$this->dir.' && pdfunite '.$pdfsrc.' '.$tmpsrc.' '.$docpdf.' && rm '.$tmpsrc);
+        exec('cd '.$this->dir.' && rm -f '.$dstpdf.' && pdfunite '.$pdfsrc.' '.$tmpsrc.' '.$dstpdf.' && rm '.$tmpsrc);
         unlink($pdfsrc);
-        rename($this->dir.'/'.$docpdf, $app->route->path_app.$this->orders.'/'.$docpdf);
+        unlink($app->route->path_app.$this->orders.'/'.$dstpdf);
+        rename($this->dir.'/'.$dstpdf, $app->route->path_app.$this->orders.'/'.$dstpdf);
         foreach ($sources as $img) unlink($app->route->path_app.$img);
         foreach ($srcpdf as $sp) unlink($app->route->path_app.$sp['img']);
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
-        echo json_encode(['pdf'=>$this->orders.'/'.$docpdf]);
+        echo json_encode(['pdf'=>$this->orders.'/'.$dstpdf]);
 
     }
 
