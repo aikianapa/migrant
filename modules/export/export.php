@@ -29,7 +29,7 @@ class modExport
         $spreadsheet = $reader->load($app->route->path_app.'/ocr/export.xls');
         $sheet = $spreadsheet->getActiveSheet();
         $list = $app->itemList('docs', json_decode('{
-            "filter" : {"code": {"$ne":""}}
+            "filter" : {"code": {"$ne":""},"order":{"$ne":""}}
         }', true));
         $writer = new Xlsx($spreadsheet);
         $schema = array_flip($this->schema);
