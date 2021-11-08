@@ -48,7 +48,7 @@ class modPdfer
         $pdfsrc = str_replace('//', '/', $app->route->path_app.$app->vars('_post.pdf'));
         $srcpdf = $app->vars('_post.srcpdf');
         $sources = $app->vars('_post.sources');
-        $dstpdf = $app->vars('_post.dstpdf').'.pdf';
+        $dstpdf = $app->vars('_post.dstpdf');
         $images = '';
         foreach ($sources as $img) {
             $img = str_replace($this->path.'/', '', $img);
@@ -59,7 +59,6 @@ class modPdfer
         // sudo apt install poppler-utils
         exec('cd '.$this->dir.' && rm -f '.$dstpdf.' && pdfunite '.$pdfsrc.' '.$tmpsrc.' '.$dstpdf.' && rm '.$tmpsrc);
         unlink($pdfsrc);
-        unlink($app->route->path_app.$this->orders.'/'.$dstpdf);
         rename($this->dir.'/'.$dstpdf, $app->route->path_app.$this->orders.'/'.$dstpdf);
         foreach ($sources as $img) unlink($app->route->path_app.$img);
         foreach ($srcpdf as $sp) unlink($app->route->path_app.$sp['img']);
