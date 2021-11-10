@@ -45,7 +45,7 @@ $(document).ready(function() {
             let srcpdf = json_decode($('#uploadSources .filepicker-data').text());
             let item = $('#docsEditForm').serializeJson();
             item['_created'] > ' ' ? null : item['_created'] = date('Y-m-d', strtotime('now'));
-            let dstpdf = date('dmY', strtotime(item['_created'])) + '_' + item['doc_ser'] + '_' + item['doc_num'] + '.pdf';
+            let dstpdf = date('dmY', strtotime(item['_created'])) + '_' + item['doc_ser'] + item['doc_num'] + '.pdf';
             dstpdf.replace("__", "_");
             wbapp.post('/module/pdfer/attach/', { 'pdf': pdf, 'sources': sources, 'srcpdf': srcpdf, 'dstpdf': dstpdf }, function(data) {
                 window.open(data.pdf, '_blank');
