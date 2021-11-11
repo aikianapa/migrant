@@ -65,6 +65,7 @@ class docsClass extends cmsFormsClass
             ,18 => 'reg_house'
             ,19 => 'reg_corpse'
             ,20 => 'reg_flat'
+            ,23 => 'phone'
             ,27 => 'card_type' // 32
             ,28 => 'gender'
             ,29 => 'birth_place'
@@ -73,6 +74,7 @@ class docsClass extends cmsFormsClass
             ,35 => 'mc_num'
             ,36 => 'mc_date'
             ,37 => 'mc_expire'
+            ,43 => 'tax_resident_outside' // нет
             ,70 => 'code'
         ];
     }

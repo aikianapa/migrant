@@ -17,3 +17,7 @@ forms/quotes
 forms/users
 
 database/
+
+ocr/.cache/
+
+ocr/.config/
