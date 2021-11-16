@@ -50,6 +50,7 @@
         </div>
     </nav>
 
+    <wb-var date="" />
 
     <table class="table table-striped table-hover tx-15">
         <thead>
@@ -64,6 +65,14 @@
         <tbody id="docsList">
             <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&sort=_created:d&size={{_sett.page_size}}"
                 wb-filter="{'login':'{{_sess.user.login}}' }">
+                <tr wb-if="'{{_var.date}}'!=='{{date}}'" class="bg-transparent">
+                    <td colspan="5">
+                        <wb-var date="{{date}}" />
+                        <div class="divider-text tx-primary">{{wbDate("d.m.Y",{{{{_created}}}})}}</div>
+                    </td>
+                </tr>
+
+
                 <tr>
                     <td>{{fullname}}<br /><small>{{wbDate("d.m.Y",{{birth_date}})}}</small></td>
                     <td>{{doc_ser}} №{{doc_num}}</td>

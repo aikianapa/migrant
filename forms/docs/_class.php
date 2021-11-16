@@ -18,6 +18,7 @@ class docsClass extends cmsFormsClass
         $data->get('source.0.img') > '' OR $data->get('code') > '' ? $item['status'] = 'progress' : null;
         $data->get('order.0.img') > '' AND $data->get('code') > '' ? $item['status'] = 'ready' : null;
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
+        $item['date'] = date('Y-m-d', strtotime($item['_created']));
     }
 
     public function beforeItemRemove(&$item)
