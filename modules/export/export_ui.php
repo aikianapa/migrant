@@ -1,16 +1,21 @@
 <div class="m-3" id="moduleExportXls">
     <nav class="nav navbar navbar-expand-md col">
-        <div class=" pos-absolute r-0 t-0">
-            <a href="#" class="btn btn-primary export">
-                <svg wb-module="myicons" class="mi mi-documents-file-excel.2 size-20" stroke="#FFFFFF"></svg>
-                Экспортировать
+        <h3 class="tx-bold tx-spacing--2 order-1">Экспорт в XLS</h3>
+        <div class="pos-md-absolute r-0 t-0">
+            <a href="#" class="btn btn-primary download mb-1">
+                <svg wb-module="myicons" class="mi mi-zip-archive-circle.1 size-20" stroke="#FFFFFF"></svg>
+                Скачать документы
             </a>
-            <a href="#" class="btn btn-success archive">
+            <a href="#" class="btn btn-primary export mb-1">
                 <svg wb-module="myicons" class="mi mi-documents-file-excel.2 size-20" stroke="#FFFFFF"></svg>
+                Экспорт реестра
+            </a>
+            <a href="#" class="btn btn-danger archive mb-1">
+                <svg wb-module="myicons" class="mi mi-mailbox-archive size-20" stroke="#FFFFFF"></svg>
                 Отправить в архив
             </a>
         </div>
-        <h3 class="tx-bold tx-spacing--2 order-1">Экспорт в XLS</h3>
+
     </nav>
 
     <wb-var date="" />
@@ -40,6 +45,38 @@
         </wb-foreach>
     </ul>
     <script wb-app remove>
+
+        $('#moduleExportXls .btn.download').off('click');
+        $('#moduleExportXls .btn.download').on('click', function() {
+            let data = {};
+            data.items = [];
+            $('#moduleExportXlsAccept .list-group-item input[data-id]:checked').each(function(i) {
+                data.items[i] = $(this).data('id')
+            });
+            if (data.items.length == 0) {
+                wbapp.toast('Предупреждение', 'Необходимо выбрать хотя бы один документ.', {
+                    bgcolor: 'danger'
+                });
+                return false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/module/export/zipdocs/',
+                data: data
+            }).done(function(data) {
+                var $a = $("<a>");
+                $a.attr("href", data);
+                $a.attr("target", "_blank");
+                $a.addClass("d-none");
+                $("body").append($a);
+                $a.attr("download", "Documents.zip");
+                $a[0].click();
+                $a.remove();
+            });
+
+        });
+
+
         $('#moduleExportXls .btn.export').off('click');
         $('#moduleExportXls .btn.export').on('click', function() {
             let data = {};
@@ -61,6 +98,7 @@
             }).done(function(data) {
                 var $a = $("<a>");
                 $a.attr("href", data);
+                $a.attr("target", "_blank");
                 $a.addClass("d-none");
                 $("body").append($a);
                 $a.attr("download", "Report.xls");

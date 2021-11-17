@@ -28,6 +28,31 @@ class modExport
         die;
     }
 
+    public function zipdocs() {
+        $app = &$this->app;
+        $checked = $app->vars('_post.items');
+        $list = $app->itemList('docs', $this->filter);
+        $list['list'] = array_intersect_key($list['list'], array_flip($checked));
+        $file = $app->route->path_app.'/uploads/tmp/'.$app->newId('','tmp').'.zip';
+        $zip = new ZipArchive();
+        if ($zip->open($file, ZipArchive::CREATE)!==true) {
+            exit("Невозможно открыть <$filename>\n");
+        }
+        foreach ($list['list'] as $item) {
+            $Item = $app->dot($item);
+            $doc = $Item->get('order.0.img');
+            $name = array_pop(explode('/', $doc));
+            is_file($app->route->path_app.$doc) ?  $zip->addFile($app->route->path_app.$doc,$name) : null;
+       }
+        $zip->close();
+        header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
+        header('Content-Type: application/json');
+        echo json_encode('data:application/zip ;base64,'.base64_encode(file_get_contents($file)));
+        unlink($file);
+        die;
+
+    }
+
     public function archive() {
         $app = &$this->app;
         $checked = $app->vars('_post.items');
