@@ -44,6 +44,22 @@
             </li>
         </wb-foreach>
     </ul>
+
+<div class="modal" tabindex="-1" data-backdrop="static" role="dialog" id="moduleExportWait" aria-modal="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ожидайте</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body"><p class="tx-center">Идёт подготовка документов...<br><br><span class="spinner-border spinner-border" role="status" aria-hidden="true"></span></p></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
     <script wb-app remove>
 
         $('#moduleExportXls .btn.download').off('click');
@@ -58,12 +74,15 @@
                     bgcolor: 'danger'
                 });
                 return false;
+            } else {
+                $('#moduleExportWait').modal('show');
             }
             $.ajax({
                 type: 'POST',
                 url: '/module/export/zipdocs/',
                 data: data
             }).done(function(data) {
+                $('#moduleExportWait').modal('hide');
                 var $a = $("<a>");
                 $a.attr("href", data);
                 $a.attr("target", "_blank");
@@ -73,7 +92,6 @@
                 $a[0].click();
                 $a.remove();
             });
-
         });
 
 

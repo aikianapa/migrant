@@ -21,6 +21,7 @@ class modExport
 
     public function init()
     {
+        ini_set('max_execution_time', 300);
         $out = $this->app->fromFile(__DIR__.'/export_ui.php');
         $list = $this->app->itemList('docs', $this->filter);
         $out->fetch($list);
