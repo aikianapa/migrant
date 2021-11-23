@@ -33,6 +33,32 @@ class docsClass extends cmsFormsClass
         return $item;
     }
 
+    public function operGetWork() {
+        $app = &$this->app;
+        $data = $app->vars('_post');
+        $item = $app->itemRead('docs', $data['id']);
+        $res = false;
+        if ($item AND (!isset($item['oper']) OR $data['oper'] == $item['oper'])) {
+            if (!isset($item['oper'])) {
+                $data['opertime'] = $item['opertime'] = date('Y-m-d H:i:s');
+                $item['oper'] = $data['oper'];
+                $app->itemSave('docs', $item, true);
+                $item = $app->itemRead('docs', $data['id']);
+                if ($item['opertime'] == $data['opertime'] && $item['oper'] == $data['oper']) $res = true;
+            } else {
+                $res = true;
+            }
+            @$data['pdf'] = $item['order'][0]['img'];
+        }
+        header('Content-Type: application/json; charset=utf-8');
+        if ($res) {
+            echo json_encode(['error'=>false,'pdf'=>$data['pdf']]);
+        } else {
+            echo json_encode(['error'=>true]);
+        }
+    }
+
+
     public function checklist() {
         $list = $this->app->itemList('docs');
         $list = $this->app->json($list)->from('list')->column('checksum');

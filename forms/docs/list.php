@@ -1,5 +1,5 @@
 <html>
-<div class="m-3" id="yongerDocs">
+<div class="m-3" id="yongerDocs" wb-allow="admin">
 
     <nav class="nav navbar navbar-expand-md col">
         <h3 class="tx-bold tx-spacing--2 order-1">{{_lang.docs}}</h3>
