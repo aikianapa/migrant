@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody id="docsListOper">
-            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.operdocs&sort=_created:d,opertime&size={{_sett.page_size}}"
+            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.operdocs&sort=_created:d&size={{_sett.page_size}}"
                 wb-filter="{
                     'status': 'archive',
                     'oper': {'$lt':' '}
