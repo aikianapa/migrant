@@ -21,3 +21,5 @@ database/
 ocr/.cache/
 
 ocr/.config/
+
+uploads/
