@@ -61,6 +61,11 @@
                                     <input wb-module="mask" wb-mask="+7 (999) 999-99-99" name="phone" class="form-control" placeholder="Телефон">
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="form-control-label">Телефон (дополнительный)</label>
+                                    <input wb-module="mask" wb-mask="+7 (999) 999-99-99" name="phone_alt" class="form-control" placeholder="Телефон">
+                                </div>
+
                             </div>
                             <h6>2. Паспорт</h6>
                             <div>
