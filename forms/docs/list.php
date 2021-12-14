@@ -1,5 +1,5 @@
 <html>
-<div class="m-3" id="yongerDocs" wb-allow="admin">
+<div class="m-3" id="yongerDocs" wb-allow="admin,partner">
 
     <nav class="nav navbar navbar-expand-md col">
         <h3 class="tx-bold tx-spacing--2 order-1">{{_lang.docs}}</h3>
@@ -51,7 +51,8 @@
     </nav>
 
     <wb-var date="" />
-
+    <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']}}" />
+    <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']},'_creator':'{{_sess.user.id}}'}" wb-if="in_array({{_sess.user.role}},['partner','',null])" />
     <table class="table table-striped table-hover tx-15">
         <thead>
             <tr>
@@ -64,7 +65,7 @@
         </thead>
         <tbody id="docsList">
             <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&sort=_created:d&size={{_sett.page_size}}"
-                wb-filter="{'login':'{{_sess.user.login}}' }">
+                wb-filter="{{_var.filter}}">
                 <tr wb-if="'{{_var.date}}'!=='{{date}}'" class="bg-transparent">
                     <td colspan="5">
                         <wb-var date="{{date}}" />
