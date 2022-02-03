@@ -1,10 +1,8 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
 
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
-
-require 'vendor/autoload.php';
-
 
 class modPrintdocx
 {
