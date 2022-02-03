@@ -7,6 +7,9 @@ AddDefaultCharset UTF-8
 </FilesMatch>
 </IfModule>
 
+php_value post_max_size 30M
+php_value upload_max_filesize 30M
+
 RewriteBase /
 Options +FollowSymLinks
 RewriteEngine On
