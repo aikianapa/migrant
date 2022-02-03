@@ -14,6 +14,8 @@ class docsClass extends cmsFormsClass
     public function afterItemRead(&$item) {
         $item ? null : $item=(array)$item;
         $data = $this->app->Dot($item);
+        $data->get('phone') ? $item['phone'] = wbDigitsOnly(str_replace('+7', '8', $item['phone'])) : null;
+        $data->get('phone_alt') ? $item['phone_alt'] = wbDigitsOnly(str_replace('+7', '8', $item['phone_alt'])) : null;
         $data->get('status') ? null : $item['status'] = 'new';
         $data->get('source.0.img') > '' OR $data->get('code') > '' ? $item['status'] = 'progress' : null;
         $data->get('order.0.img') > '' AND $data->get('code') > '' ? $item['status'] = 'ready' : null;

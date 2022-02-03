@@ -58,12 +58,12 @@
 
                                 <div class="form-group">
                                     <label class="form-control-label">Телефон</label>
-                                    <input wb-module="mask" wb-mask="+7 (999) 999-99-99" name="phone" class="form-control" placeholder="Телефон">
+                                    <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label">Телефон (дополнительный)</label>
-                                    <input wb-module="mask" wb-mask="+7 (999) 999-99-99" name="phone_alt" class="form-control" placeholder="Телефон">
+                                    <input wb-module="mask" wb-mask="89999999999" name="phone_alt" class="form-control" placeholder="Телефон">
                                 </div>
 
                             </div>
