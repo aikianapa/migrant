@@ -13,7 +13,7 @@ class docsClass extends cmsFormsClass
 
     public function afterItemRead(&$item) {
         $item ? null : $item=(array)$item;
-        $data = $this->app->Dot($item);
+        $data = &$this->app->Dot($item);
         $data->get('phone') ? $item['phone'] = wbDigitsOnly(str_replace('+7', '8', $item['phone'])) : null;
         $data->get('phone_alt') ? $item['phone_alt'] = wbDigitsOnly(str_replace('+7', '8', $item['phone_alt'])) : null;
         $data->get('status') ? null : $item['status'] = 'new';
@@ -22,6 +22,13 @@ class docsClass extends cmsFormsClass
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
+
+        if ($this->app->route->action !== 'edit') {
+            $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type') ) : null; // Область + тип города
+            $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
+            $data->set('reg_house', trim($data->set('reg_house').' '.$data->set('reg_house_num'))); // тип дома + номер дома
+            $data->set('reg_flat', trim($data->set('reg_flat').' '.$data->set('reg_flat_num'))); // тип квартиры + номер квартиры
+        }
     }
 
     public function beforeItemRemove(&$item)

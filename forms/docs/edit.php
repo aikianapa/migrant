@@ -126,6 +126,12 @@
                             <h6>4. Регистрация</h6>
                             <div>
                                 <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label class="form-control-label">Область</label>
+                                        <input type="text" name="region" class="form-control" placeholder="Область">
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-sm-3">
                                         <label class="form-control-label">Тип</label>
                                         <input type="text" name="reg_city_type" class="form-control" placeholder="Тип">
@@ -148,17 +154,33 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="form-control-label">Дом</label>
-                                        <input type="number" name="reg_house" class="form-control" placeholder="Дом">
+                                    <div class="col-sm-6">
+                                        <label class="form-control-label">Тип</label>
+                                        <input type="text" name="reg_house" class="form-control" placeholder="Дом/участок/владение">
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
+                                        <label class="form-control-label">Номер</label>
+                                        <input type="text" name="reg_house_num" class="form-control" placeholder="Номер дома">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
                                         <label class="form-control-label">Корпус</label>
                                         <input type="text" name="reg_corpse" class="form-control" placeholder="Корпус">
                                     </div>
-                                    <div class="col-sm-4">
-                                        <label class="form-control-label">Квартира</label>
-                                        <input type="number" name="reg_flat" class="form-control" placeholder="Квартира">
+                                    <div class="col-sm-6">
+                                        <label class="form-control-label">Строение</label>
+                                        <input type="text" name="reg_build" class="form-control" placeholder="Строение">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="form-control-label">Тип (кв/комн/пом)</label>
+                                        <input type="number" name="reg_flat" class="form-control" placeholder="Тип помещения">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-control-label">Номер</label>
+                                        <input type="number" name="reg_flat_num" class="form-control" placeholder="Номер помещения">
                                     </div>
                                 </div>
                             </div>
