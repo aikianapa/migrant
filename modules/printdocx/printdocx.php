@@ -15,25 +15,36 @@ class modPrintdocx
     {
         //sudo apt-get install libreoffice-java-common
         $app = $this->app;
-        $data = $app->itemToArray($app->vars('_post'));
-        $tid = str_replace('__','_',date('dmY',strtotime($data['_created'])).'_'.$data['doc_ser'].'_'.$data['doc_num']);
-        foreach ($data as $k => $v) {
-            strpos(' '.$k, 'date') ? $data[$k] = date('d.m.Y', strtotime($v)) : null;
-            strpos(' '.$k, 'expire') ? $data[$k] = date('d.m.Y', strtotime($v)) : null;
+        $item = $app->itemToArray($app->vars('_post'));
+        $data = &$this->app->Dot($item);
+
+        $tid = str_replace('__','_',date('dmY',strtotime($data->get('_created'))).'_'.$data->get('doc_ser').'_'.$data->get('doc_num'));
+        foreach ($item as $k => $v) {
+            strpos(' '.$k, 'date') ? $item[$k] = date('d.m.Y', strtotime($v)) : null;
+            strpos(' '.$k, 'expire') ? $item[$k] = date('d.m.Y', strtotime($v)) : null;
         }
-        $data['gender'] == 'М' ? $data['gender'] = 'мужской' : null;
-        $data['gender'] == 'Ж' ? $data['gender'] = 'женский' : null;
-        $data['checked'] = '☑';
-        $data['date'] = date('d.m.Y');
-        $data['reg_city'] = ucfirst($data['reg_city']);
-        $data['reg_street'] = ucfirst($data['reg_street']);
-        $data['reg_corpse'] > ' ' ? $data['reg_corpse'] = ', '.$data['reg_corpse'] : null;
-        $data['reg_flat'] > ' ' ? $data['reg_flat'] = ', '.$data['reg_flat'] : null;
-        $data['doc_ser'] > ' ' ? $data['doc_ser'] = 'Серия '.$data['doc_ser'] : null;
+        $data->get('gender') == 'М' ? $data->set('gender', 'мужской') : null;
+        $data->get('gender') == 'Ж' ? $data->set('gender', 'женский') : null;
+        $data->set('checked', '☑');
+        $data->set('date', date('d.m.Y'));
+        $data->set('reg_city', ucfirst($data['reg_city']));
+        $data->set('reg_street', ucfirst($data['reg_street']));
+        $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = ', '.$item['reg_corpse'] : null;
+        $data->get('reg_flat') > ' ' ? $item['reg_flat'] = ', '.$item['reg_flat'] : null;
+        $data->get('doc_ser') > ' ' ? $item['doc_ser'] = 'Серия '.$item['doc_ser'] : null;
+
+
+            $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type')) : null; // Область + тип города
+            $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
+            $data->set('reg_house', trim($data->get('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
+            $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
+
 
         $ccodes = $app->treeRead('countries');
-        $country = wbTreeFindBranch($ccodes['tree']['data'], $data['citizen']);
-        isset($country[0]['name']) ? $data['citizen'] = $country[0]['name'] : null;
+        $country = wbTreeFindBranch($ccodes['tree']['data'], $item['citizen']);
+        isset($country[0]['name']) ? $item['citizen'] = $country[0]['name'] : null;
+        $data = $item;
+
 
         $pdfsrc = '';
         $pathsrc = $app->route->path_app.'/ocr/';
