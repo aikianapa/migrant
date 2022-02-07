@@ -26,8 +26,8 @@ class docsClass extends cmsFormsClass
         if ($this->app->route->action !== 'edit') {
             $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type') ) : null; // Область + тип города
             $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
-            $data->set('reg_house', trim($data->set('reg_house').' '.$data->set('reg_house_num'))); // тип дома + номер дома
-            $data->set('reg_flat', trim($data->set('reg_flat').' '.$data->set('reg_flat_num'))); // тип квартиры + номер квартиры
+            $data->set('reg_house', trim($data->set('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
+            $data->set('reg_flat', trim($data->set('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
         }
     }
 

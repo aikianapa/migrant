@@ -176,11 +176,11 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label class="form-control-label">Тип (кв/комн/пом)</label>
-                                        <input type="number" name="reg_flat" class="form-control" placeholder="Тип помещения">
+                                        <input type="text" name="reg_flat" class="form-control" placeholder="Тип помещения">
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-control-label">Номер</label>
-                                        <input type="number" name="reg_flat_num" class="form-control" placeholder="Номер помещения">
+                                        <input type="text" name="reg_flat_num" class="form-control" placeholder="Номер помещения">
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                         </div>
 
                         <div class="divider-text">Исходные документы</div>
-                        <p class="tx-12">Загрузите PDF файл с исходными документами и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.<></p>
+                        <p class="tx-12">Загрузите PDF файл с исходными документами и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
                         <div id="uploadSources">
                             <wb-module name="attaches" wb="{
                                 'module':'filepicker',
