@@ -27,8 +27,8 @@ class modPrintdocx
         $data['date'] = date('d.m.Y');
         $data['reg_city'] = ucfirst($data['reg_city']);
         $data['reg_street'] = ucfirst($data['reg_street']);
-        $data['reg_corpse'] > ' ' ? $data['reg_corpse'] = ', к.'.$data['reg_corpse'] : null;
-        $data['reg_flat'] > ' ' ? $data['reg_flat'] = ', кв.'.$data['reg_flat'] : null;
+        $data['reg_corpse'] > ' ' ? $data['reg_corpse'] = ', '.$data['reg_corpse'] : null;
+        $data['reg_flat'] > ' ' ? $data['reg_flat'] = ', '.$data['reg_flat'] : null;
         $data['doc_ser'] > ' ' ? $data['doc_ser'] = 'Серия '.$data['doc_ser'] : null;
 
         $ccodes = $app->treeRead('countries');
