@@ -48,7 +48,9 @@ class modPrintdocx
         $pathsrc = $app->route->path_app.'/ocr/';
         $pathtmp = $app->route->path_app.'/uploads/tmp/';
 
-        $list = ['approve.docx','persdata.docx'];
+        // $list = ['approve.docx','persdata.docx'];
+        $list = ['approve.docx'];
+
         // 1) Читаем DOCX файлы 2) подставляем данные 3) сохраняем 4) экспортируем в PDF
         foreach ($list as $key => $file) {
             $file = $pathsrc.$file;
