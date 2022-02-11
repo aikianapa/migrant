@@ -121,14 +121,14 @@ class modImport
                         $newname = $app->route->path_app.$neword;
                         $oldname = $app->route->path_app.$pasp[$item['pasp']];
                         if (rename($oldname,$newname)) {
-                            $item['order'] = [0=>["img"=> $neword,'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
+                            $item['order'] = [0=>['img'=> $neword,'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
                             $item['status'] = 'ready';
                         } else {
-                            $item['order'] = [];
+                            $item['order'] = '';
                         }
                     } else {
-                        $item['attaches'] = [0=>["img"=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
-                        $item['order'] = [];
+                        $item['attaches'] = [0=>['img'=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
+                        $item['order'] = '';
                         $item['status'] = 'progress';
                     }
                     $item['archive'] = '';

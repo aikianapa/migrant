@@ -44,7 +44,6 @@ class modExport
         die;
     }
 
-
     public function process()
     {
         $app = &$this->app;
