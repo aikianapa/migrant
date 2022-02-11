@@ -34,7 +34,8 @@ class modExport
         $checked = $app->vars('_post.items');
         $list = $app->itemList('docs', $this->filter);
         $list['list'] = array_intersect_key($list['list'], array_flip($checked));
-        $fname = '/uploads/tmp/'.$app->newId('', 'tmp').'.zip';
+        $fid = date('Y-m-d_His');
+        $fname = '/uploads/tmp/'.$fid.'.zip';
         $file = $app->route->path_app.$fname;
         $zip = new ZipArchive();
         if ($zip->open($file, ZipArchive::CREATE)!==true) {
