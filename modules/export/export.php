@@ -34,7 +34,8 @@ class modExport
         $checked = $app->vars('_post.items');
         $list = $app->itemList('docs', $this->filter);
         $list['list'] = array_intersect_key($list['list'], array_flip($checked));
-        $file = $app->route->path_app.'/uploads/tmp/'.$app->newId('','tmp').'.zip';
+        $fname = '/uploads/tmp/'.$app->newId('', 'tmp').'.zip';
+        $file = $app->route->path_app.$fname;
         $zip = new ZipArchive();
         if ($zip->open($file, ZipArchive::CREATE)!==true) {
             exit("Невозможно открыть <$filename>\n");
@@ -46,12 +47,14 @@ class modExport
             is_file($app->route->path_app.$doc) ?  $zip->addFile($app->route->path_app.$doc,$name) : null;
        }
         $zip->close();
-        header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
-        header('Content-Type: application/json');
-        echo json_encode('data:application/zip ;base64,'.base64_encode(file_get_contents($file)));
-        unlink($file);
-        die;
 
+        header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
+        header("Content-Type: application/zip");
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-Length: ".filesize($file));
+        header("Content-Disposition: attachment; filename=\"".basename($file)."\"");
+        readfile($file);
+        exit;
     }
 
     public function archive() {
