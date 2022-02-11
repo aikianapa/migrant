@@ -22,9 +22,14 @@ class docsClass extends cmsFormsClass
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
+        if ($this->app->route->action !== 'edit') {
+            $this->beforeItemShow($item);
+        }
     }
 
-    public function afterItemShow(&$item) {
+
+
+    public function beforeItemShow(&$item) {
         if ($this->app->route->action !== 'edit') {
             $item ? null : $item=(array)$item;
             $data = &$this->app->Dot($item);
@@ -33,6 +38,8 @@ class docsClass extends cmsFormsClass
             $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
             $data->set('reg_house', trim($data->get('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
             $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
+            $item['pasp'] = str_replace([' ','_','_','#','@','$'], '', $data->get('doc_ser').$data->get('doc_num'));
+            $item['birth_date'] = wbDate('d.m.Y', $item['birth_date']);
         }
     }
 

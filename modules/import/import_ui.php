@@ -89,19 +89,21 @@
 
         <div class="mod-data row mb-3">
             <div class="col-auto">
-                <input wb="module=filepicker&mode=button&ext=zip" name="file" wb-path="/uploads/tmp/src" wb-button="Файл ZIP">
+                <input wb="module=filepicker&mode=button&ext=zip" name="file" wb-path="/uploads/sources" wb-button="Файл ZIP">
             </div>
             <div class="col col-form-label">
                 Выберите ZIP файл с исходными документами
+                <p class="tx-10 text-muted">Архив должен содержать файлы в формате PDF с именем состоящим из серии и номера паспорта без разделителей (пробелов, тире и т.д.)</p>
             </div>
         </div>
 
         <div class="mod-data row">
             <div class="col-auto">
-                <input wb="module=filepicker&mode=button&ext=zip" name="file" wb-path="/uploads/tmp/doc" wb-button="Файл ZIP">
+                <input wb="module=filepicker&mode=button&ext=zip" name="file" wb-path="/uploads/orders" wb-button="Файл ZIP">
             </div>
             <div class="col col-form-label">
                 Выберите ZIP файл с подписанными договорами
+                <p class="tx-10 text-muted">Архив должен содержать файлы в формате PDF с именем состоящим из серии и номера паспорта без разделителей (пробелов, тире и т.д.)</p>
             </div>
         </div>
 

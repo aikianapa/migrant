@@ -29,35 +29,6 @@ class modExport
         die;
     }
 
-    public function zipdocs() {
-        $app = &$this->app;
-        $checked = $app->vars('_post.items');
-        $list = $app->itemList('docs', $this->filter);
-        $list['list'] = array_intersect_key($list['list'], array_flip($checked));
-        $fid = date('Y-m-d_His');
-        $fname = '/uploads/tmp/'.$fid.'.zip';
-        $file = $app->route->path_app.$fname;
-        $zip = new ZipArchive();
-        if ($zip->open($file, ZipArchive::CREATE)!==true) {
-            exit("Невозможно открыть <$filename>\n");
-        }
-        foreach ($list['list'] as $item) {
-            $Item = $app->dot($item);
-            $doc = $Item->get('order.0.img');
-            $name = array_pop(explode('/', $doc));
-            is_file($app->route->path_app.$doc) ?  $zip->addFile($app->route->path_app.$doc,$name) : null;
-       }
-        $zip->close();
-
-        header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
-        header("Content-Type: application/zip");
-        header("Content-Transfer-Encoding: Binary");
-        header("Content-Length: ".filesize($file));
-        header("Content-Disposition: attachment; filename=\"".basename($file)."\"");
-        readfile($file);
-        exit;
-    }
-
     public function archive() {
         $app = &$this->app;
         $checked = $app->vars('_post.items');

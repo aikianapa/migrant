@@ -75,6 +75,79 @@ class modImport
         */
     }
 
+
+    public function zipdocs() {
+        $app = &$this->app;
+        if (!$app->checkToken()) return;
+        $checked = $app->vars('_post.items');
+        $post = $app->arrayToObj($app->vars('_post'));
+        unset($post->__token);
+        $zip = new ZipArchive();
+        $count = 0;
+        foreach($post as $zipfile) {
+            $file = $app->route->path_app.$zipfile->img;
+            $path = explode('/',$zipfile->img);
+            array_pop($path);
+            $path=implode('/', $path);
+            $pasp = [];
+            $map = [];
+            if ($zip->open($file)) {
+                for ($i = 0; $i < $zip->numFiles; $i++) {
+                    $fn = $zip->getNameIndex($i);
+                    $id = substr($fn, 0, -4);
+                    $pasp[$id] = $path.'/'.$fn;
+                }
+                $zip->extractTo('.'.$path);
+                $zip->close();
+            }
+            //         unlink($file);
+
+            $status = null;
+            if (strpos($path,'uploads/sources')) {
+                $status = ['$in',['new','progress']];
+            } else if (strpos($path,'uploads/orders')) {
+                $status = 'progress';
+            }
+            if ($status) {
+                $list = $app->itemList('docs', ['filter'=>[
+                'status'=>$status,
+////////                'archive'=>['$ne'=>'on'],
+                'pasp'=>['$in'=>array_keys($pasp)]
+                ]]);
+
+                foreach ($list['list'] as $item) {
+                    if ($status == 'progress') {
+                        $neword = '/uploads/orders/'.date('dmY').'_'.$item['pasp'].'.pdf';
+                        $newname = $app->route->path_app.$neword;
+                        $oldname = $app->route->path_app.$pasp[$item['pasp']];
+                        if (rename($oldname,$newname)) {
+                            $item['order'] = [0=>["img"=> $neword,'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
+                            $item['status'] = 'ready';
+                        } else {
+                            $item['order'] = [];
+                        }
+                    } else {
+                        $item['attaches'] = [0=>["img"=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
+                        $item['order'] = [];
+                        $item['status'] = 'progress';
+                    }
+                    $item['archive'] = '';
+                    if ($app->itemSave('docs', $item, false)) {
+                        unset($pasp[$item['pasp']]);
+                        $count++;
+                    }
+                }
+            }
+        }
+        $app->tableFlush('docs');
+
+        header('Content-Type: charset=utf-8');
+        header('Content-Type: application/json');
+        echo json_encode(['accept'=>$count,'decline'=>count($pasp),'data'=>$pasp]);
+        exit;
+    }
+
+
     private function prepCell($c, $val)
     {
         in_array($c, $this->cDate) ? $val = date('Y-m-d', strtotime($val)) : null;

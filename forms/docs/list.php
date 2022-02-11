@@ -75,7 +75,7 @@
 
 
                 <tr>
-                    <td>{{fullname}}<br /><small>{{wbDate("d.m.Y",{{birth_date}})}}</small></td>
+                    <td>{{fullname}}<br /><small>{{birth_date}}</small></td>
                     <td>{{doc_ser}} №{{doc_num}}</td>
                     <td>{{code}}</td>
                     <td>
