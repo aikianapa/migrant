@@ -100,7 +100,7 @@ class modImport
                 $zip->extractTo('.'.$path);
                 $zip->close();
             }
-            //         unlink($file);
+                     unlink($file);
 
             $status = null;
             if (strpos($path,'uploads/sources')) {
@@ -111,7 +111,7 @@ class modImport
             if ($status) {
                 $list = $app->itemList('docs', ['filter'=>[
                 'status'=>$status,
-////////                'archive'=>['$ne'=>'on'],
+                'archive'=>['$ne'=>'on'],
                 'pasp'=>['$in'=>array_keys($pasp)]
                 ]]);
 
