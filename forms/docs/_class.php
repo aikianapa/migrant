@@ -22,15 +22,20 @@ class docsClass extends cmsFormsClass
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
+    }
 
+    public function afterItemShow(&$item) {
         if ($this->app->route->action !== 'edit') {
-            $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = ', корп.'.$item['reg_corpse'] : null;
-            $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type') ) : null; // Область + тип города
+            $item ? null : $item=(array)$item;
+            $data = &$this->app->Dot($item);
+            $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type')) : null; // Область + тип города
+            $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = 'корп.'.$item['reg_corpse'] : null;
             $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
             $data->set('reg_house', trim($data->get('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
             $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
         }
     }
+
 
     public function beforeItemRemove(&$item)
     {
@@ -44,6 +49,29 @@ class docsClass extends cmsFormsClass
         return $item;
     }
 
+/*
+    public function norm() {
+        $list = $this->app->itemList('docs', $this->filter);
+        foreach ($list['list'] as $item) {
+
+            $item = (object)$item;
+            $item->reg_corpse = str_replace(', корп.', '', $item->reg_corpse);
+            $item->region > '' && isset($item->reg_city_type) ? $item->reg_city_type = str_replace('Ленинградская область, ','',$item->reg_city_type) : null;
+            $item->reg_build > '' ? $item->reg_corpse = str_replace(', стр. '.$item->reg_build,'',$item->reg_corpse) : null;
+            $item->reg_house_num > '' ? $item->reg_house = str_replace(" {$item->reg_house_num}",'', $item->reg_house) : null;
+            $item->reg_flat_num > '' ? $item->reg_flat = str_replace(" {$item->reg_flat_num}", '', $item->reg_flat) : null;
+            $item = (array)$item;
+            $this->afterItemShow($item);
+            //$item = (object)$item;
+            //print_r([$item->region,$item->reg_city_type,$item->reg_city,$item->reg_build,$item->reg_house,$item->reg_house_num,$item->reg_flat]);
+            echo "<br>";
+
+            wbItemSave('docs', $item, false);
+            
+        }
+        wbTableFlush('docs');
+    }
+*/
     public function operGetWork() {
         $app = &$this->app;
         $data = $app->vars('_post');
