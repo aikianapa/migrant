@@ -85,8 +85,15 @@
                             wb-if="'{{status}}' == 'progress'">
                         <img data-src="/module/myicons/checkmark-circle-1.svg?size=24&stroke=10b759"
                             wb-if="'{{status}}' == 'ready'">
-                        <img data-src="/module/myicons/zip-archive-circle.svg?size=24&stroke=dc3545"
-                            wb-if="'{{status}}' == 'archive'">
+                        
+                        <input wb-module="swico" name="archive" wb-if="'{{status}}' == 'archive'"
+                        data-ico-on="zip-archive-circle" data-ico-off="checkmark-circle-1"
+                        data-color-on="dc3545" data-color-off="10b759"
+                        onchange="wbapp.save($(this),{'table':'{{_form}}','id':'{{_id}}','field':'archive','silent':'true'})">
+
+
+                        <!--img data-src="/module/myicons/zip-archive-circle.svg?size=24&stroke=dc3545"
+                            wb-if="'{{status}}' == 'archive'"-->
                     </td>
                     <td>
                         <a href="javascript:"
