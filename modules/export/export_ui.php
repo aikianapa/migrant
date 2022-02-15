@@ -54,7 +54,13 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body"><p class="tx-center">Идёт подготовка документов...<br><br><span class="spinner-border spinner-border" role="status" aria-hidden="true"></span></p></div>
+      <div class="modal-body">
+          <div class="tx-center wait">Идёт подготовка документов...<br><br><span class="spinner-border spinner-border" role="status" aria-hidden="true"></span></div>
+          <div class="tx-center ready d-none">
+              <div>Нажмите кнопку, чтобы скачать архив документов</div>
+              <a class='btn btn-success' href='#' target='_blank'>Скачать</a>
+</div>
+      </div>
       <div class="modal-footer"></div>
     </div>
   </div>
@@ -66,6 +72,7 @@
         $('#moduleExportXls .btn.download').on('click', function() {
             let data = {};
             data.items = [];
+            let $modal = $(document).find('#moduleExportWait');
             $('#moduleExportXlsAccept .list-group-item input[data-id]:checked').each(function(i) {
                 data.items[i] = $(this).data('id')
             });
@@ -75,22 +82,18 @@
                 });
                 return false;
             } else {
-                $('#moduleExportWait').modal('show');
+                $modal.modal('show');
+                $modal.find('.ready').addClass('d-none');
+                $modal.find('.wait').removeClass('d-none');
             }
             $.ajax({
                 type: 'POST',
                 url: '/module/export/zipdocs/',
                 data: data
             }).done(function(data) {
-                $('#moduleExportWait').modal('hide');
-                var $a = $("<a>");
-                $a.attr("href", data);
-                $a.attr("target", "_blank");
-                $a.addClass("d-none");
-                $("body").append($a);
-                $a.attr("download", "Documents.zip");
-                $a[0].click();
-                $a.remove();
+                $modal.find('.ready').removeClass('d-none');
+                $modal.find('.wait').addClass('d-none');
+                $modal.find('.ready a').attr('href',data.link);
             });
         });
 

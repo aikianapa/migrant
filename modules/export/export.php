@@ -63,7 +63,13 @@ class modExport
             $name = array_pop(explode('/', $doc));
             is_file($app->route->path_app.$doc) ?  $zip->addFile($app->route->path_app.$doc,$name) : null;
        }
-        $zip->close();
+       $zip->close();
+       header('Content-Type: application/json');
+       echo json_encode(['link'=>$fname]);
+
+       die;
+
+
 
         header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
         header('Content-Type: application/json');
