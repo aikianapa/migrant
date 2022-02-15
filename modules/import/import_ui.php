@@ -156,7 +156,6 @@
                 wbapp.post('/module/import/zipdocs/', data, function(data) {
                     wbapp.unloading();
                     $('#moduleImportZip .mod-wait').addClass('d-none');
-                    console.log(data);
                     wbapp.storage('cms.list.modImport.decline', data.decline);
                     wbapp.storage('cms.list.modImport.accept', data.accept);
                     $('#moduleImportZip .result').removeClass('d-none');
