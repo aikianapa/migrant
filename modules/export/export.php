@@ -65,13 +65,25 @@ class modExport
        }
         $zip->close();
 
-        header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
-        header("Content-Type: application/zip");
-        header("Content-Transfer-Encoding: Binary");
-        header("Content-Length: ".filesize($file));
-        header("Content-Disposition: attachment; filename=\"".basename($file)."\"");
-        readfile($file);
-        exit;
+header("Pragma: public");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("Cache-Control: public");
+header("Content-Description: File Transfer");
+header("Content-type: application/octet-stream");
+header('Content-Disposition: attachment; filename="'.basename($file).'"');
+header("Content-Transfer-Encoding: binary");
+header("Content-Length: ".filesize($file));
+ob_end_flush();
+@readfile($file);
+die;
+
+//        header("Content-Type: application/zip");
+//        header("Content-Transfer-Encoding: Binary");
+//        header("Content-Length: ".filesize($file));
+//        header("Content-Disposition: attachment; filename=\"".basename($file)."\"");
+//        readfile($file);
+//        exit;
     }
 
     public function process()
