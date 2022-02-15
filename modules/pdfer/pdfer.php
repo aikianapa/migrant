@@ -25,7 +25,7 @@ class modPdfer
         $app = &$this->app;
         $pdf = array_pop(explode('/', $app->vars('_post.pdf')));
         // output file
-        $target = $app->newid().'.jpg';
+        $target = $app->vars('_post.name') > '' ? $app->vars('_post.name').'.jpg' : $app->newid().'.jpg';
         // create a command string
 	exec('cd '.$this->dir.' && /usr/bin/convert -verbose -scale 1024 -density 150 -depth 8 -quality 100  "'.$pdf .'"  "'.$target.'" 2>&1', $output);
         $files = [];

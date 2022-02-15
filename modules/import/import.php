@@ -8,7 +8,7 @@ class modImport
 {
     public function __construct($app)
     {
-        set_time_limit(600);
+        set_time_limit(1200);
         $this->app = &$app;
         $this->docs = $app->formClass('docs');
         $this->schema = $this->docs->schemaXls();
@@ -84,6 +84,9 @@ class modImport
         $post = $app->arrayToObj($app->vars('_post'));
         unset($post->__token);
         $zip = new ZipArchive();
+        $type = $app->vars('_post.0.img');
+        $type = strpos($type,'uploads/sources') ? 'sources' : 'orders';
+
         foreach($post as $zipfile) {
             $file = $app->route->path_app.$zipfile->img;
             $path = explode('/',$zipfile->img);
@@ -101,12 +104,12 @@ class modImport
                 $zip->extractTo('.'.$path);
                 $zip->close();
             }
-                     unlink($file);
-
+            unlink($file);
+        }
             $status = null;
-            if (strpos($path,'uploads/sources')) {
+            if ($type == 'sources') {
                 $status = ['$in',['new','progress']];
-            } else if (strpos($path,'uploads/orders')) {
+            } else if ($type == 'orders') {
                 $status = 'progress';
             }
             if ($status) {
@@ -115,20 +118,17 @@ class modImport
                 'archive'=>['$ne'=>'on'],
                 'pasp'=>['$in'=>array_keys($pasp)]
                 ]]);
-
                 foreach ($list['list'] as $item) {
-                    if ($status == 'progress') {
-                        $neword = '/uploads/orders/'.date('dmY').'_'.$item['pasp'].'.pdf';
-                        $newname = $app->route->path_app.$neword;
-                        $oldname = $app->route->path_app.$pasp[$item['pasp']];
-                        if (rename($oldname,$newname)) {
-                            $item['order'] = [0=>['img'=> $neword,'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
-                            $item['status'] = 'ready';
+                    if ($type == 'orders') {
+                        $order = $this->attachImages($pasp[$item['pasp']], $item);
+                        if (isset($order['pdf']) && $order['pdf']>'') {
+                            $item['order'] = [0=>['img'=> $order['pdf'],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
                         } else {
                             $item['order'] = '';
                         }
-                    } else {
-                        $item['attaches'] = [0=>['img'=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
+                    } else if ($type == 'sources') {
+                        $item['sources'] = $this->extractImages($pasp[$item['pasp']]);
+                        $item['attaches'] = [['img'=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
                         $item['order'] = '';
                         $item['status'] = 'progress';
                     }
@@ -145,7 +145,7 @@ class modImport
                 unlink($app->route->path_app.$name);
                 $decline[] = (string)$id;
             }
-        }
+        
         $app->tableFlush('docs');
 
         header('Content-Type: charset=utf-8');
@@ -153,6 +153,54 @@ class modImport
         echo json_encode(['accept'=>$accept,'decline'=>$decline]);
         exit;
     }
+
+
+    private function extractImages($pdf) {
+        $url = $this->app->route->host.'/module/pdfer/extract/';
+        $name = array_pop(explode('/',$pdf));
+        $name = array_shift(explode('.',$name));
+        $post = [
+            'pdf' => $pdf,
+            'name' => $name,
+            '__token' => $this->app->vars('_sess.token')
+        ];
+        $res = $this->app->authPostContents($url, $post);
+        return json_decode($res,true);
+    }
+
+    private function attachImages($pdf, $item) {
+        $url = $this->app->route->host.'/module/pdfer/attach/';
+        $post = [
+            'pdf' => $pdf,
+            'sources' => $item['sources'],
+            'srcpdf' =>  $item['attaches'],
+            'dstpdf' => date('dmY',strtotime($item['_created'])).'_'.$item['pasp'].'.pdf',
+            '__token' => $this->app->vars('_sess.token')
+        ];
+        $res = $this->app->authPostContents($url, $post);
+        return json_decode($res,true);
+    }
+
+/*
+http://migrant.loc/module/pdfer/attach/
+
+
+pdf: /uploads/sources//id620c0fd6img1c86.pdf
+sources[]: /uploads/sources/400195566-0.jpg
+sources[]: /uploads/sources/400195566-1.jpg
+sources[]: /uploads/sources/400195566-2.jpg
+sources[]: /uploads/sources/400195566-3.jpg
+srcpdf[0][img]: /uploads/sources/400195566.pdf
+srcpdf[0][width]: 100
+srcpdf[0][height]: 60
+srcpdf[0][alt]: 
+srcpdf[0][title]: 
+dstpdf: 05022022_400195566.pdf // дата и номер паспорта
+__token: $2y$10$g5dsQkNCXRhIKIDeJUSazOJZ6ud3mXW1OD3HQAuoboxqX19/rb1yW
+
+
+
+*/
 
 
     private function prepCell($c, $val)

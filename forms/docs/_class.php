@@ -13,7 +13,7 @@ class docsClass extends cmsFormsClass
 
     public function afterItemRead(&$item) {
         $item ? null : $item=(array)$item;
-        $data = &$this->app->Dot($item);
+        $data = $this->app->Dot($item);
         $data->get('phone') ? $item['phone'] = wbDigitsOnly(str_replace('+7', '8', $item['phone'])) : null;
         $data->get('phone_alt') ? $item['phone_alt'] = wbDigitsOnly(str_replace('+7', '8', $item['phone_alt'])) : null;
         $data->get('status') ? null : $item['status'] = 'new';
@@ -22,17 +22,15 @@ class docsClass extends cmsFormsClass
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
-        if ($this->app->route->action !== 'edit') {
-            $this->beforeItemShow($item);
-        }
+        if ($this->app->vars('_route.action') !== 'edit') $this->beforeItemShow($item);
     }
 
 
 
     public function beforeItemShow(&$item) {
-        if ($this->app->route->action !== 'edit') {
+        if ($this->app->vars('_route.action') !== 'edit') {
             $item ? null : $item=(array)$item;
-            $data = &$this->app->Dot($item);
+            $data = $this->app->Dot($item);
             $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type')) : null; // Область + тип города
             $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = 'корп.'.$item['reg_corpse'] : null;
             $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
