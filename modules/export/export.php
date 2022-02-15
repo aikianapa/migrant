@@ -9,6 +9,7 @@ class modExport
 {
     public function __construct($app)
     {
+        set_time_limit(600);
         $this->app = $app;
         $this->docs = $app->formClass('docs');
         $this->schema = $this->docs->schemaXls();

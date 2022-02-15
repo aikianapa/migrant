@@ -8,6 +8,7 @@ class modPdfer
 {
     public function __construct($app)
     {
+        set_time_limit(600);
         $this->app = $app;
         $this->path = '/uploads/sources';
         $this->orders = '/uploads/orders';

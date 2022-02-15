@@ -24,7 +24,7 @@
                 <span class="spinner-border spinner-border-sm text-success" role="status" aria-hidden="true"></span>
             </div>
         </div>
-
+        <div class="result d-none">
         <ul class="list-group" id="moduleImportXlsAccept">
             <wb-foreach wb="from=result&bind=cms.list.modImport.accept&render=client&tpl=true">
                 {{#if @index == 0}}
@@ -52,7 +52,7 @@
                 </li>
             </wb-foreach>
         </ul>
-
+        </div>
         <script>
             wbapp.loadStyles(['/engine/lib/js/select2/select2.min.css'], 'select2-css');
             wbapp.loadScripts(['/engine/lib/js/select2/select2.min.js'], 'select2-js', function() {
@@ -67,6 +67,8 @@
             wbapp.storage('cms.list.modImport', null);
             $(document).undelegate('#moduleImportXls', 'mod-filepicker-done');
             $(document).delegate('#moduleImportXls', 'mod-filepicker-done', function(ev, data) {
+                $('#moduleImportZip').hide();
+                wbapp.storage('cms.list.modImport', null);
                 data.team = $('#moduleImportXls [name=team]').val();
                 if (!$(ev.currentTarget).is('#moduleImportXls')) return;
                 $('#moduleImportXls .mod-data').hide();
@@ -77,6 +79,7 @@
                     $('#moduleImportXls .mod-wait').hide();
                     wbapp.storage('cms.list.modImport.decline', data.decline);
                     wbapp.storage('cms.list.modImport.accept', data.accept);
+                    $('#moduleImportXis .result').removeClass('d-none');
                 });
             })
         </script>
@@ -107,8 +110,6 @@
             </div>
         </div>
 
-
-
         <div class="mod-wait d-none">
             <div class="alert alert-secondary">
                 Выполняется импорт данных. Ждите...
@@ -116,44 +117,49 @@
             </div>
         </div>
 
-        <ul class="list-group" id="moduleImportZipAccept">
-            <wb-foreach wb="from=result&bind=cms.list.modImport.accept&render=client&tpl=true">
-                {{#if @index == 0}}
-                <li class="list-group-item bg-primary tx-16 tx-semibold tx-white">Приняты</li>
-                {{/if}}
-                <li class="list-group-item">
-                    <div>
-                        <h6 class="tx-13 tx-inverse tx-semibold mg-b-0">{{fullname}}</h6>
-                        <span class="d-block tx-11 text-muted">{{birth_date}} {{doc_ser}} {{doc_num}}</span>
-                    </div>
-                </li>
-            </wb-foreach>
-        </ul>
-
-        <ul class="list-group" id="moduleImportZipDecline">
-            <wb-foreach wb="from=result&bind=cms.list.modImport.decline&render=client&tpl=true">
-                {{#if @index == 0}}
-                <li class="list-group-item bg-danger tx-16 tx-semibold tx-white">Отклонены</li>
-                {{/if}}
-                <li class="list-group-item">
-                    <div>
-                        <h6 class="tx-13 tx-inverse tx-semibold mg-b-0">{{fullname}}</h6>
-                        <span class="d-block tx-11 text-muted">{{birth_date}} {{doc_ser}} {{doc_num}}</span>
-                    </div>
-                </li>
-            </wb-foreach>
-        </ul>
-
+        <div class="result d-none">
+            <ul class="list-group mb-3" id="moduleImportZipDecline">
+                <wb-foreach wb="from=result&bind=cms.list.modImport.decline&render=client&tpl=true">
+                    {{#if @index == 0}}
+                    <li class="list-group-item bg-danger tx-16 tx-semibold tx-white">Отклонены</li>
+                    {{/if}}
+                    <li class="list-group-item">
+                        <div>
+                            <span class="d-block tx-11 text-muted">{{item}}</span>
+                        </div>
+                    </li>
+                </wb-foreach>
+            </ul>
+            <ul class="list-group mb-3" id="moduleImportZipAccept">
+                <wb-foreach wb="from=result&bind=cms.list.modImport.accept&render=client&tpl=true">
+                    {{#if @index == 0}}
+                    <li class="list-group-item bg-primary tx-16 tx-semibold tx-white">Приняты</li>
+                    {{/if}}
+                    <li class="list-group-item">
+                        <div>
+                            <span class="d-block tx-11 text-muted">{{this}}</span>
+                        </div>
+                    </li>
+                </wb-foreach>
+            </ul>
+        <div>
         <script>
-            wbapp.storage('cms.list.modImportZip', null);
+            wbapp.storage('cms.list.modImport', null);
             $(document).undelegate('#moduleImportZip', 'mod-filepicker-done');
             $(document).delegate('#moduleImportZip', 'mod-filepicker-done', function(ev, data) {
+                $('#moduleImportXls').hide();
                 wbapp.loading();
+                wbapp.storage('cms.list.modImport', null);
+                $('#moduleImportZip .mod-data').hide();
+                $('#moduleImportZip .mod-wait').removeClass('d-none');
+
                 wbapp.post('/module/import/zipdocs/', data, function(data) {
                     wbapp.unloading();
-                    $('#moduleImportZip .mod-wait').hide();
-                    wbapp.storage('cms.list.modImportZip.decline', data.decline);
-                    wbapp.storage('cms.list.modImportZip.accept', data.accept);
+                    $('#moduleImportZip .mod-wait').addClass('d-none');
+                    console.log(data);
+                    wbapp.storage('cms.list.modImport.decline', data.decline);
+                    wbapp.storage('cms.list.modImport.accept', data.accept);
+                    $('#moduleImportZip .result').removeClass('d-none');
                 });
             })
         </script>

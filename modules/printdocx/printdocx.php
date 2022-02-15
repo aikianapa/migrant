@@ -8,6 +8,7 @@ class modPrintdocx
 {
     public function __construct($app)
     {
+        set_time_limit(600);
         $this->app = $app;
     }
 

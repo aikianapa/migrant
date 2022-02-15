@@ -8,6 +8,7 @@ class modImport
 {
     public function __construct($app)
     {
+        set_time_limit(600);
         $this->app = &$app;
         $this->docs = $app->formClass('docs');
         $this->schema = $this->docs->schemaXls();
@@ -83,7 +84,6 @@ class modImport
         $post = $app->arrayToObj($app->vars('_post'));
         unset($post->__token);
         $zip = new ZipArchive();
-        $count = 0;
         foreach($post as $zipfile) {
             $file = $app->route->path_app.$zipfile->img;
             $path = explode('/',$zipfile->img);
@@ -91,6 +91,7 @@ class modImport
             $path=implode('/', $path);
             $pasp = [];
             $map = [];
+            $accept = [];
             if ($zip->open($file)) {
                 for ($i = 0; $i < $zip->numFiles; $i++) {
                     $fn = $zip->getNameIndex($i);
@@ -133,17 +134,23 @@ class modImport
                     }
                     $item['archive'] = '';
                     if ($app->itemSave('docs', $item, false)) {
+                        $accept[] = $item['pasp'];
                         unset($pasp[$item['pasp']]);
-                        $count++;
                     }
                 }
+            }
+            $decline = [];
+            foreach($pasp as $id => $name) {
+                // чистим не импортированные файлы
+                unlink($app->route->path_app.$name);
+                $decline[] = (string)$id;
             }
         }
         $app->tableFlush('docs');
 
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
-        echo json_encode(['accept'=>$count,'decline'=>count($pasp),'data'=>$pasp]);
+        echo json_encode(['accept'=>$accept,'decline'=>$decline]);
         exit;
     }
 
