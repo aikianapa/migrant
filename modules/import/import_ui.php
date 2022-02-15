@@ -125,7 +125,7 @@
                     {{/if}}
                     <li class="list-group-item">
                         <div>
-                            <span class="d-block tx-11 text-muted">{{item}}</span>
+                            <span class="d-block tx-11 text-muted">{{this}}</span>
                         </div>
                     </li>
                 </wb-foreach>
