@@ -22,7 +22,6 @@ class docsClass extends cmsFormsClass
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
-        if ($this->app->vars('_route.action') !== 'edit') $this->beforeItemShow($item);
     }
 
 
@@ -54,7 +53,7 @@ class docsClass extends cmsFormsClass
         return $item;
     }
 
-/*
+
     public function norm() {
         $list = $this->app->itemList('docs', $this->filter);
         foreach ($list['list'] as $item) {
@@ -66,7 +65,7 @@ class docsClass extends cmsFormsClass
             $item->reg_house_num > '' ? $item->reg_house = str_replace(" {$item->reg_house_num}",'', $item->reg_house) : null;
             $item->reg_flat_num > '' ? $item->reg_flat = str_replace(" {$item->reg_flat_num}", '', $item->reg_flat) : null;
             $item = (array)$item;
-            $this->afterItemShow($item);
+            //$this->afterItemShow($item);
             //$item = (object)$item;
             //print_r([$item->region,$item->reg_city_type,$item->reg_city,$item->reg_build,$item->reg_house,$item->reg_house_num,$item->reg_flat]);
             echo "<br>";
@@ -76,7 +75,7 @@ class docsClass extends cmsFormsClass
         }
         wbTableFlush('docs');
     }
-*/
+
     public function operGetWork() {
         $app = &$this->app;
         $data = $app->vars('_post');

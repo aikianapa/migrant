@@ -101,6 +101,7 @@ class modExport
         $row = 3;
         $list['list'] = array_intersect_key($list['list'], array_flip($checked));
         foreach ($list['list'] as $item) {
+            $this->docs->beforeItemShow($item);
             $item['tax_resident_outside'] = 'нет';
             $c=0;
             foreach ($item as $fld => $val) {
