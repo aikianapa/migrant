@@ -87,6 +87,9 @@ class modImport
         $type = $app->vars('_post.0.img');
         $type = strpos($type,'uploads/sources') ? 'sources' : 'orders';
 
+            $accept = [];
+            $decline = [];
+
         foreach($post as $zipfile) {
             $file = $app->route->path_app.$zipfile->img;
             $path = explode('/',$zipfile->img);
@@ -94,7 +97,6 @@ class modImport
             $path=implode('/', $path);
             $pasp = [];
             $map = [];
-            $accept = [];
             if ($zip->open($file)) {
                 for ($i = 0; $i < $zip->numFiles; $i++) {
                     $fn = $zip->getNameIndex($i);
@@ -106,6 +108,7 @@ class modImport
             }
             unlink($file);
         }
+ 
             $status = null;
             if ($type == 'sources') {
                 $status = ['$in',['new','progress']];
@@ -121,6 +124,7 @@ class modImport
                 $arks = array_keys($pasp);
                 foreach ($list['list'] as $item) {
                     if (in_array($item['pasp'], $arks)) {
+                        $decline[$item['pasp']] = ['id'=>$item['id'],'pasp'=>$item['pasp'],'fullname'=>$item['fullname'],'status'=>$item['status']];
                         if ($type == 'orders') {
                             $order = $this->attachImages($pasp[$item['pasp']], $item);
                             if (isset($order['pdf']) && $order['pdf']>'') {
@@ -137,17 +141,15 @@ class modImport
                         $item['archive'] = '';
                         $save = $app->itemSave('docs', $item, false);
                         if ($save) {
-                            $accept[] = $item['pasp'];
+                            $accept[$item['pasp']] = ['id'=>$item['id'],'pasp'=>$item['pasp'],'fullname'=>$item['fullname'],'status'=>$item['status']];
                             unset($pasp[$item['pasp']]);
                         }
+                        if (isset($accept[$item['pasp']])) unset($decline[$item['pasp']]);
                     }
                 }
-            }
-            $decline = [];
-            foreach($pasp as $id => $name) {
-                // чистим не импортированные файлы
-                unlink($app->route->path_app.$name);
-                $decline[] = (string)$id;
+                foreach($pasp as $p => $path) {
+                    $decline[$p] = ['id'=>'','pasp'=>$p,'fullname'=>'Паспорт не найден или в архиве','status'=>'unknown'];
+                }
             }
         
         $app->tableFlush('docs');

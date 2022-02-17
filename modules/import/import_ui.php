@@ -125,7 +125,25 @@
                     {{/if}}
                     <li class="list-group-item">
                         <div>
-                            <span class="d-block tx-11 text-muted">{{this}}</span>
+                        {{#if status == 'new'}}
+                        <img data-src="/module/myicons/thunder-lightning-circle.1.svg?size=24&stroke=666666">
+                        {{/if}}
+                        {{#if status == 'progress'}}
+                        <img data-src="/module/myicons/loading-checkmark-status-circle.svg?size=24&stroke=ffc107">
+                        {{/if}}
+                        {{#if status == 'ready'}}
+                        <img data-src="/module/myicons/checkmark-circle-1.svg?size=24&stroke=10b759">
+                        {{/if}}
+                        {{#if status == 'unknown'}}
+                        <img data-src="/module/myicons/question-circle.svg?size=24&stroke=dc3545">
+                        {{/if}}
+                        <span class="d-inline-block tx-11 text-muted"> {{pasp}} {{fullname}}
+                        {{#if id !== ''}}
+                        <a href="javascript:" data-ajax="{'url':'/cms/ajax/form/docs/edit/{{id}}','html':'#moduleImportZip modals'}" class="d-inline position-absolute r-10">
+                            <img src="/module/myicons/content-edit-pen.svg?size=24&amp;stroke=323232">
+                        </a>
+                        {{/if}}
+                        </span>
                         </div>
                     </li>
                 </wb-foreach>
@@ -137,7 +155,22 @@
                     {{/if}}
                     <li class="list-group-item">
                         <div>
-                            <span class="d-block tx-11 text-muted">{{this}}</span>
+                        {{#if status == 'new'}}
+                        <img data-src="/module/myicons/thunder-lightning-circle.1.svg?size=24&stroke=666666">
+                        {{/if}}
+                        {{#if status == 'progress'}}
+                        <img data-src="/module/myicons/loading-checkmark-status-circle.svg?size=24&stroke=ffc107">
+                        {{/if}}
+                        {{#if status == 'ready'}}
+                        <img data-src="/module/myicons/checkmark-circle-1.svg?size=24&stroke=10b759">
+                        {{/if}}
+                        <span class="d-inline-block tx-11 text-muted"> {{pasp}} {{fullname}}
+                        {{#if id !== ''}}
+                        <a href="javascript:" data-ajax="{'url':'/cms/ajax/form/docs/edit/{{id}}','html':'#moduleImportZip modals'}" class="d-inline position-absolute r-10">
+                            <img src="/module/myicons/content-edit-pen.svg?size=24&amp;stroke=323232">
+                        </a>
+                        {{/if}}
+                        </span>
                         </div>
                     </li>
                 </wb-foreach>
@@ -162,5 +195,6 @@
                 });
             })
         </script>
+        <modals></modals>
     </div>
 </div>
