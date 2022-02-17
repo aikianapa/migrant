@@ -22,6 +22,7 @@ class docsClass extends cmsFormsClass
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
+        $item['pasp'] = preg_replace('/[^a-zA-Z0-9]/ui', '', $data->get('doc_ser').$data->get('doc_num'));
     }
 
 
@@ -35,7 +36,6 @@ class docsClass extends cmsFormsClass
             $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
             $data->set('reg_house', trim($data->get('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
             $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
-            $item['pasp'] = str_replace([' ','_','_','#','@','$'], '', $data->get('doc_ser').$data->get('doc_num'));
             $item['birth_date'] = wbDate('d.m.Y', $item['birth_date']);
         }
     }
@@ -57,7 +57,6 @@ class docsClass extends cmsFormsClass
     public function norm() {
         $list = $this->app->itemList('docs', $this->filter);
         foreach ($list['list'] as $item) {
-
             $item = (object)$item;
             $item->reg_corpse = str_replace(', корп.', '', $item->reg_corpse);
             $item->region > '' && isset($item->reg_city_type) ? $item->reg_city_type = str_replace('Ленинградская область, ','',$item->reg_city_type) : null;
@@ -69,9 +68,7 @@ class docsClass extends cmsFormsClass
             //$item = (object)$item;
             //print_r([$item->region,$item->reg_city_type,$item->reg_city,$item->reg_build,$item->reg_house,$item->reg_house_num,$item->reg_flat]);
             echo "<br>";
-
             wbItemSave('docs', $item, false);
-            
         }
         wbTableFlush('docs');
     }

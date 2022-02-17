@@ -113,29 +113,33 @@ class modImport
                 $status = 'progress';
             }
             if ($status) {
+                $docs = $this->app->formClass('docs');
                 $list = $app->itemList('docs', ['filter'=>[
                 'status'=>$status,
-                'archive'=>['$ne'=>'on'],
-                'pasp'=>['$in'=>array_keys($pasp)]
+                'archive'=>['$ne'=>'on']
                 ]]);
+                $arks = array_keys($pasp);
                 foreach ($list['list'] as $item) {
-                    if ($type == 'orders') {
-                        $order = $this->attachImages($pasp[$item['pasp']], $item);
-                        if (isset($order['pdf']) && $order['pdf']>'') {
-                            $item['order'] = [0=>['img'=> $order['pdf'],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
-                        } else {
+                    if (in_array($item['pasp'], $arks)) {
+                        if ($type == 'orders') {
+                            $order = $this->attachImages($pasp[$item['pasp']], $item);
+                            if (isset($order['pdf']) && $order['pdf']>'') {
+                                $item['order'] = [0=>['img'=> $order['pdf'],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
+                            } else {
+                                $item['order'] = '';
+                            }
+                        } elseif ($type == 'sources') {
+                            $item['sources'] = $this->extractImages($pasp[$item['pasp']]);
+                            $item['attaches'] = [['img'=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
                             $item['order'] = '';
+                            $item['status'] = 'progress';
                         }
-                    } else if ($type == 'sources') {
-                        $item['sources'] = $this->extractImages($pasp[$item['pasp']]);
-                        $item['attaches'] = [['img'=> $pasp[$item['pasp']],'width'=>'100','height'=>'60','alt'=>'','title'=>'']];
-                        $item['order'] = '';
-                        $item['status'] = 'progress';
-                    }
-                    $item['archive'] = '';
-                    if ($app->itemSave('docs', $item, false)) {
-                        $accept[] = $item['pasp'];
-                        unset($pasp[$item['pasp']]);
+                        $item['archive'] = '';
+                        $save = $app->itemSave('docs', $item, false);
+                        if ($save) {
+                            $accept[] = $item['pasp'];
+                            unset($pasp[$item['pasp']]);
+                        }
                     }
                 }
             }
