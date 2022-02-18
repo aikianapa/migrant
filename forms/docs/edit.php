@@ -27,7 +27,7 @@
                             <div>
                                 <div class="form-group">
                                     <label class="form-control-label">Дата рождения</label>
-                                    <input type="date"  name="birth_date" class="form-control" placeholder="Дата рождения">
+                                    <input type="date"  name="birth_date" class="form-control" required placeholder="Дата рождения">
                                 </div>
 
                                 <div class="form-group">
