@@ -117,9 +117,11 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label class="form-control-label">Место пребывания</label>
-                            <select name="place" class="form-control select2" placeholder="Место пребывания">
-                                <option value="{{id}}">{{name}}</option>
+                            <label class="form-control-label">Место прибывания</label>
+                            <select name="place" class="form-control select2" placeholder="Место прибывания">
+                                <wb-foreach wb="table=places">
+                                    <option value="{{id}}">{{title}}</option>
+                                </wb-foreach>
                             </select>
                         </div>
                     </div>
@@ -128,15 +130,17 @@
                         <div class="form-group">
                             <label class="form-control-label">Работодатель</label>
                             <select name="employer" class="form-control select2" placeholder="Работодатель">
-                                <option value="{{id}}">{{name}}</option>
+                                <wb-foreach wb="table=employers">
+                                <option value="{{id}}">{{title}}</option>
+                                </wb-foreach>
                             </select>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label class="form-control-label">Срок пребывания</label>
-                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания">
+                            <label class="form-control-label">Срок прибывания</label>
+                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок прибывания">
                         </div>
                     </div>
 
