@@ -14,7 +14,6 @@
             </div>
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
-                    <input type="hidden" name="_id">
                     <div class="col-lg-6">
 
                         <div class="form-group">
