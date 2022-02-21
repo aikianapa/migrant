@@ -155,6 +155,24 @@ class modExport
             $this->boxedField(30, 20, date('d', strtotime($item['birth_date']))); // Число рождения
             $this->boxedField(46, 20, date('m', strtotime($item['birth_date']))); // Месяц рождения
             $this->boxedField(58, 20, date('Y', strtotime($item['birth_date']))); // Год рождения
+            
+            $this->boxedField(26, 22, $item['birth_place']); // Страна рождения
+            $this->boxedField(26, 24, $item['birth_city'], 24, 2); // Город рождения
+            
+            $this->boxedField(10, 28, $item['doc_type']); // Документ
+            $this->boxedField(58, 28, $item['doc_ser']); // Документ серия
+            $this->boxedField(78, 28, $item['doc_num']); // Документ номер
+
+
+//            $this->boxedField(9, 46, date('d', strtotime($item['_created']))); // Число въезда
+//            $this->boxedField(26, 46, date('m', strtotime($item['_created']))); // Месяц въезда
+//            $this->boxedField(38, 46, date('Y', strtotime($item['_created']))); // Год въезда
+
+
+            $this->boxedField(66, 46, date('d', strtotime($item['mc_expire']))); // Число Срок пребывания
+            $this->boxedField(82, 46, date('m', strtotime($item['mc_expire']))); // Месяц Срок пребывания
+            $this->boxedField(94, 46, date('Y', strtotime($item['mc_expire']))); // Год Срок пребывания
+
 
             if ($item['gender']=='М')  $this->boxedField(90, 20, 'V'); // Пол мужской
             if ($item['gender']=='Ж')  $this->boxedField(106, 20, 'V'); // Пол женский
@@ -164,10 +182,11 @@ class modExport
             $this->boxedField(26, 30, date('m', strtotime($item['doc_date']))); // Месяц выдачи паспорта
             $this->boxedField(38, 30, date('Y', strtotime($item['doc_date']))); // Год выдачи паспорта
 
-            $this->boxedField(66, 30, date('d', strtotime($item['doc_expire']))); // Число окончания паспорта
-            $this->boxedField(82, 30, date('m', strtotime($item['doc_expire']))); // Месяц окончания паспорта
-            
+            if ($item['doc_expire']>'') $this->boxedField(66, 30, date('d', strtotime($item['doc_expire']))); // Число окончания паспорта
+            if ($item['doc_expire']>'') $this->boxedField(82, 30, date('m', strtotime($item['doc_expire']))); // Месяц окончания паспорта
             if ($item['doc_expire']>'') $this->boxedField(94, 30, date('Y', strtotime($item['doc_expire']))); // Год окончания паспорта
+            
+            
 
 
 
@@ -181,18 +200,27 @@ class modExport
         header('Content-Type: application/json');
         echo json_encode('data:application/vnd.ms-excel ;base64,'.base64_encode($xlsData));
         die;
-
-
-        die;
     }
 
-    public function boxedField($col, $row, $val, $len = 1) {
-
+    public function boxedField($col, $row, $val, $x = null, $y = null) {
+        $c = $col;
         $arr = mb_str_split($val);
+        $xx = 0; $yy = 0;
         foreach($arr as $i => $sym) {
             $idx = $this->getColName($col).$row;
             $this->sheet->setCellValue($idx, mb_strtoupper($sym));
             $col+=4;
+            if ($x>0 && $y>0) {
+                // перенос строк
+                $xx++; 
+                if ($xx == $x) {
+                    $yy++;
+                    $xx=0;
+                    $col = $c;
+                    $row += 2;
+                    if ($yy == $y) break;
+                }
+            }
         }
     }
 

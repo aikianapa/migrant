@@ -66,14 +66,14 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Страна рождения</label>
-                            <input type="text" name="birth_country" class="form-control" placeholder="Страна рождения">
+                            <input type="text" name="birth_place" class="form-control" placeholder="Страна рождения">
                         </div>
                     </div>
 
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Место рождения</label>
-                            <input type="text" name="birth_place" class="form-control" placeholder="Место рождения">
+                            <input type="text" name="birth_city" class="form-control" placeholder="Место рождения">
                         </div>
                     </div>
 
@@ -119,8 +119,8 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label class="form-control-label">Место прибывания</label>
-                            <select name="place" class="form-control select2" placeholder="Место прибывания" required>
+                            <label class="form-control-label">Место пребывания</label>
+                            <select name="place" class="form-control select2" placeholder="Место пребывания" required>
                                 <wb-foreach wb="table=places">
                                     <option value="{{id}}">{{title}}</option>
                                 </wb-foreach>
@@ -141,8 +141,8 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label class="form-control-label">Срок прибывания</label>
-                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок прибывания" required>
+                            <label class="form-control-label">Срок пребывания</label>
+                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
                         </div>
                     </div>
 
