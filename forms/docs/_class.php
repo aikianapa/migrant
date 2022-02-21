@@ -23,6 +23,16 @@ class docsClass extends cmsFormsClass
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
         $item['pasp'] = preg_replace('/[^a-zA-Z0-9]/ui', '', $data->get('doc_ser').$data->get('doc_num'));
+        if ($data->get('fullname') > '' && $data->get('last_name') == '') {
+            $tmp = explode(' ', $data->get('fullname'));
+            isset($tmp[0]) ? $data->set('last_name', $tmp[0]) : null;
+            isset($tmp[1]) ? $data->set('first_name', $tmp[1]) : null;
+            unset($tmp[0]); unset($tmp[1]);
+            $tmp = implode(' ',$tmp); 
+            $data->set('middle_name', $tmp);
+        } else if ($data->get('fullname') == '' && $data->set('first_name')>'') {
+            $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
+        }
     }
 
 

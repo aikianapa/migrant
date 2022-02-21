@@ -14,7 +14,9 @@
             </div>
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
-<input type="hidden" name="_id">
+                    <input type="hidden" name="inprint">
+                    <input type="hidden" name="status" value='new' wb-if="'{{status}}'==''">
+
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Фамилия</label>
@@ -95,7 +97,7 @@
                                 <div class="col-8">
                                     <div class="form-group">
                                     <label class="form-control-label">Номер</label>
-                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер">
+                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер" required>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +106,7 @@
                     <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="form-control-label">Дата выдачи</label>
-                                        <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи">
+                                        <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
                                     </div>
                     </div>
 
@@ -118,7 +120,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">Место прибывания</label>
-                            <select name="place" class="form-control select2" placeholder="Место прибывания">
+                            <select name="place" class="form-control select2" placeholder="Место прибывания" required>
                                 <wb-foreach wb="table=places">
                                     <option value="{{id}}">{{title}}</option>
                                 </wb-foreach>
@@ -129,7 +131,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">Работодатель</label>
-                            <select name="employer" class="form-control select2" placeholder="Работодатель">
+                            <select name="employer" class="form-control select2" placeholder="Работодатель" required>
                                 <wb-foreach wb="table=employers">
                                 <option value="{{id}}">{{title}}</option>
                                 </wb-foreach>
@@ -140,7 +142,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">Срок прибывания</label>
-                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок прибывания">
+                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок прибывания" required>
                         </div>
                     </div>
 

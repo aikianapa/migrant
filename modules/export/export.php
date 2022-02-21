@@ -5,6 +5,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
+
 class modExport
 {
     public function __construct($app)
@@ -22,7 +23,7 @@ class modExport
 
     public function init()
     {
-        ini_set('max_execution_time', 300);
+        ini_set('max_execution_time', 1200);
         $out = $this->app->fromFile(__DIR__.'/export_ui.php');
         $list = $this->app->itemList('docs', $this->filter);
         $out->fetch($list);
@@ -129,6 +130,71 @@ class modExport
         die;
     }
 
+    public function inprint() {
+        $app = &$this->app;
+        $tid = date('Ymd_His').'_inprint';
+        $reader = new Xls();
+        $spreadsheet = $reader->load($app->route->path_app.'/ocr/inprint.xls');
+        $writer = new Xlsx($spreadsheet);
+        $cat_citizen = wbTreeRead('countries')['tree']['data']; // справочник стран
+
+        $sheet = $spreadsheet->getActiveSheet();
+        $this->sheet = &$sheet;
+        $checked = $app->vars('_post.items');
+        $this->filter = ['filter' => ['id'=>['$in'=>$checked]]];
+        $list = $app->itemList('docs', $this->filter);
+        $idx = 0;
+        foreach ($list['list'] as $item) {
+            $this->docs->beforeItemShow($item);
+            $xls = $tid.'_'.$idx.'.xlsx';
+            $this->boxedField(14, 11, $item['last_name']); // Фамилия
+            $this->boxedField(14, 13, $item['first_name']); // Имя
+            $this->boxedField(26, 15, $item['middle_name']); // Отчество
+            $this->boxedField(22, 17, $cat_citizen[$item['citizen']]['name']); // Гражданство
+            //===
+            $this->boxedField(30, 20, date('d', strtotime($item['birth_date']))); // Число рождения
+            $this->boxedField(46, 20, date('m', strtotime($item['birth_date']))); // Месяц рождения
+            $this->boxedField(58, 20, date('Y', strtotime($item['birth_date']))); // Год рождения
+
+            if ($item['gender']=='М')  $this->boxedField(90, 20, 'V'); // Пол мужской
+            if ($item['gender']=='Ж')  $this->boxedField(106, 20, 'V'); // Пол женский
+
+            //===
+            $this->boxedField(9, 30, date('d', strtotime($item['doc_date']))); // Число выдачи паспорта
+            $this->boxedField(26, 30, date('m', strtotime($item['doc_date']))); // Месяц выдачи паспорта
+            $this->boxedField(38, 30, date('Y', strtotime($item['doc_date']))); // Год выдачи паспорта
+
+            $this->boxedField(66, 30, date('d', strtotime($item['doc_expire']))); // Число окончания паспорта
+            $this->boxedField(82, 30, date('m', strtotime($item['doc_expire']))); // Месяц окончания паспорта
+            
+            if ($item['doc_expire']>'') $this->boxedField(94, 30, date('Y', strtotime($item['doc_expire']))); // Год окончания паспорта
+
+
+
+            $idx++; break;
+        }
+
+        ob_start();
+        $writer->save('php://output');
+        $xlsData = ob_get_contents();
+        ob_end_clean();
+        header('Content-Type: application/json');
+        echo json_encode('data:application/vnd.ms-excel ;base64,'.base64_encode($xlsData));
+        die;
+
+
+        die;
+    }
+
+    public function boxedField($col, $row, $val, $len = 1) {
+
+        $arr = mb_str_split($val);
+        foreach($arr as $i => $sym) {
+            $idx = $this->getColName($col).$row;
+            $this->sheet->setCellValue($idx, mb_strtoupper($sym));
+            $col+=4;
+        }
+    }
 
     public function getColName($num)
     {
