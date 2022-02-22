@@ -87,9 +87,10 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label class="form-control-label">Тип (кв/комн/пом)</label>
-                                        <select name="reg_flat" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=flat_type&parent=false">
+                                        <input type="text" name="reg_flat" class="form-control" placeholder="Тип (кв/комн/пом)">
+                                        <!--select name="reg_flat" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=flat_type&parent=false">
                                         <option value="{{data.short}}">{{name}}</option>
-                                        </select>
+                                        </select-->
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-control-label">Номер</label>
