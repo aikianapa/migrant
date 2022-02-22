@@ -47,6 +47,34 @@
                         </div>
                     </div>
 
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">Префикс ЭЦП</label>
+                            <div class="input-group">
+                                <input type="text" name="sign_prefix" class="form-control" required placeholder="Префикс ЭЦП">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">/{{date("y")}}/0000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">Ключ ЭЦП</label>
+                            <input type="text" name="sign_key" class="form-control" required placeholder="Ключ ЭЦП">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">Действителен до</label>
+                            <input type="datepicker" wb-module="datetimepicker" name="sign_expire" class="form-control" required placeholder="Действителен до">
+                        </div>
+                    </div>
+
                     <div class="col-6">
                         <div class="form-group">
                             <label class="form-control-label">Факсимиле</label>

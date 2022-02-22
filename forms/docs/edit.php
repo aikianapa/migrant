@@ -26,7 +26,7 @@
                             <div>
                                 <div class="form-group">
                                     <label class="form-control-label">Дата рождения</label>
-                                    <input type="date"  name="birth_date" class="form-control" required placeholder="Дата рождения">
+                                    <input type="datepicker" wb-module="datetimepicker"  name="birth_date" class="form-control" required placeholder="Дата рождения">
                                 </div>
 
                                 <div class="form-group">
@@ -82,12 +82,12 @@
                                 <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата выдачи</label>
-                                        <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи">
+                                        <input type="datepicker" wb-module="datetimepicker" name="doc_date" class="form-control" placeholder="Дата выдачи">
                                     </div>
 
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="date" name="doc_expire" class="form-control" placeholder="Дата окончания">
+                                        <input type="datepicker" wb-module="datetimepicker" name="doc_expire" class="form-control" placeholder="Дата окончания">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -112,12 +112,12 @@
                                 <div class="row">
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата выдачи</label>
-                                        <input type="date" name="mc_date" class="form-control" placeholder="Дата выдачи">
+                                        <input type="datepicker" wb-module="datetimepicker" name="mc_date" class="form-control" placeholder="Дата выдачи">
                                     </div>
 
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="date" name="mc_expire" class="form-control" placeholder="Дата окончания">
+                                        <input type="datepicker" wb-module="datetimepicker" name="mc_expire" class="form-control" placeholder="Дата окончания">
                                     </div>
                                 </div>
 

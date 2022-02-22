@@ -45,32 +45,29 @@
         </wb-foreach>
     </ul>
 
-    <div class="modal" tabindex="-1" data-backdrop="static" role="dialog" id="moduleExportWait" aria-modal="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ожидайте</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="tx-center wait">Идёт подготовка документов...
-                        <br>
-                        <br>
-                        <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
-                    </div>
-                    <div class="tx-center ready d-none">
-                        <div>Нажмите кнопку, чтобы скачать архив документов</div>
-                        <a class='btn btn-success' href='#' target='_blank'>Скачать</a>
-                    </div>
-                </div>
-                <div class="modal-footer"></div>
-            </div>
-        </div>
+<div class="modal" tabindex="-1" data-backdrop="static" role="dialog" id="moduleExportWait" aria-modal="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ожидайте</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="tx-center wait">Идёт подготовка документов...<br><br><span class="spinner-border spinner-border" role="status" aria-hidden="true"></span></div>
+          <div class="tx-center ready d-none">
+              <div>Нажмите кнопку, чтобы скачать архив документов</div>
+              <a class='btn btn-success' href='#' target='_blank'>Скачать</a>
+</div>
+      </div>
+      <div class="modal-footer"></div>
     </div>
+  </div>
+</div>
 
     <script wb-app remove>
+
         $('#moduleExportXls .btn.download').off('click');
         $('#moduleExportXls .btn.download').on('click', function() {
             let data = {};
@@ -96,7 +93,7 @@
             }).done(function(data) {
                 $modal.find('.ready').removeClass('d-none');
                 $modal.find('.wait').addClass('d-none');
-                $modal.find('.ready a').attr('href', data.link);
+                $modal.find('.ready a').attr('href',data.link);
             });
         });
 

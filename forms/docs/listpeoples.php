@@ -159,15 +159,22 @@
                 data: data,
                 dataType: 'json'
             }).done(function(data) {
-                var $a = $('&lt;a>');
-                $a.attr("href", data);
-                $a.attr("target", "_blank");
-                $a.addClass("d-none");
-                $("body").append($a);
-                $a.attr("download", "Report.xls");
-                $a[0].click();
-                $a.remove();
-                $('#yongerPeoples modals #modalInprintWait').modal('hide').remove();
+                if (data.error == false) {
+                    var $a = $('&lt;a>');
+                    $a.attr("href", data.pdf);
+                    $a.attr("target", "_blank");
+                    $a.addClass("d-none");
+                    $("body").append($a);
+//                    $a.attr("download", "Report.xls");
+                    $a[0].click();
+                    $a.remove();
+                } else {
+                    wbapp.toast('Ошибка', 'Что-то пошло не так!', {
+                        bgcolor: 'danger',
+                        delay: 10000
+                    });
+                }
+                $('#yongerPeoples modals #modalInprintWait').modal('hide');
             });
         });
 </script>
