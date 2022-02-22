@@ -291,24 +291,22 @@ class modExport
                 $im = new Imagick($this->app->vars('_env.path_app').$emplr['faximile'][0]['img']);
                 $im->clipImage(0);
                 $im->paintTransparentImage($im->getImageBackgroundColor(), 0, 3000);
-                $im->rotateImage(new ImagickPixel('none'), intval(rand(-15, 15)));
+                //$im->rotateImage(new ImagickPixel('none'), intval(rand(-15, 15)));
 
-                $im->resizeImage(0, 200, Imagick::FILTER_LANCZOS, 1);
-                $im->setImageFormat('png32');
+                $im->resizeImage(0, 300, Imagick::FILTER_LANCZOS, 1);
+                $im->setImageFormat('png64');
                 file_put_contents($png, $im->getImageBlob());
                 $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
                 $drawing->setName('faximile');
                 $drawing->setDescription('faximile');
                 $drawing->setPath($png);
 
-                $drawing->setWidth(250);
-                $drawing->setHeight(70);
+                $drawing->setWidth(300);
+                $drawing->setHeight(100);
 
-                $drawing->setCoordinates('K36');
-
-                $drawing->setOffsetY(intval(rand(1, 10)));
-                $drawing->setOffsetX(intval(rand(-20, 20)));
-
+                $drawing->setOffsetY(intval(rand(-30, 5)));
+                $drawing->setOffsetX(intval(rand(5, 30)));
+                $drawing->setCoordinates('B37');
                 $drawing->setWorksheet($spreadsheet->getSheetByName('стр.4'));
             }
 
@@ -319,29 +317,28 @@ class modExport
                 $im = new Imagick($this->app->vars('_env.path_app').$emplr['stamp'][0]['img']);
                 $im->clipImage(0);
                 $im->paintTransparentImage($im->getImageBackgroundColor(), 0, 3000);
-                $im->rotateImage(new ImagickPixel('none'), intval(rand(-25, 25)));
-
                 $im->resizeImage(0, 200, Imagick::FILTER_LANCZOS, 1);
-                $im->setImageFormat('png32');
+                $im->rotateImage(new ImagickPixel('none'), intval(rand(-25, 25)));
+                $im->cropImage(200, 200, 0, 0);
+                $im->resizeImage(0, 200, Imagick::FILTER_LANCZOS, 1);
+
+                $im->setImageFormat('png64');
                 file_put_contents($png, $im->getImageBlob());
 
                 $drawing =  new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
 
-                $drawing->setName('stamp');
-                $drawing->setDescription('stamp');
                 $drawing->setPath($png);
+                $drawing->setWidthAndHeight(196, 196);
+                $drawing->setCoordinates('B46');
 
-                $drawing->setWidth(120);
-                $drawing->setHeight(120);
+                $drawing->setOffsetY(intval(rand(-30, 5)));
+                $drawing->setOffsetX(intval(rand(10, 30)));
 
-                $drawing->setCoordinates('K46');
-
-                $drawing->setOffsetY(intval(rand(1, 10)));
-                $drawing->setOffsetX(intval(rand(-20, 20)));
+                $drawing->setRotation(intval(rand(10, 30)));
                 $drawing->setWorksheet($spreadsheet->getSheetByName('стр.4'));
             }
 
-            //=== ПОДПИСЬ
+            //=== ПОДПИСЬ ЭЦП
 
             $this->sheet->getStyle('BD37')->applyFromArray(['font'=>['size'=>8]]);
 

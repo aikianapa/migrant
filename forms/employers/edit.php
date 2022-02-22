@@ -22,7 +22,7 @@
 
                     <div class="form-group col-5">
                         <label class="form-control-label">ИНН</label>
-                        <input type="text" wb-mask="999999999999" name="inn" class="form-control" placeholder="ИНН">
+                        <input type="number" name="inn" class="form-control" placeholder="ИНН">
                     </div>
 
 
