@@ -9,6 +9,10 @@ class docsClass extends cmsFormsClass
         $item['reg_city'] = ucfirst($item['reg_city']);
         $item['reg_street'] = ucfirst($item['reg_street']);
         $item['checksum'] = $this->checksum($item);
+        $data = $this->app->Dot($item);
+        if ($data->get('fullname') == '' && $data->get('first_name')>'') {
+            $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
+        }
     }
 
     public function afterItemRead(&$item) {
@@ -30,7 +34,7 @@ class docsClass extends cmsFormsClass
             unset($tmp[0]); unset($tmp[1]);
             $tmp = implode(' ',$tmp); 
             $data->set('middle_name', $tmp);
-        } else if ($data->get('fullname') == '' && $data->set('first_name')>'') {
+        } else if ($data->get('fullname') == '' && $data->get('first_name')>'') {
             $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
         }
     }

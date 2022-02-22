@@ -142,7 +142,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">Срок пребывания</label>
-                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
+                            <input type="datepicker" wb-module="datetimepicker" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
                         </div>
                     </div>
 
