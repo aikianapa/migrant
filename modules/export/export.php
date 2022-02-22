@@ -262,7 +262,7 @@ class modExport
             $this->boxedField('CX:63', $place['reg_build']); // Строение
 
             $this->lineField('B:63', $place['reg_house']); // Тип дома
-            $this->boxedField('AВ:63', $place['reg_house_num']); // Номер дома
+            $this->boxedField('AD:63', $place['reg_house_num']); // Номер дома
 
             $this->lineField('B:65', $place['reg_flat']); // Тип квартиры
             $this->boxedField('AJ:65', $place['reg_flat_num']); // Номер квартиры
