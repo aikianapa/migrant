@@ -59,7 +59,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Дата рождения</label>
-                            <input type="datepicker" wb-module="datetimepicker" name="birth_date" class="form-control" required placeholder="Дата рождения">
+                            <input type="date" name="birth_date" class="form-control" required placeholder="Дата рождения">
                         </div>
                     </div>
 
@@ -106,14 +106,14 @@
                     <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="form-control-label">Дата выдачи</label>
-                                        <input type="datepicker" wb-module="datetimepicker" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
+                                        <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
                                     </div>
                     </div>
 
                     <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="form-control-label">Дата окончания</label>
-                                        <input type="datepicker" wb-module="datetimepicker" name="doc_expire" class="form-control" placeholder="Дата окончания">
+                                        <input type="date" name="doc_expire" class="form-control" placeholder="Дата окончания">
                                     </div>
                     </div>
 
@@ -142,7 +142,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">Срок пребывания</label>
-                            <input type="datepicker" wb-module="datetimepicker" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
+                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
                         </div>
                     </div>
 

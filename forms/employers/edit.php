@@ -71,7 +71,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">Действителен до</label>
-                            <input type="datepicker" wb-module="datetimepicker" name="sign_expire" class="form-control" required placeholder="Действителен до">
+                            <input type="date" name="sign_expire" class="form-control" required placeholder="Действителен до">
                         </div>
                     </div>
 
