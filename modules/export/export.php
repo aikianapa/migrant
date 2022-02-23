@@ -328,10 +328,10 @@ class modExport
                 $drawing =  new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
 
                 $drawing->setPath($png);
-                $drawing->setWidthAndHeight(196, 196);
+                $drawing->setWidthAndHeight(160, 160);
                 $drawing->setCoordinates('B46');
 
-                $drawing->setOffsetY(intval(rand(-30, 5)));
+                $drawing->setOffsetY(intval(rand(-20, 5)));
                 $drawing->setOffsetX(intval(rand(10, 30)));
 
                 $drawing->setRotation(intval(rand(10, 30)));
