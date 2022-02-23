@@ -340,17 +340,18 @@ class modExport
 
             //=== ПОДПИСЬ ЭЦП
 
-            $this->sheet->getStyle('BD37')->applyFromArray(['font'=>['size'=>8]]);
+            //$this->sheet->getStyle('BD37')->applyFromArray(['font'=>['size'=>8]]);
             $sign_num = (isset($item['sign_num'])) ? intval($item['sign_num']) : 0;
             $sign = $emplr['sign_prefix'].'/'.date('y').'/'.str_pad($sign_num,5,0,0);
             $sign .=PHP_EOL.date('d.m.Y H:i');
-            $sign .=PHP_EOL.PHP_EOL.$emplr['title'];
-            $sign .=PHP_EOL.PHP_EOL.$emplr['last_name'].' '.$emplr['first_name'].' '.$emplr['middle_name'];
-            $sign .=PHP_EOL.'сертификат ключа ЭЦП '.$emplr['sign_key'];
-            $sign .=PHP_EOL.'действителен до '.date('d.m.Y',strtotime($emplr['sign_expire']));
+            $this->lineField('BD:37', $sign);
+            $this->lineField('BD:39', $emplr['title']);
+            $this->lineField('BD:42', $emplr['last_name'].' '.$emplr['first_name'].' '.$emplr['middle_name']);
 
-            $sign .=PHP_EOL.'выдан удостоверяющим центром';
-            $this->lineField('BD:37', $sign);           
+            $sign_key = PHP_EOL.'сертификат ключа ЭЦП '.$emplr['sign_key'];
+            $sign_key .=PHP_EOL.'действителен до '.date('d.m.Y',strtotime($emplr['sign_expire']));
+            $sign_key .=PHP_EOL.'выдан удостоверяющим центром';
+            $this->lineField('BD:44', $sign_key);
 
             $idx++;
             $name = "rep{$idx}.xlsx";
