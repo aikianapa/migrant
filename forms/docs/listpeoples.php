@@ -106,8 +106,8 @@
             </tr>
         </tfoot>
     </table>
-
-
+    <modals></modals>
+</div>
     <modals>
 
     <div class="modal" tabindex="-1" data-backdrop="static" role="dialog" id="modalInprintWait" aria-modal="true">
@@ -136,7 +136,6 @@
     </div>
 
     </modals>
-</div>
 <script wb-app remove>
         $('#yongerPeoples thead .btn-print').off('click');
         $('#yongerPeoples thead .btn-print').on('click', function() {
@@ -151,7 +150,7 @@
                 });
                 return false;
             } else {
-                $('#yongerPeoples modals #modalInprintWait').modal('show');
+                $('modals #modalInprintWait').modal('show');
             }
             $.ajax({
                 type: 'POST',
@@ -174,7 +173,7 @@
                         delay: 10000
                     });
                 }
-                $('#yongerPeoples modals #modalInprintWait').modal('hide');
+                $('modals #modalInprintWait').modal('hide');
             });
         });
 </script>
