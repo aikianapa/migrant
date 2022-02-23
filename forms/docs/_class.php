@@ -13,6 +13,14 @@ class docsClass extends cmsFormsClass
         if ($data->get('fullname') == '' && $data->get('first_name')>'') {
             $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
         }
+        if ($data->get('sign_num') =='' && $data->get('employer') > '') {
+            $emplr = $this->app->itemRead('employers', $data->get('employer'));
+            $year = date('y');
+            $start = ($year == 22 && (isset($emplr['sign_start']))) ? intval($emplr['sign_start']) : 0;
+            $ai = $this->app->module('autoinc');
+            $counter=$data->get('employer').'_'.$year;
+            $item['sign_num'] = $ai->inc('sign_num', $counter, $start);
+        }
     }
 
     public function afterItemRead(&$item) {
@@ -64,6 +72,12 @@ class docsClass extends cmsFormsClass
 
     public function beforeItemEdit(&$item)
     {
+        /*
+        if (isset($item['id']) && !in_array($item['id'],['','_new'])) {
+            $ai = $this->app->module('autoinc');
+            $item['sign_start'] = $ai->get('docs', $item['id'].'_'.date('y'));
+        }
+        */
         return $item;
     }
 

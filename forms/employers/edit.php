@@ -51,11 +51,14 @@
                         <div class="form-group">
                             <label class="form-control-label">Префикс ЭЦП</label>
                             <div class="input-group">
+                                <wb-var signstart="{{str_pad(0,5,0,0)}}" wb-if="'{{sign_start}}'==''" else="{{str_pad({{sign_start}},5,0,0)}}" />
                                 <input type="text" name="sign_prefix" class="form-control" required placeholder="Префикс ЭЦП">
                                 <div class="input-group-append">
-                                    <span class="input-group-text">/{{date("y")}}/0000</span>
+                                    <span class="input-group-text">/{{date("y")}}/<span contenteditable onkeyup="$('#{{_form}}EditForm [name=sign_start]').attr('value',intval($(this).text())*1)">{{_var.signstart}}</span></span>
                                     </div>
                                 </div>
+                                <input type="hidden" name="sign_start">
+                                <input type="hidden" name="sign_num">
                             </div>
                             
                         </div>
