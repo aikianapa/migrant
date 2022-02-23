@@ -341,8 +341,8 @@ class modExport
             //=== ПОДПИСЬ ЭЦП
 
             $this->sheet->getStyle('BD37')->applyFromArray(['font'=>['size'=>8]]);
-
-            $sign = $emplr['sign_prefix'].'/'.date('y').'/'.'00001';
+            $sign_num = (isset($item['sign_num'])) ? intval($item['sign_num']) : 0;
+            $sign = $emplr['sign_prefix'].'/'.date('y').'/'.str_pad($sign_num,5,0,0);
             $sign .=PHP_EOL.date('d.m.Y H:i');
             $sign .=PHP_EOL.PHP_EOL.$emplr['title'];
             $sign .=PHP_EOL.PHP_EOL.$emplr['last_name'].' '.$emplr['first_name'].' '.$emplr['middle_name'];
