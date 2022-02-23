@@ -1,5 +1,5 @@
 <html>
-<div class="m-3" id="yongerPeoples" wb-allow="admin,partner">
+<div class="m-3" id="yongerPeoples" wb-allow="admin,reg">
 
     <nav class="nav navbar navbar-expand-md col">
         <h3 class="tx-bold tx-spacing--2 order-1">Люди</h3>

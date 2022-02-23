@@ -63,17 +63,10 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="form-control-label">Страна рождения</label>
-                            <input type="text" name="birth_place" class="form-control" placeholder="Страна рождения">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Место рождения</label>
-                            <input type="text" name="birth_city" class="form-control" placeholder="Место рождения">
+                            <input type="text" name="birth_place" class="form-control" placeholder="Место рождения">
                         </div>
                     </div>
 
