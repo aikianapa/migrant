@@ -10,7 +10,7 @@ class modExport
 {
     public function __construct($app)
     {
-        set_time_limit(600);
+        set_time_limit(1200);
         $this->app = $app;
         $this->docs = $app->formClass('docs');
         $this->schema = $this->docs->schemaXls();
@@ -302,9 +302,9 @@ class modExport
                 $drawing->setPath($png);
 
                 $drawing->setWidth(300);
-                $drawing->setHeight(100);
+                $drawing->setHeight(80);
 
-                $drawing->setOffsetY(intval(rand(-30, 5)));
+                $drawing->setOffsetY(intval(rand(-30, 0)));
                 $drawing->setOffsetX(intval(rand(5, 30)));
                 $drawing->setCoordinates('B37');
                 $drawing->setWorksheet($spreadsheet->getSheetByName('стр.4'));
