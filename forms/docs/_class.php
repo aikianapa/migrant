@@ -21,6 +21,12 @@ class docsClass extends cmsFormsClass
             $counter=$data->get('employer').'_'.$year;
             $item['sign_num'] = $ai->inc('sign_num', $counter, $start);
         }
+        if ($data->get('reg_street') =='' && $data->get('place') > '') {
+            $place = $this->app->itemRead('places', $data->get('place'));
+            foreach($place as $k => $v) {
+                substr($k, 0, 4) == 'reg_' ? $item[$k] = $v : null;
+            }
+        }
     }
 
     public function afterItemRead(&$item) {
