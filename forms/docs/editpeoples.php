@@ -110,29 +110,19 @@
                                     </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Место пребывания</label>
                             <select name="place" class="form-control select2" placeholder="Место пребывания" required>
                                 <wb-foreach wb="table=places">
-                                    <option value="{{id}}">{{title}}</option>
+                                    <option value="{{id}}" data-employer="{{employer}}">{{title}}</option>
                                 </wb-foreach>
                             </select>
+                            <input type="hidden" name="employer">
                         </div>
                     </div>
 
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label class="form-control-label">Работодатель</label>
-                            <select name="employer" class="form-control select2" placeholder="Работодатель" required>
-                                <wb-foreach wb="table=employers">
-                                <option value="{{id}}">{{title}}</option>
-                                </wb-foreach>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Срок пребывания</label>
                             <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
@@ -148,6 +138,14 @@
         </div>
     </div>
 </div>
+<script>
+    $('#modalPeoplesEdit select[name=place]').on('change',function(e){
+        let employer = $(this).children('option[value="'+$(this).val()+'"]').data('employer');
+        if (employer) {
+            $('#modalPeoplesEdit [name=place]').val(employer);
+        }
+    })
 
+</script>
 
 </html>

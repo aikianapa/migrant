@@ -99,6 +99,18 @@
                                         <input type="text" name="reg_flat_num" class="form-control" placeholder="Номер помещения">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Работодатель</label>
+                                            <select name="employer" class="form-control select2" placeholder="Работодатель" required>
+                                                <wb-foreach wb="table=employers">
+                                                <option value="{{id}}">{{title}}</option>
+                                                </wb-foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
