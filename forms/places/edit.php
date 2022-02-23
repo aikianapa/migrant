@@ -31,9 +31,10 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label class="form-control-label">Область</label>
-                                        <select name="region" class="form-control select2" wb-tree="item=locations&tpl=false&branch=regions&parent=false" placeholder="Область/край/республика">
+                                        <input type="text" name="region" class="form-control" placeholder="Область/край/республика">
+                                        <!--select name="region" class="form-control select2" wb-tree="item=locations&tpl=false&branch=regions&parent=false" placeholder="Область/край/республика">
                                             <option value="{{name}}">{{name}}</option>
-                                        </select>
+                                        </select-->
                                     </div>
                                 </div>
                                 <div class="row">
