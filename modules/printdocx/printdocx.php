@@ -42,9 +42,9 @@ class modPrintdocx
         $ccodes = $app->treeRead('countries');
         $country = wbTreeFindBranch($ccodes['tree']['data'], $item['citizen']);
         isset($country[0]['name']) ? $item['citizen'] = $country[0]['name'] : null;
+        $data->set('birth_place', str_replace('TADJI','TAJI',strtoupper(wbTranslit($data->get('birth_place')))));
+
         $data = $item;
-
-
         $pdfsrc = '';
         $pathsrc = $app->route->path_app.'/ocr/';
         $pathtmp = $app->route->path_app.'/uploads/tmp/';
