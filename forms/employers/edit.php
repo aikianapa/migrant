@@ -1,6 +1,6 @@
 <html>
 <div class="modal fade effect-scale show removable" id="modalEmployersEdit" data-backdrop="static" tabindex="-1"
-    role="dialog" aria-hidden="true" wb-allow="admin,partner">
+    role="dialog" aria-hidden="true" wb-allow="admin,partner,reg">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header row">

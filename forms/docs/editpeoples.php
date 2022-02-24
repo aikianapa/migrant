@@ -80,34 +80,34 @@
                     </div>
 
                     <div class="col-sm-3">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
                                     <label class="form-control-label">Серия</label>
                                     <input type="text" name="doc_ser" class="form-control" placeholder="Серия">
-                                    </div>
-                                </div>
-                                <div class="col-8">
-                                    <div class="form-group">
-                                    <label class="form-control-label">Номер</label>
-                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер" required>
-                                    </div>
                                 </div>
                             </div>
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <label class="form-control-label">Номер</label>
+                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Дата выдачи</label>
-                                        <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
-                                    </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Дата выдачи</label>
+                            <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
+                        </div>
                     </div>
 
                     <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Дата окончания</label>
-                                        <input type="date" name="doc_expire" class="form-control" placeholder="Дата окончания">
-                                    </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Дата окончания</label>
+                            <input type="date" name="doc_expire" class="form-control" placeholder="Дата окончания">
+                        </div>
                     </div>
 
                     <div class="col-sm-6">
@@ -139,13 +139,11 @@
     </div>
 </div>
 <script>
-    $('#modalPeoplesEdit select[name=place]').on('change',function(e){
-        let employer = $(this).children('option[value="'+$(this).val()+'"]').data('employer');
-        if (employer) {
-            $('#modalPeoplesEdit [name=place]').val(employer);
-        }
+    $('#modalPeoplesEdit select[name=place]').on('select2:select', function(e) {
+        let data = e.params.data;
+        let employer = $(data.element).attr('data-employer');
+        $('#modalPeoplesEdit [name=employer]').val(employer).attr('value', employer);
     })
-
 </script>
 
 </html>
