@@ -34,7 +34,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Отчество</label>
-                            <input type="text" name="middle_name" class="form-control" required placeholder="Отчество">
+                            <input type="text" name="middle_name" class="form-control"  placeholder="Отчество">
                         </div>
                     </div>
                     <div class="col-sm-3">
