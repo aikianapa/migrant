@@ -165,59 +165,59 @@ class modExport
 
             $xls = $tid.'_'.$idx.'.xlsx';
 
-/*
+        /*
 
-            //=== СТРАНИЦА 1
-            $sheet = $spreadsheet->getSheetByName('стр.1');
-            $this->sheet = &$sheet;
+                    //=== СТРАНИЦА 1
+                    $sheet = $spreadsheet->getSheetByName('стр.1');
+                    $this->sheet = &$sheet;
 
-            $this->boxedField('N:11', $item['last_name']); // Фамилия
-            $this->boxedField('N:13', $item['first_name']); // Имя
-            $this->boxedField('Z:15', $item['middle_name']); // Отчество
-            $this->boxedField('V:17', $cat_citizen[$item['citizen']]['name']); // Гражданство
-            //===
+                    $this->boxedField('N:11', $item['last_name']); // Фамилия
+                    $this->boxedField('N:13', $item['first_name']); // Имя
+                    $this->boxedField('Z:15', $item['middle_name']); // Отчество
+                    $this->boxedField('V:17', $cat_citizen[$item['citizen']]['name']); // Гражданство
+                    //===
 
-            $this->boxedField('AD:20', date('d', strtotime($item['birth_date']))); // Число рождения
-            $this->boxedField('AT:20', date('m', strtotime($item['birth_date']))); // Месяц рождения
-            $this->boxedField('BF:20', date('Y', strtotime($item['birth_date']))); // Год рождения
-            
-            $this->boxedField('Z:22', $item['birth_place']); // Страна рождения
-            $this->boxedField('Z:24', $item['birth_city'], 24, 2); // Город рождения
-            
-            $this->boxedField('J:28', $item['doc_type']); // Документ
-            $this->boxedField('BF:28', $item['doc_ser']); // Документ серия
-            $this->boxedField('BZ:28', $item['doc_num']); // Документ номер
-
-
-//            $this->boxedField('I:46', date('d', strtotime($item['_created']))); // Число въезда
-//            $this->boxedField('Z:46', date('m', strtotime($item['_created']))); // Месяц въезда
-//            $this->boxedField('AL:46', date('Y', strtotime($item['_created']))); // Год въезда
-
-            $this->boxedField('BN:46', date('d', strtotime($item['mc_expire']))); // Число Срок пребывания
-            $this->boxedField('CD:46', date('m', strtotime($item['mc_expire']))); // Месяц Срок пребывания
-            $this->boxedField('CP:46', date('Y', strtotime($item['mc_expire']))); // Год Срок пребывания
+                    $this->boxedField('AD:20', date('d', strtotime($item['birth_date']))); // Число рождения
+                    $this->boxedField('AT:20', date('m', strtotime($item['birth_date']))); // Месяц рождения
+                    $this->boxedField('BF:20', date('Y', strtotime($item['birth_date']))); // Год рождения
+                    
+                    $this->boxedField('Z:22', $item['birth_place']); // Страна рождения
+                    $this->boxedField('Z:24', $item['birth_city'], 24, 2); // Город рождения
+                    
+                    $this->boxedField('J:28', $item['doc_type']); // Документ
+                    $this->boxedField('BF:28', $item['doc_ser']); // Документ серия
+                    $this->boxedField('BZ:28', $item['doc_num']); // Документ номер
 
 
-            if ($item['gender']=='М')  $this->boxedField('CL:20', 'V'); // Пол мужской
-            if ($item['gender']=='Ж')  $this->boxedField('DB:20', 'V'); // Пол женский
+        //            $this->boxedField('I:46', date('d', strtotime($item['_created']))); // Число въезда
+        //            $this->boxedField('Z:46', date('m', strtotime($item['_created']))); // Месяц въезда
+        //            $this->boxedField('AL:46', date('Y', strtotime($item['_created']))); // Год въезда
 
-            //===
-            $this->boxedField('I:30', date('d', strtotime($item['doc_date']))); // Число выдачи паспорта
-            $this->boxedField('Z:30', date('m', strtotime($item['doc_date']))); // Месяц выдачи паспорта
-            $this->boxedField('AL:30', date('Y', strtotime($item['doc_date']))); // Год выдачи паспорта
+                    $this->boxedField('BN:46', date('d', strtotime($item['mc_expire']))); // Число Срок пребывания
+                    $this->boxedField('CD:46', date('m', strtotime($item['mc_expire']))); // Месяц Срок пребывания
+                    $this->boxedField('CP:46', date('Y', strtotime($item['mc_expire']))); // Год Срок пребывания
 
-            if ($item['doc_expire']>'') $this->boxedField('BN:30', date('d', strtotime($item['doc_expire']))); // Число окончания паспорта
-            if ($item['doc_expire']>'') $this->boxedField('CD:30', date('m', strtotime($item['doc_expire']))); // Месяц окончания паспорта
-            if ($item['doc_expire']>'') $this->boxedField('CP:30', date('Y', strtotime($item['doc_expire']))); // Год окончания паспорта
 
-            //=== СТРАНИЦА 2
-            $sheet = $spreadsheet->getSheetByName('стр.2');
-            $this->sheet = &$sheet;
-            
-            $this->boxedField('V:14', $place['region'], 25, 2); // Область пребывания
-            $this->boxedField('Z:20', $place['reg_city_type'].$place['reg_city'], 25, 2); // Город пребывания
-            $this->boxedField('V:22', $place['reg_street_type'].$place['reg_street'], 25, 2); // Улица пребывания
-*/
+                    if ($item['gender']=='М')  $this->boxedField('CL:20', 'V'); // Пол мужской
+                    if ($item['gender']=='Ж')  $this->boxedField('DB:20', 'V'); // Пол женский
+
+                    //===
+                    $this->boxedField('I:30', date('d', strtotime($item['doc_date']))); // Число выдачи паспорта
+                    $this->boxedField('Z:30', date('m', strtotime($item['doc_date']))); // Месяц выдачи паспорта
+                    $this->boxedField('AL:30', date('Y', strtotime($item['doc_date']))); // Год выдачи паспорта
+
+                    if ($item['doc_expire']>'') $this->boxedField('BN:30', date('d', strtotime($item['doc_expire']))); // Число окончания паспорта
+                    if ($item['doc_expire']>'') $this->boxedField('CD:30', date('m', strtotime($item['doc_expire']))); // Месяц окончания паспорта
+                    if ($item['doc_expire']>'') $this->boxedField('CP:30', date('Y', strtotime($item['doc_expire']))); // Год окончания паспорта
+
+                    //=== СТРАНИЦА 2
+                    $sheet = $spreadsheet->getSheetByName('стр.2');
+                    $this->sheet = &$sheet;
+                    
+                    $this->boxedField('V:14', $place['region'], 25, 2); // Область пребывания
+                    $this->boxedField('Z:20', $place['reg_city_type'].$place['reg_city'], 25, 2); // Город пребывания
+                    $this->boxedField('V:22', $place['reg_street_type'].$place['reg_street'], 25, 2); // Улица пребывания
+        */
 
             //=== СТРАНИЦА 3
             $sheet = $spreadsheet->getSheetByName('стр.3');
