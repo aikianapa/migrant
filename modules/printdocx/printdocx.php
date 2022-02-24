@@ -20,6 +20,7 @@ class modPrintdocx
         $data = &$this->app->Dot($item);
 
         $tid = str_replace('__','_',date('dmY',strtotime($data->get('_created'))).'_'.$data->get('doc_ser').'_'.$data->get('doc_num'));
+        $tid = str_replace(' ', '', $tid);
         foreach ($item as $k => $v) {
             strpos(' '.$k, 'date') ? $item[$k] = date('d.m.Y', strtotime($v)) : null;
             strpos(' '.$k, 'expire') ? $item[$k] = date('d.m.Y', strtotime($v)) : null;
