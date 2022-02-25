@@ -66,9 +66,9 @@ class docsClass extends cmsFormsClass
                 $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
                 $data->set('reg_house', $data->get('reg_house_num')); // номер дома
                 $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
-
+                $data->set('tfl', 'Н');
+                $data->set('doc_type', '31');
             } else {
-
                 $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = 'корп.'.$item['reg_corpse'] : null;
                 $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
                 $data->set('reg_house', trim($data->get('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
@@ -158,7 +158,7 @@ class docsClass extends cmsFormsClass
         return [
              0  => 'fullname'
             ,1  => 'birth_date'
-            ,2  => 'tfl' // тип физ.лица
+            ,2  => 'tfl' // тип физ.лица = Н
             ,3  => 'citizen'
             ,4  => 'doc_type' // тип док-та = 31
             ,5  => 'doc_ser'
