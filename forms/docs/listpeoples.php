@@ -72,7 +72,7 @@
 
                 <tr>
                     <td>{{fullname}}<br /><small>{{birth_date}}</small></td>
-                    <td>{{doc_ser}} №{{doc_num}}<br>{{date("y-m-d",{{_created}})}}</td>
+                    <td>{{doc_ser}} №{{doc_num}}<br><small>{{wbdate("Y-m-d",{{_created}})}}</small></td>
                     <td>
 
                         <input wb-module="swico" name="inprint"
