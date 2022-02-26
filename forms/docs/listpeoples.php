@@ -60,7 +60,7 @@
             </tr>
         </thead>
         <tbody id="{{_form}}List">
-            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&sort=_created:d&size={{_sett.page_size}}"
+            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&size={{_sett.page_size}}"
                 wb-filter="{{_var.filter}}">
                 <tr wb-if="'{{_var.date}}'!=='{{date}}'" class="bg-transparent">
                     <td colspan="5">
@@ -72,7 +72,7 @@
 
                 <tr>
                     <td>{{fullname}}<br /><small>{{birth_date}}</small></td>
-                    <td>{{doc_ser}} №{{doc_num}}</td>
+                    <td>{{doc_ser}} №{{doc_num}}<br>{{date("y-m-d",{{_created}})}}</td>
                     <td>
 
                         <input wb-module="swico" name="inprint"
