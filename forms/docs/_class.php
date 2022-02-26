@@ -51,6 +51,11 @@ class docsClass extends cmsFormsClass
         } else if ($data->get('fullname') == '' && $data->get('first_name')>'') {
             $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
         }
+        if ( $this->app->vars('_route.action') == 'rep_reg') {
+            $item['month'] = wbDate('Y-m', $item['_created']);
+            $item['day'] = wbDate('d', $item['_created']);
+            $item['items'] = 1;
+        }
     }
 
 
@@ -96,6 +101,36 @@ class docsClass extends cmsFormsClass
         }
         */
         return $item;
+    }
+
+    function rep_reg() {
+        $app = &$this->app;
+        $users = $app->itemList('users', ['filter'=>['role'=>'reg']])['list'];
+        $regs = array_keys($users);
+        $month = $app->vars('_post.month') > '' ? $app->vars('_post.month') : date('Y-m');
+        $tmp = explode('-', $month);
+        $mds = $number = cal_days_in_month(CAL_GREGORIAN, $tmp[1], $tmp[0]);
+        $dom = $app->fromFile(__DIR__ . '/rep_reg.php');
+        $data = $app->itemList('docs',[
+            'filter' => [
+                '_creator' => ['$in'=>$regs],
+                'month' => $month
+            ],
+            'sort' => '_created',
+            'return' => 'id,_creator,_created,day'
+        ]);
+        $data = $app->json($data['list'])->groupBy('_creator')->get();
+        $result = [];
+        foreach($data as $d) {
+            $tmp = $d;
+            $creator = array_pop($tmp)['_creator'];
+            $d = $app->json($d)->sortBy('day')->groupBy('day')->get();
+            foreach($d as $i => $day) {
+                $d[$i] = count($day);
+            }
+            $result[$creator] = ['creator'=>$users[$creator], 'name'=>$name, 'days' => $d, 'mds' => $mds];
+        }
+        echo $dom->fetch(['result'=>$result]);
     }
 
 
