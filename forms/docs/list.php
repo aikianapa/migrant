@@ -52,7 +52,12 @@
 
     <wb-var date="" />
     <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']}}" />
-    <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']},'_creator':'{{_sess.user.id}}'}" wb-if="in_array({{_sess.user.role}},['partner','',null])" />
+    <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']},
+            '$or' : [
+                {'_role':'reg'},
+                {'_creator':'{{_sess.user.id}}'}
+            ]
+    }" wb-if="in_array({{_sess.user.role}},['partner','',null])" />
     <table class="table table-striped table-hover tx-15">
         <thead>
             <tr>

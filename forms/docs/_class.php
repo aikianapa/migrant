@@ -56,6 +56,10 @@ class docsClass extends cmsFormsClass
             $item['day'] = wbDate('d', $item['_created']);
             $item['items'] = 1;
         }
+        if ($this->app->vars('_route.action') == 'list' && $data->get('_creator') >'') {
+            $user = $this->app->itemRead('users', $data->get('_creator'));
+            $item['_role'] = $user['role'];
+        }
     }
 
 
