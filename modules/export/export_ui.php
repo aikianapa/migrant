@@ -24,7 +24,7 @@
             <h5 class="m-0">Список клиентов для экспорта</h5>
             <input type="checkbox" class="pos-absolute wd-20 ht-20 r-10 t-10" onclick="$(this).parents('.list-group').find('[type=checkbox]').prop('checked',$(this).prop('checked'));">
         </li>
-        <wb-foreach wb="from=list&bind=cms.list.modExport&tpl=true&size=99999">
+        <wb-foreach wb="from=list&sort=_created:d&bind=cms.list.modExport&tpl=true&size=99999">
             <li class="list-unstyled" wb-if="'{{_var.date}}'!=='{{date}}'" class="bg-transparent">
                 <wb-var date="{{date}}" />
                 <div class="divider-text tx-primary">{{wbDate("d.m.Y",{{{{_created}}}})}}</div>

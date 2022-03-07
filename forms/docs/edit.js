@@ -49,7 +49,7 @@ $(document).ready(function() {
             dstpdf.replace("__", "_");
             wbapp.post('/module/pdfer/attach/', { 'pdf': pdf, 'sources': sources, 'srcpdf': srcpdf, 'dstpdf': dstpdf }, function(data) {
                 window.open(data.pdf, '_blank');
-                $('#docsEditForm #uploadSources [name=sources]').text('');
+                //                $('#docsEditForm #uploadSources [name=sources]').text('');
                 $('#docsEditForm #uploadSources .filepicker-data').text('');
                 $('#docsEditForm #uploadSources .listview').html('');
                 let doc = json_decode($('#docsEditForm #uploadOrder .filepicker-data').text());

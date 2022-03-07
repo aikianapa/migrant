@@ -1,5 +1,5 @@
 <html>
-<div class="modal fade effect-scale show removable" id="modalPeoplesEdit" data-backdrop="static" tabindex="-1" role="dialog"
+<div class="modal fade effect-scale show removable" id="modalPeoplesEdit" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog"
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -128,9 +128,16 @@
                             <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
                         </div>
                     </div>
-
-
+                    <textarea type="json" class="d-none" name="sources"></textarea>
                 </form>
+                <div class="row" wb="module=photoswipe&imgset=migreg">
+                    <wb-foreach wb="from=sources&tpl=false">
+                        <a href="{{_val}}" class="col-3" wb-if="_val > ''">
+                            <img data-src="/thumbc/100x150/src{{_val}}">
+                        </a>
+                    </wb-foreach>
+                </div>
+
             </div>
             <div class="modal-footer pd-x-20 pd-b-20 pd-t-0 bd-t-0">
                 <wb-include wb="{'form':'common_formsave.php'}" />

@@ -96,14 +96,21 @@ class docsClass extends cmsFormsClass
         }
     }
 
-    public function beforeItemEdit(&$item)
+    public function beforeItemEditpeoples(&$item)
     {
-        /*
-        if (isset($item['id']) && !in_array($item['id'],['','_new'])) {
-            $ai = $this->app->module('autoinc');
-            $item['sign_start'] = $ai->get('docs', $item['id'].'_'.date('y'));
+        if ($this->app->vars('_route.params.scan') == 'true') {
+            $scan = $this->app->itemRead('scans', $this->app->vars('_route.id'));
+            $item['id'] = $item['_id'] = $scan['id'];
+            $item['doc_ser'] = $scan['doc_ser'];
+            $item['doc_num'] = $scan['doc_num'];
+            $item['sources'] = [
+                $scan['img1'][0]['img'],
+                $scan['img2'][0]['img'],
+                $scan['img3'][0]['img'],
+                $scan['img4'][0]['img']
+            ];
+            $item['scan'] = true;
         }
-        */
         return $item;
     }
 

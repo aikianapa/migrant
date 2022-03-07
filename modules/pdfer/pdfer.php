@@ -59,10 +59,10 @@ class modPdfer
         exec('cd '.$this->dir.' && convert '.$images.' '.$tmpsrc);
         // sudo apt install poppler-utils
         exec('cd '.$this->dir.' && rm -f '.$dstpdf.' && pdfunite '.$pdfsrc.' '.$tmpsrc.' '.$dstpdf.' && rm '.$tmpsrc);
-        unlink($pdfsrc);
+        //unlink($pdfsrc);
         rename($this->dir.'/'.$dstpdf, $app->route->path_app.$this->orders.'/'.$dstpdf);
-        foreach ($sources as $img) unlink($app->route->path_app.$img);
-        foreach ($srcpdf as $sp) unlink($app->route->path_app.$sp['img']);
+        //foreach ($sources as $img) unlink($app->route->path_app.$img);
+        //foreach ($srcpdf as $sp) unlink($app->route->path_app.$sp['img']);
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
         echo json_encode(['pdf'=>$this->orders.'/'.$dstpdf]);

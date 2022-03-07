@@ -55,7 +55,7 @@ class modExport
         $fname = '/uploads/tmp/'.$fid.'.zip';
         $file = $app->route->path_app.$fname;
         $zip = new ZipArchive();
-        if ($zip->open($file, ZipArchive::CREATE)!==true) {
+        if ($zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)!==true) {
             exit("Невозможно открыть <$filename>\n");
         }
         foreach ($list['list'] as $item) {
@@ -131,6 +131,10 @@ class modExport
     }
 
     public function inprint() {
+
+        header('Content-Type: charset=utf-8');
+        header('Content-Type: application/json');
+
         $app = &$this->app;
         $tid = date('Ymd_His').'_inprint';
         $tpl = $app->route->path_app.'/ocr/inprint.xlsx';
@@ -286,7 +290,12 @@ class modExport
             $drawing = null;
             if ($emplr['faximile'][0]['img'] > '') {
                 $png = $dir.'/faxe_'.md5($emplr['stamp'][0]['img']).'.png';
-                $im = new Imagick($this->app->vars('_env.path_app').$emplr['faximile'][0]['img']);
+                $tmp = $this->app->vars('_env.path_app').$emplr['faximile'][0]['img'];
+                if (!is_file($tmp)) {
+                    echo json_encode(['msg'=>'Файл не найден: '.$tmp,'error'=>true]);
+                    die;
+                };
+                $im = new Imagick($tmp);
                 $im->clipImage(0);
                 $im->paintTransparentImage($im->getImageBackgroundColor(), 0, 3000);
                 //$im->rotateImage(new ImagickPixel('none'), intval(rand(-15, 15)));
@@ -312,7 +321,12 @@ class modExport
 
             if ($emplr['stamp'][0]['img'] > '') {
                 $png = $dir.'/stamp_'.md5($emplr['stamp'][0]['img']).'.png';
-                $im = new Imagick($this->app->vars('_env.path_app').$emplr['stamp'][0]['img']);
+                $tmp = $this->app->vars('_env.path_app').$emplr['stamp'][0]['img'];
+                if (!is_file($tmp)) {
+                    echo json_encode(['msg'=>'Файл не найден: '.$tmp,'error'=>true]);
+                    die;
+                };
+                $im = new Imagick($tmp);
                 $im->clipImage(0);
                 $im->paintTransparentImage($im->getImageBackgroundColor(), 0, 3000);
                 $im->resizeImage(0, 200, Imagick::FILTER_LANCZOS, 1);
@@ -362,8 +376,7 @@ class modExport
         exec("cd {$dir} && rm *.xlsx && pdfunite *.pdf {$result} && rm rep*.pdf");
         $error = is_file($dir.'/'.$result) ? false : true;
 
-        header('Content-Type: charset=utf-8');
-        header('Content-Type: application/json');
+
         echo json_encode(['pdf'=>$path.'/'.$result,'error'=>$error]);
         die;
     }
