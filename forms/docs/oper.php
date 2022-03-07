@@ -7,7 +7,12 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                        data-ajax="{'target':'#docsListOper','filter': 'clear','filter_add':{'status':'archive'}}">Свободные</a>
+                        data-ajax="{'target':'#docsListOper','filter':
+                            {
+                                'status':'archive',
+                                'oper': {'$lt':' '}
+                            }
+                }">Свободные</a>
                 </li>
 
                 <li class="nav-item">
@@ -19,7 +24,7 @@
                 <div class="form-group">
                     <input class="form-control mg-r-10 col-auto" type="search" placeholder="Поиск..."
                         aria-label="Поиск..."
-                        data-ajax="{'target':'#docsListOper','filter_add':{'$or':[{ 'doc_num' : {'$like' : '$value'} }, { 'fullname': {'$like' : '$value'} }]} }">
+                        data-ajax="{'target':'#docsListOper','filter_add':{'$or':[{ 'doc_num' : {'$like' : '$value'} }, { 'date': {'$like' : '$value'} }, { 'fullname': {'$like' : '$value'} }, { 'phone': {'$like' : '$value'} }]} }">
 
                     <a href="#" data-ajax="{'url':'/cms/ajax/form/docs/edit/_new','html':'#yongerDocs modals'}"
                         class="ml-auto order-2 float-right btn btn-primary">
@@ -83,7 +88,7 @@
             let data = $(that).data();
             wbapp.post('/cms/ajax/form/docs/opergetwork',data,function(res){
                 if (res.error) {
-                    wbapp.toast('Внимание!','Данный клиент уже взят в работу другим оператором.',{bgcolor:'warning'});
+                    wbapp.toast('Ошибка!',res.msg,{bgcolor:'warning'});
                     wbapp.storage('cms.list.operdocs.'+data.id, null);
                 } else {
                     window.open(res.pdf, '_blank');

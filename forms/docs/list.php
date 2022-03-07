@@ -34,6 +34,10 @@
                     <a class="nav-link" href="#"
                         data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'archive'}}">Архив</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'error'}}">Ошибка</a>
+                </li>
             </ul>
             <form class="form-inline mg-t-10 mg-lg-0">
                 <div class="form-group">
@@ -90,7 +94,8 @@
                             wb-if="'{{status}}' == 'progress'">
                         <img data-src="/module/myicons/checkmark-circle-1.svg?size=24&stroke=10b759"
                             wb-if="'{{status}}' == 'ready'">
-                        
+                        <img data-src="/module/myicons/warning-alarm-delete-error.svg?size=24&stroke=dc3545"
+                            wb-if="'{{status}}' == 'error'">
                         <input wb-module="swico" name="archive" wb-if="'{{status}}' == 'archive'"
                         data-ico-on="zip-archive-circle" data-ico-off="checkmark-circle-1"
                         data-color-on="dc3545" data-color-off="10b759"

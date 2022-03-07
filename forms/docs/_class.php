@@ -56,9 +56,15 @@ class docsClass extends cmsFormsClass
             $item['day'] = wbDate('d', $item['_created']);
             $item['items'] = 1;
         }
-        if ($this->app->vars('_route.action') == 'list' && $data->get('_creator') >'') {
+        if (in_array($this->app->vars('_route.action'),['list','oper']) && $data->get('_creator') >'') {
             $user = $this->app->itemRead('users', $data->get('_creator'));
             $item['_role'] = $user['role'];
+            if ($data->get('order.0.img') > '' && in_array($item['status'],['archive','ready'])) {
+                $order = $this->app->vars('_env.path_app').$data->get('order.0.img');
+                if (!is_file($order)) {
+                    $item['status'] = 'error';
+                }
+            }
         }
     }
 
@@ -165,27 +171,34 @@ class docsClass extends cmsFormsClass
     }
 
     public function operGetWork() {
+        header('Content-Type: application/json; charset=utf-8');
+
         $app = &$this->app;
         $data = $app->vars('_post');
         $item = $app->itemRead('docs', $data['id']);
         $res = false;
+        $msg = 'Данный клиент уже взят в работу другим оператором.';
         if ($item AND (!isset($item['oper']) OR $data['oper'] == $item['oper'])) {
+
+            @$data['pdf'] = $item['order'][0]['img'];
+            if (!is_file($app->vars('_env.path_app').$data['pdf'])) {
+                echo json_encode(['error'=>true, 'msg'=>'Договор не найден']);
+                die;
+            }
             if (!isset($item['oper'])) {
                 $data['opertime'] = $item['opertime'] = date('Y-m-d H:i:s');
                 $item['oper'] = $data['oper'];
                 $app->itemSave('docs', $item, true);
-                $item = $app->itemRead('docs', $data['id']);
+//                $item = $app->itemRead('docs', $data['id']);
                 if ($item['opertime'] == $data['opertime'] && $item['oper'] == $data['oper']) $res = true;
             } else {
                 $res = true;
             }
-            @$data['pdf'] = $item['order'][0]['img'];
         }
-        header('Content-Type: application/json; charset=utf-8');
         if ($res) {
             echo json_encode(['error'=>false,'pdf'=>$data['pdf']]);
         } else {
-            echo json_encode(['error'=>true]);
+            echo json_encode(['error'=>true, 'msg'=>$msg]);
         }
     }
 
