@@ -15,11 +15,14 @@
                     <input class="form-control mg-r-10 col-auto" type="search" placeholder="Поиск..."
                         aria-label="Поиск..."
                         data-ajax="{'target':'#{{_form}}List','filter_add':{'$or':[{ 'doc_num' : {'$like' : '$value'} }, { 'fullname': {'$like' : '$value'} }]} }">
-
-                    <a href="#" data-ajax="{'url':'/cms/ajax/form/scans/edit/_new','html':'#yongerscans modals'}"
-                        class="ml-auto order-2 float-right btn btn-primary">
-                        <img src="/module/myicons/item-select-plus-add.svg?size=24&stroke=FFFFFF" /> Новый
-                    </a>
+                        <wb-module id="scansImport" wb="{
+                            'module':'filepicker',
+                            'button': 'Импорт',
+                            'width':'200',
+                            'height':'200',
+                            'mode':'button',
+                            'original': false
+                        }" wb-ext="zip" wb-path='/uploads/tmp/' />
                 </div>
             </form>
         </div>
@@ -33,6 +36,7 @@
             <tr>
                 <th class="tx-right wd-20p">Серия</th>
                 <th>Номер</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -82,7 +86,16 @@
     <modals></modals>
 </div>
 <script wb-app>
-
+    $('#yongerscans').off('mod-filepicker-done');
+    $('#yongerscans').on('mod-filepicker-done',function(ev,data){
+        if (data[0] !== undefined) {
+            wbapp.post('/cms/ajax/form/scans/import',data[0],function(data){
+                console.log(data);
+            });
+        } else {
+            wbapp.toast('Ошибка!', 'Загрузка файла не удалась, попробуйте снова',{ bgcolor: 'danger' });
+        }
+    })
 </script>
 <wb-lang>
     [ru]

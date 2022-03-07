@@ -109,12 +109,7 @@ class docsClass extends cmsFormsClass
             $item['id'] = $item['_id'] = $scan['id'];
             $item['doc_ser'] = $scan['doc_ser'];
             $item['doc_num'] = $scan['doc_num'];
-            $item['sources'] = [
-                $scan['img1'][0]['img'],
-                $scan['img2'][0]['img'],
-                $scan['img3'][0]['img'],
-                $scan['img4'][0]['img']
-            ];
+            $item['sources'] = $scan['sources'];
             $item['scan'] = true;
         }
         return $item;
