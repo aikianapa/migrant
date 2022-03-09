@@ -1,5 +1,8 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+require __DIR__ . '/fpdf.php';
+require __DIR__ . '/fpdf_rotate.php';
+
 
 use iio\libmergepdf\Merger;
 use iio\libmergepdf\Pages;
@@ -27,7 +30,7 @@ class modPdfer
         // output file
         $target = $app->vars('_post.name') > '' ? $app->vars('_post.name').'.jpg' : $app->newid().'.jpg';
         // create a command string
-	exec('cd '.$this->dir.' && /usr/bin/convert -verbose -scale 1024 -density 150 -depth 8 -quality 100  "'.$pdf .'"  "'.$target.'" 2>&1', $output);
+	    exec('cd '.$this->dir.' && /usr/bin/convert -verbose -scale 1024 -density 150 -depth 8 -quality 100  "'.$pdf .'"  "'.$target.'" 2>&1', $output);
         $files = [];
         foreach ((array)$output as $out) {
             preg_match_all('/=>(.*)\[/m', $out, $matches, PREG_PATTERN_ORDER);
@@ -45,18 +48,42 @@ class modPdfer
 
     public function attach()
     {
+
         $app = &$this->app;
         $pdfsrc = str_replace('//', '/', $app->route->path_app.$app->vars('_post.pdf'));
         $srcpdf = $app->vars('_post.srcpdf');
         $sources = $app->vars('_post.sources');
         $dstpdf = $app->vars('_post.dstpdf');
         $images = '';
-        foreach ($sources as $img) {
+        $pdf = new PDF('P','mm','A4');
+        // размеры в миллиметрах
+        $sizes = [
+            0 => ['ox'=>rand(10,60), 'oy'=>rand(50,100), 'x'=> 125, 'y'=>180, 'r'=>rand(-1.5,1.5)],
+            1 => ['ox'=>rand(10,60), 'oy'=>rand(50,100), 'x'=> 85, 'y'=>125, 'r'=>rand(-1.5,1.5)],
+            2 => ['ox'=>rand(5,40), 'oy'=>rand(190,230), 'x'=> 170, 'y'=>170, 'r'=>90+rand(-1.5,1.5)],
+            3 => ['ox'=>rand(5,40), 'oy'=>rand(190,230), 'x'=> 170, 'y'=>170, 'r'=>90+rand(-1.5,1.5)],
+        ];
+        $fax = $app->route->path_app.'/ocr/faximile.png';
+        foreach ($sources as $i => $img) {
+            $fx = ['ox'=>rand(10, 30), 'oy'=>$sizes[$i]['oy'], 'x'=> 50, 'y'=>20, 'r'=>rand(-5, 5)];
+            if ($i>1) {
+                $fx['r'] += 90;
+                $fx['oy'] += rand(50, 70);
+            } else {
+                $fx['oy'] -= 40;
+            }
+            $rotate = 0;
+            $img = wbNormalizePath($app->route->path_app.$img);
+            $pdf->AddPage();
+            $pdf->RotatedImage($img, $sizes[$i]['ox'], $sizes[$i]['oy'], $sizes[$i]['x'], $sizes[$i]['y'], $sizes[$i]['r']);
+            $pdf->RotatedImage($fax, $fx['ox'], $fx['oy'], $fx['x'], $fx['y'], $fx['r']);
             $img = basename($img);
             $images .= $img.' ';
         }
-        $tmpsrc = 'tmp_'.$this->app->newId().'.pdf';
-        exec('cd '.$this->dir.' && convert '.$images.' '.$tmpsrc);
+
+        $tmpsrc = $app->route->path_app.'/uploads/tmp/'.'tmp_'.$this->app->newId().'.pdf';
+        $pdf->output('F', $tmpsrc);
+        //exec('cd '.$this->dir.' && convert '.$images.' '.$tmpsrc);
         // sudo apt install poppler-utils
         exec('cd '.$this->dir.' && rm -f '.$dstpdf.' && pdfunite '.$pdfsrc.' '.$tmpsrc.' '.$dstpdf.' && rm '.$tmpsrc);
         //unlink($pdfsrc);
@@ -66,6 +93,7 @@ class modPdfer
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
         echo json_encode(['pdf'=>$this->orders.'/'.$dstpdf]);
+//       echo json_encode(['pdf'=>'/uploads/tmp/'.$tmpsrc]);
 
     }
 
