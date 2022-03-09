@@ -65,13 +65,7 @@ class modPdfer
         ];
         $fax = $app->route->path_app.'/ocr/faximile.png';
         foreach ($sources as $i => $img) {
-            $fx = ['ox'=>rand(10, 30), 'oy'=>$sizes[$i]['oy'], 'x'=> 50, 'y'=>20, 'r'=>rand(-5, 5)];
-            if ($i>1) {
-                $fx['r'] += 90;
-                $fx['oy'] += rand(50, 70);
-            } else {
-                $fx['oy'] -= 40;
-            }
+            $fx = ['ox'=>rand(15, 70), 'oy'=>rand(10,40), 'x'=> 50, 'y'=>20, 'r'=>rand(-5, 5)];
             $rotate = 0;
             $img = wbNormalizePath($app->route->path_app.$img);
             $pdf->AddPage();
