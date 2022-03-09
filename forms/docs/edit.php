@@ -203,7 +203,7 @@
 
                         <div class="divider-text">Исходные документы</div>
                         <p class="tx-12">Загрузите PDF файл с исходными документами и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
-                        <div id="uploadSources">
+                        <div id="uploadSources" wb-if="count({{sources}})<4">
                             <wb-module name="attaches" wb="{
                                 'module':'filepicker',
                                 'mode':'multi',
@@ -212,6 +212,16 @@
                                 'original': false
                             }" wb-path="/uploads/sources/{{wbDate()}}" />
                             <textarea class="d-none" type="json" name="sources"></textarea>
+                        </div>
+                        <div id="uploadSources" wb-if="count({{sources}})>=4">
+                            <textarea class="d-none" type="json" name="sources"></textarea>
+                            <div class="row" wb="module=photoswipe&imgset=migreg">
+                                <wb-foreach wb="from=sources&tpl=false">
+                                    <a href="{{_val}}" class="col-3" wb-if="_val > ''">
+                                        <img data-src="/thumbc/70x70/src{{_val}}">
+                                    </a>
+                                </wb-foreach>
+                            </div>
                         </div>
 
 

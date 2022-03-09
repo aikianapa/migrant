@@ -31,6 +31,15 @@
     <wb-var date="" />
     <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']}}" />
     <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']},'_creator':'{{_sess.user.id}}'}" wb-if="in_array({{_sess.user.role}},['partner','',null])" />
+
+
+    <div class="yongerscans-wait d-none my-3">
+        <div class="alert alert-secondary">
+            Выполняется импорт данных. Ждите...
+            <span class="spinner-border spinner-border-sm text-success" role="status" aria-hidden="true"></span>
+        </div>
+    </div>
+
     <table class="table table-striped table-hover tx-15">
         <thead>
             <tr>
@@ -44,7 +53,7 @@
             <wb-foreach wb="table=scans&sort=_created:d&bind=cms.list.scans&sort=_created:d&size={{_sett.page_size}}"
                 wb-filter="{{_var.filter}}">
 
-                <tr>
+                <tr data-id="{{id}}">
                     <td class="tx-right wd-20p">{{doc_ser}}</td>
                     <td>{{doc_num}}</td>
                     <td>
@@ -88,9 +97,11 @@
 <script wb-app>
     $('#yongerscans').off('mod-filepicker-done');
     $('#yongerscans').on('mod-filepicker-done',function(ev,data){
+        $('#yongerscans .yongerscans-wait').removeClass('d-none');
         if (data[0] !== undefined) {
             wbapp.post('/cms/ajax/form/scans/import',data[0],function(data){
-                console.log(data);
+                $('#yongerscans .yongerscans-wait').addClass('d-none');
+                wbapp.render('#scansList');
             });
         } else {
             wbapp.toast('Ошибка!', 'Загрузка файла не удалась, попробуйте снова',{ bgcolor: 'danger' });

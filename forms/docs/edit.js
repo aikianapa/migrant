@@ -42,7 +42,12 @@ $(document).ready(function() {
         }
         if (data.img.substr(-4).toLowerCase() == '.pdf') {
             let pdf = data.img;
-            let srcpdf = json_decode($('#uploadSources .filepicker-data').text());
+            let srcpdf;
+            try {
+                srcpdf = json_decode($('#uploadSources .filepicker-data').text());
+            } catch (error) {
+                srcpdf = null;
+            }
             let item = $('#docsEditForm').serializeJson();
             item['_created'] > ' ' ? null : item['_created'] = date('Y-m-d', strtotime('now'));
             let dstpdf = date('dmY', strtotime(item['_created'])) + '_' + item['doc_ser'] + item['doc_num'] + '.pdf';
@@ -71,6 +76,4 @@ $(document).ready(function() {
         return false;
 
     });
-
-
 })

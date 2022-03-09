@@ -30,9 +30,9 @@
                                     <input type="number" name="doc_num" class="form-control" placeholder="Номер" required>
                                 </div>
                             </div>
-
+<!--
                             <div class="col-6 col-md-3">
-                                <div class="divider-text">Паспорт</div>
+                                <div class="divider-text">Паспорт/Мигр.карта/Рег1/Рег2</div>
                                 <div id="uploadScan1" class="text-center">
                                     <wb-module name="img1" wb="{
                                         'module':'filepicker',
@@ -82,6 +82,7 @@
                                     }" wb-ext="jpg,jpeg,png,webp" wb-path='/uploads/sources/{{wbDate("Ymd")}}' />
                                 </div>
                             </div>
+-->
                 </form>
             </div>
             <div class="modal-footer pd-x-20 pd-b-20 pd-t-0 bd-t-0">

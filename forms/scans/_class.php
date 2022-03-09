@@ -3,6 +3,7 @@ class scansClass extends cmsFormsClass
 {
     public function afterItemRead(&$item)
     {
+        if (!$item) return $item;
         $data = $this->app->Dot($item);
         if ($data->get('sources.0') > '' 
         && $data->get('sources.1') > '') {
@@ -28,10 +29,10 @@ class scansClass extends cmsFormsClass
                         $num = $name;
                     } else {
                         $ser = substr($name, 0, 2);
-                        $num = substr($name, 3, -1);
+                        $num = substr($name, 2);
                     }
                     $zip->extractTo($dir, $fn);
-                    $target = $this->app->vars('_env.path_app').'/uploads/sources/'.date('Ymd');
+                    $target = $this->app->vars('_env.path_app').'/uploads/sources/';
                     if (!is_dir($target)) mkdir($dir,0777);
                     exec('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80  "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
                     unlink($dir.'/'.$fn);

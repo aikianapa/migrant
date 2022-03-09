@@ -27,6 +27,41 @@ class docsClass extends cmsFormsClass
                 substr($k, 0, 4) == 'reg_' ? $item[$k] = $v : null;
             }
         }
+        if (!isset($item['sources'])) $item['sources'] = [];
+        if ($data->get('order.0.img') == '' && count($item['sources']) > 1) $this->genRegCard($item);
+    }
+
+    public function afterItemSave(&$item)
+    {
+    }
+
+    function genRegCard(&$item) {
+        $url = $this->app->route->host.'/module/export/inprint/';
+        $post = [
+            'item' => $item,
+            '__token' => $this->app->vars('_sess.token')
+        ];
+        $res = $this->app->authPostContents($url, $post);
+        $res = json_decode($res);
+        $pdf = $this->app->vars('_env.path_app').$res->pdf;
+        $target = $item['doc_ser'].$item['doc_num'];
+        $srcpath = '/uploads/sources';
+        $srcdir = $this->app->vars('_env.path_app').$srcpath;
+        if ($res->error == false && is_file($pdf)) {
+            $dir = dirname($pdf);
+            // далее конвертируем pdf в картинки, вырезаем нужное и добавляем в sources
+            exec("cd {$dir} ".
+                " && /usr/bin/convert -scale 1024 -density 150 -depth 8 -trim -flatten -quality 80 '{$pdf}[0]' '{$target}-2.jpg' ".
+                " && /usr/bin/convert '{$target}-2.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-2.jpg' ");
+            exec("cd {$dir} ".
+                " && /usr/bin/convert -scale 1024 -density 150 -depth 8 -trim -flatten -quality 80 '{$pdf}[1]' '{$target}-3.jpg' ".
+                " && /usr/bin/convert '{$target}-3.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-3.jpg' ");
+            if (!is_array($item['sources'])) $item['sources'] = [];
+            $item['sources'][2] = "{$srcpath}/{$target}-2.jpg";
+            $item['sources'][3] = "{$srcpath}/{$target}-3.jpg";
+            $item['status'] = 'progress';
+            $this->app->itemRemove('scans', $item['id']);
+        }
     }
 
     public function afterItemRead(&$item) {

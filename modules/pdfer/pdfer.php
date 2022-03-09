@@ -52,7 +52,7 @@ class modPdfer
         $dstpdf = $app->vars('_post.dstpdf');
         $images = '';
         foreach ($sources as $img) {
-            $img = str_replace($this->path.'/', '', $img);
+            $img = basename($img);
             $images .= $img.' ';
         }
         $tmpsrc = 'tmp_'.$this->app->newId().'.pdf';

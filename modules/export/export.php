@@ -147,11 +147,15 @@ class modExport
         $cat_places = $app->itemList('places')['list']; // справочник мест пребывания
         $cat_empls = $app->itemList('employers')['list']; // справочник работодателей
 
-        $checked = $app->vars('_post.items');
-        $this->filter = ['filter' => ['id'=>['$in'=>$checked]]];
-        $list = $app->itemList('docs', $this->filter);
+        if ($app->vars('_post.item')) {
+            // передаётся конкретная запись (для вызова по api)
+            $list['list'][] = $app->vars('_post.item');
+        } else {
+            $checked = $app->vars('_post.items');
+            $this->filter = ['filter' => ['id'=>['$in'=>$checked]]];
+            $list = $app->itemList('docs', $this->filter);
+        }
         $idx = 0;
-
         $path = '/uploads/tmp/inp'.md5($this->app->vars('_sess.user.id'));
         $dir = $this->app->vars('_env.path_app').$path;
         wbRecurseDelete($dir);
@@ -159,7 +163,6 @@ class modExport
 
 
         foreach ($list['list'] as $item) {
-
             $spreadsheet = $reader->load($tpl);
             $writer = new Xlsx($spreadsheet);
 

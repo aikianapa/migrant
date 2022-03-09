@@ -14,6 +14,7 @@
             </div>
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
+                    <meta name="scan" content="{{_route.params.scan}}">
                     <input type="hidden" name="inprint">
                     <input type="hidden" name="status" value='new' wb-if="'{{status}}'==''">
 
@@ -145,12 +146,19 @@
         </div>
     </div>
 </div>
-<script>
+<script wb-app remove>
     $('#modalPeoplesEdit select[name=place]').on('select2:select', function(e) {
         let data = e.params.data;
         let employer = $(data.element).attr('data-employer');
         $('#modalPeoplesEdit [name=employer]').val(employer).attr('value', employer);
     })
+
+    $('#modalPeoplesEdit').delegate('.btn-save','wb-save-done', function(ev, data) {
+        if ($('#docsEditForm meta[name=scan]').attr('content') == "true") {
+            $('#scansList tr[data-id="'+data.data.id+'"]').remove();
+        }
+    })
+
 </script>
 
 </html>
