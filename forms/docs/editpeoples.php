@@ -159,6 +159,16 @@
         }
     })
 
+    let ser = $('#docsEditForm [name=doc_ser]').val();
+    let num = $('#docsEditForm [name=doc_num]').val();
+
+    if ($('#docsEditForm meta[name=scan]').attr('content') == "true" && num > '') {
+        wbapp.post('/api/v2/list/docs/?@return=doc_ser;doc_num&@limit=1',{'filter':{'doc_ser':ser,'doc_num':num}},function(data){
+            $('#modalPeoplesEdit .btn-save').remove();
+            wbapp.toast('Внимание!','Данный номер паспорта уже зарегистрирован в системе!',{'bgcolor':'danger','delay':9999});
+        })
+    }
+
 </script>
 
 </html>
