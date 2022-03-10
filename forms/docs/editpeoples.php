@@ -164,8 +164,13 @@
 
     if ($('#docsEditForm meta[name=scan]').attr('content') == "true" && num > '') {
         wbapp.post('/api/v2/list/docs/?@return=doc_ser;doc_num&@limit=1',{'filter':{'doc_ser':ser,'doc_num':num}},function(data){
-            $('#modalPeoplesEdit .btn-save').remove();
-            wbapp.toast('Внимание!','Данный номер паспорта уже зарегистрирован в системе!',{'bgcolor':'danger','delay':9999});
+            if (data[0] !== undefined) {
+                let sernum = data[0].doc_ser + '' + data[0].doc_num;
+                if ((ser + '' + num ) == sernum) {
+                    $('#modalPeoplesEdit .btn-save').remove();
+                    wbapp.toast('Внимание!','Данный номер паспорта уже зарегистрирован в системе!',{'bgcolor':'danger','delay':9999});
+                }
+            }
         })
     }
 
