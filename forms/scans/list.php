@@ -50,7 +50,7 @@
             </tr>
         </thead>
         <tbody id="scansList">
-            <wb-foreach wb="table=scans&sort=_created:d&bind=cms.list.scans&sort=_created:d&size={{_sett.page_size}}"
+            <wb-foreach wb="table=scans&bind=cms.list.scans&sort=sernum&size={{_sett.page_size}}"
                 wb-filter="{{_var.filter}}">
 
                 <tr data-id="{{id}}">

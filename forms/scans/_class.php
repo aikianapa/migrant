@@ -11,6 +11,7 @@ class scansClass extends cmsFormsClass
         } else {
             $data->set('active', '');
         }
+        $item['sernum'] = $item['doc_ser'].$item['doc_num'];
     }
 
     function import() {
