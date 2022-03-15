@@ -86,7 +86,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td></td>
+                <td colspan="4"></td>
             </tr>
         </tfoot>
     </table>
@@ -94,6 +94,53 @@
 
     <modals></modals>
 </div>
+<wb-module wb="module=synapse&host={{_route.hostname}}&port=4000&project=migrant&room=scans">
+    <script wb-app>
+    $(document).off('modSynapse');
+    $(document).on('modSynapse',function(e,synapse){
+        synapse.get = function(data) {
+            if (!$('#scansList').length) {
+                delete synapse;
+                $(document).off('modSynapse');
+                return;
+            }
+            switch (data.type) {
+                // System messages
+                case 'sysmsg':
+                    if (data.action == 'formsave') eventFormasave(data);
+                    break;
+                // Data messages
+                case 'data':
+                    if (data.text == 'blockitem') $('#scansList').find('tr[data-id="'+data.item+'"]').addClass('d-none');
+                    if (data.text == 'unblockitem') $('#scansList').find('tr[data-id="'+data.item+'"]').removeClass('d-none');
+                    break;
+            }
+        }
+
+        let eventFormasave = function(data) {
+            let form = data.params.form;
+            let item = data.params.item;
+            let table = data.params.table;
+            if (form !== '#docsEditForm' || !$('#scansList').length || !$('#docsEditForm meta[name=scan][content=true]').length) return;
+            $('#scansList').find('tr[data-id="'+item+'"]').remove();
+        }
+
+        $(document).undelegate('#modalPeoplesEdit','hide.bs.modal');
+        $(document).delegate('#modalPeoplesEdit','hide.bs.modal',function(){
+            let id = $(this).data("id");
+            synapse.put({'type':'data','text':'unblockitem','item':id,'cast':'room'})
+        })
+
+        $('#scansList').undelegate('a[data-ajax]',wbapp.evClick);
+        $('#scansList').delegate('a[data-ajax]',wbapp.evClick,function(){
+            let id = $(this).parents('tr').data('id');
+            synapse.put({'type':'data','text':'blockitem','item':id,'cast':'room'})
+        })
+
+    });
+    </script>
+</wb-module>
+
 <script wb-app>
     $('#yongerscans').off('mod-filepicker-done');
     $('#yongerscans').on('mod-filepicker-done',function(ev,data){
@@ -106,7 +153,7 @@
         } else {
             wbapp.toast('Ошибка!', 'Загрузка файла не удалась, попробуйте снова',{ bgcolor: 'danger' });
         }
-    })
+    });
 </script>
 <wb-lang>
     [ru]
