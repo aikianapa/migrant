@@ -19,7 +19,7 @@ class scansClass extends cmsFormsClass
         $block ? null : $block = ['_id'=>'blockedscans','blocks'=>[]];
         if ($this->app->vars('_post.id') > '') {
             $block['blocks'][$this->app->vars('_post.id')] = date('Y-m-d H:i:s');
-            $block = wbItemSave('tmp', $block);
+            $block = wbItemSave('tmp', $block, true);
         }
         header("Content-type:application/json");
         return ['msg'=>'scanblocks','blocks'=>array_keys($block['blocks'])];
@@ -32,7 +32,7 @@ class scansClass extends cmsFormsClass
             if (isset($block['blocks'][$this->app->vars('_post.id')])) {
                 unset($block['blocks'][$this->app->vars('_post.id')]);
             }
-            $block = wbItemSave('tmp', $block);
+            $block = wbItemSave('tmp', $block, true);
         }
         header("Content-type:application/json");
         return ['msg'=>'scanblocks','blocks'=>array_keys($block['blocks'])];
@@ -47,7 +47,7 @@ class scansClass extends cmsFormsClass
                 unset($block['blocks'][$id]);
             }
         }
-        $block = wbItemSave('tmp', $block);
+        $block = wbItemSave('tmp', $block, true);
         header("Content-type:application/json");
         return ['msg'=>'scanblocks','blocks'=>array_keys($block['blocks'])];
     }
