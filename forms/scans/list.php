@@ -75,7 +75,7 @@
                             class="d-inline">
                             <img src="/module/myicons/content-edit-pen.svg?size=24&stroke=323232">
                         </a>
-                        <a href="javascript:"
+                        <a href="javascript:" wb-if="'{{_sess.user.role}}' == 'admin'"
                             data-ajax="{'url':'/ajax/rmitem/scans/{{id}}','update':'cms.list.scans','html':'#yongerscans modals'}"
                             class="d-inline">
                             <img src="/module/myicons/trash-delete-bin.2.svg?size=24&stroke=323232" class="d-inline">
@@ -97,13 +97,15 @@
 <wb-module wb="module=synapse&host={{_route.hostname}}&port=4000&project=migrant&room=scans">
     <script wb-app>
     $(document).off('modSynapse');
-    $(document).on('modSynapse',function(e,synapse){
+    $(document).one('modSynapse',function(e,synapse){
+        $('#scansList').synapse = synapse;
         synapse.get = function(data) {
             if (!$('#scansList').length) {
                 delete synapse;
                 $(document).off('modSynapse');
                 return;
             }
+            let result = data.data;
             switch (data.type) {
                 // System messages
                 case 'sysmsg':
@@ -111,8 +113,12 @@
                     break;
                 // Data messages
                 case 'data':
-                    if (data.text == 'blockitem') $('#scansList').find('tr[data-id="'+data.item+'"]').addClass('d-none');
-                    if (data.text == 'unblockitem') $('#scansList').find('tr[data-id="'+data.item+'"]').removeClass('d-none');
+                    if (result.msg == 'scanblocks') {
+                        $('#scansList').find('tr[data-id]').removeClass('d-none');
+                        $(result.blocks).each(function(i,id){
+                            $('#scansList').find('tr[data-id="'+id+'"]').addClass('d-none');
+                        })
+                    }
                     break;
             }
         }
@@ -125,18 +131,28 @@
             $('#scansList').find('tr[data-id="'+item+'"]').remove();
         }
 
+        setTimeout(function(){
+            synapse.put({'type':'ajax','url':document.location.origin+'/api/v2/func/scans/getblock','post':{},'cast':'room'});
+        },200)
+
+
+        $(document).on('wb-ajax-done',function(e,data){
+            if (data.url == "/cms/ajax/form/scans/list") {
+                synapse.put({'type':'ajax','url':document.location.origin+'/api/v2/func/scans/getblock','post':{},'cast':'room'});
+            }
+        })
+
         $(document).undelegate('#modalPeoplesEdit','hide.bs.modal');
         $(document).delegate('#modalPeoplesEdit','hide.bs.modal',function(){
             let id = $(this).data("id");
-            synapse.put({'type':'data','text':'unblockitem','item':id,'cast':'room'})
+            synapse.put({'type':'ajax','url':document.location.origin+'/api/v2/func/scans/unblock','post':{'id':id},'cast':'room'});
         })
 
         $('#scansList').undelegate('a[data-ajax]',wbapp.evClick);
         $('#scansList').delegate('a[data-ajax]',wbapp.evClick,function(){
             let id = $(this).parents('tr').data('id');
-            synapse.put({'type':'data','text':'blockitem','item':id,'cast':'room'})
+            synapse.put({'type':'ajax','url':document.location.origin+'/api/v2/func/scans/block','post':{'id':id},'cast':'room'});
         })
-
     });
     </script>
 </wb-module>
@@ -144,11 +160,13 @@
 <script wb-app>
     $('#yongerscans').off('mod-filepicker-done');
     $('#yongerscans').on('mod-filepicker-done',function(ev,data){
+        let synapse = $('#scansList').synapse;
         $('#yongerscans .yongerscans-wait').removeClass('d-none');
         if (data[0] !== undefined) {
             wbapp.post('/cms/ajax/form/scans/import',data[0],function(data){
                 $('#yongerscans .yongerscans-wait').addClass('d-none');
                 wbapp.render('#scansList');
+                synapse.put({'type':'ajax','url':document.location.origin+'/cms/ajax/form/scans/block/getblock','post':{},'cast':'room'});
             });
         } else {
             wbapp.toast('Ошибка!', 'Загрузка файла не удалась, попробуйте снова',{ bgcolor: 'danger' });

@@ -14,6 +14,44 @@ class scansClass extends cmsFormsClass
         $item['sernum'] = $item['doc_ser'].$item['doc_num'];
     }
 
+    function block() {
+        $block = wbItemRead('tmp', 'blockedscans');
+        $block ? null : $block = ['_id'=>'blockedscans','blocks'=>[]];
+        if ($this->app->vars('_post.id') > '') {
+            $block['blocks'][$this->app->vars('_post.id')] = date('Y-m-d H:i:s');
+            $block = wbItemSave('tmp', $block);
+        }
+        header("Content-type:application/json");
+        return ['msg'=>'scanblocks','blocks'=>array_keys($block['blocks'])];
+    }
+
+    function unblock() {
+        $block = wbItemRead('tmp', 'blockedscans');
+        $block ? null : $block = ['_id'=>'blockedscans','blocks'=>[]];
+        if ($this->app->vars('_post.id') > '') {
+            if (isset($block['blocks'][$this->app->vars('_post.id')])) {
+                unset($block['blocks'][$this->app->vars('_post.id')]);
+            }
+            $block = wbItemSave('tmp', $block);
+        }
+        header("Content-type:application/json");
+        return ['msg'=>'scanblocks','blocks'=>array_keys($block['blocks'])];
+    }
+
+    function getblock() {
+        $block = wbItemRead('tmp', 'blockedscans');
+        $block ? null : $block = ['_id'=>'blockedscans','blocks'=>[]];
+        foreach ($block['blocks'] as $id => $time) {
+            // тут бы удалить из блока записи, которым более получаса
+            if (time() > strtotime($time.'+10 min')) {
+                unset($block['blocks'][$id]);
+            }
+        }
+        $block = wbItemSave('tmp', $block);
+        header("Content-type:application/json");
+        return ['msg'=>'scanblocks','blocks'=>array_keys($block['blocks'])];
+    }
+
     function import() {
         $file = $this->app->normalizePath($this->app->vars('_env.path_app').$this->app->vars('_post.img'));
         if (is_file($file)) {
