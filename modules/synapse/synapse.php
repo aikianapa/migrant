@@ -66,7 +66,7 @@ class modSynapse
     {
         $this->cast = $data['cast'];
         $post = isset($data['post']) ? $data['post'] : [];
-        $result = json_decode(wbAuthGetContents($data['url'], $post));
+        $result = json_decode(wbAuthPostContents($data['url'], $post));
         $reply = ['type'=>'data','cast'=>$this->cast,'data'=>$result,
             'room'=>$data['room'],'user'=>$data['user']
         ];
@@ -83,7 +83,7 @@ class modSynapse
             // подключаемся к комнате
             $this->worker->rooms[$this->synapse->id] = $this->room;
             $this->worker->users[$this->synapse->id] = $this->user;
-            $this->cast(['type'=>'sysmsg','action'=>'msg','text'=>'joined']);
+            $this->cast(['type'=>'sysmsg','action'=>'msg','text'=>'joined','user'=>$this->user,'room'=>$this->room]);
         } else {
             $this->cast($data);
         }

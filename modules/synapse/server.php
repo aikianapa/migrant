@@ -1,7 +1,6 @@
 <?php
+session_start();
 require_once __DIR__ . '/synapse.php';
-
-
 /*
 php server.php start
 php server.php start -d -демонизировать скрипт

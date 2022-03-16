@@ -55,12 +55,10 @@
                 }
                 document.modSynapse = conn;
                 wbapp.trigger('modSynapse', document.modSynapse);
-
                 // эвент сохранения записи
                 wbapp.on('wb-save-done',function(e,data){
                     conn.put({'type':'sysmsg','action':'formsave','even':e,'params':data.params,'cast':'wide'});
                 }) 
-
                 return document.modSynapse;
             } catch (error) {
                 setTimeout(function(){
