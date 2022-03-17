@@ -36,7 +36,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'error'}}">Ошибка</a>
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'@status':'error'}}">Ошибка</a>
                 </li>
             </ul>
             <form class="form-inline mg-t-10 mg-lg-0">
@@ -55,8 +55,8 @@
     </nav>
 
     <wb-var date="" />
-    <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']}}" />
-    <wb-var filter="{'_site' : {'$in': [null,'{{_sett.site}}']},
+    <wb-var filter="{'_site' : {'$ne': '???'}}" />
+    <wb-var filter="{'_site' : {'$ne': '???'},
             '$or' : [
                 {'_role':'reg'},
                 {'_creator':'{{_sess.user.id}}'}
@@ -74,6 +74,7 @@
         </thead>
         <tbody id="docsList">
             <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&sort=_created:d&size={{_sett.page_size}}"
+                __wb-return="id;doc_num;doc_ser;date;@status;order;status;birth_date;fullname;_created;code;_id;_table;_form;_creator;_created;_role;_site"
                 wb-filter="{{_var.filter}}">
                 <tr wb-if="'{{_var.date}}'!=='{{date}}'" class="bg-transparent">
                     <td colspan="5">

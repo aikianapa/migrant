@@ -51,7 +51,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Гражданство</label>
-                            <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false">
+                            <select name="citizen" class="form-control select2" required placeholder="Гражданство" wb-tree="item=countries&tpl=false">
                                 <option value="{{id}}">{{name}}</option>
                             </select>
                         </div>
