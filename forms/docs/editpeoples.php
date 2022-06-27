@@ -123,7 +123,7 @@
                         </div>
                     </div>
                     <div class="col-sm-1">
-                    <label class="form-control-label">&nbsp;</label>
+                        <label class="form-control-label">&nbsp;</label>
                         <a href="javascript:void(0)" class="btn btn-primary btn-address-toggle"><i class="fa fa-home white"></i></a>
                     </div>
 
@@ -134,7 +134,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 address d-none" >
+                    <div class="col-12 address d-none">
                         <div class="divider-text">Миграционная карта</div>
 
                         <div class="row">
@@ -170,30 +170,38 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-3">
-                                <label class="form-control-label">Тип</label>
-                                <input type="text" name="reg_city_type" class="form-control" placeholder="Тип">
+                                Населённый пункт
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <select name="reg_city_type" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=city_type&parent=false">
+                                    <option value="{{data.short}}">{{name}}</option>
+                                </select>
                             </div>
 
-                            <div class="form-group col-sm-9">
-                                <label class="form-control-label">Населённый пункт</label>
+                            <div class="form-group col-sm-5">
                                 <input type="text" name="reg_city" class="form-control" placeholder="Населённый пункт">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-3">
-                                <label class="form-control-label">Тип</label>
-                                <input type="text" name="reg_street_type" class="form-control" placeholder="Тип улицы">
+                                Название улицы
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <select name="reg_street_type" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=street_type&parent=false">
+                                    <option value="{{data.short}}">{{name}}</option>
+                                </select>
                             </div>
 
-                            <div class="form-group col-sm-9">
-                                <label class="form-control-label">Название улицы</label>
+                            <div class="form-group col-sm-5">
                                 <input type="text" name="reg_street" class="form-control" placeholder="Название улицы">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-control-label">Тип</label>
-                                <input type="text" name="reg_house" class="form-control" placeholder="Дом/участок/владение">
+                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=obj_type&parent=false">
+                                    <option value="{{data.short}}">{{name}}</option>
+                                </select>
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-control-label">Номер</label>
@@ -213,7 +221,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-control-label">Тип (кв/комн/пом)</label>
-                                <input type="text" name="reg_flat" class="form-control" placeholder="Тип помещения">
+                                <select name="reg_flat" class="form-control select2" placeholder="Тип помещения" required wb-tree="item=locations&tpl=false&branch=flat_type&parent=false">
+                                    <option value="{{data.short}}">{{name}}</option>
+                                </select>
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-control-label">Номер</label>
@@ -240,7 +250,6 @@
     </div>
 </div>
 <script wb-app remove>
-    (function($){
     $('#modalPeoplesEdit select[name=place]').on('select2:select', function(e) {
         let data = e.params.data;
         let employer = $(data.element).attr('data-employer');
@@ -262,8 +271,8 @@
         $('#modalPeoplesEdit div.address').toggleClass('d-none')
     })
 
-    let ser = $('#docsEditForm [name=doc_ser]').val();
-    let num = $('#docsEditForm [name=doc_num]').val();
+    var ser = $('#docsEditForm [name=doc_ser]').val();
+    var num = $('#docsEditForm [name=doc_num]').val();
 
     if ($('#docsEditForm meta[name=scan]').attr('content') == "true" && num > '') {
         wbapp.post('/api/v2/list/docs/?@return=doc_ser;doc_num&@limit=1', {
@@ -284,7 +293,6 @@
             }
         })
     }
-})
 </script>
 
 </html>
