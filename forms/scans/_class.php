@@ -64,7 +64,7 @@ class scansClass extends cmsFormsClass
                     $name = substr($fn, 0, -4);
                     $ext = strtolower(substr($fn, -4));
                     $dir = $this->app->vars('_env.path_app').$path.'/'.$name;
-                    if ($ext == '.pdf') {
+                    if ($ext == '.pdf' && !strpos(' '.$name,'MACOSX')) {
                         if (is_numeric(substr($name, 0, 2))) {
                             $ser = '';
                             $num = $name;
