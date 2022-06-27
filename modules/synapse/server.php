@@ -52,6 +52,7 @@ $worker->params = (object)[
 
 
 $worker->count = 1;
+$worker->reloadable = true;
 $worker->synapse = &$synapse;
 $worker->users = [];
 $worker->rooms = [];
@@ -81,6 +82,7 @@ $worker->onClose = function ($connection) {
     unset($connection->worker->rooms[$connection->id]);
     unset($connection->worker->users[$connection->id]);
     echo "Connection closed\n";
+    $connection->destroy();
 };
 
 // Run worker
