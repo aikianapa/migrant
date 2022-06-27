@@ -26,3 +26,8 @@ RewriteRule ^(.*)$ index.php [L,QSA]
 
 php_value post_max_size 5000M
 php_value upload_max_filesize 5000M 
+
+Options All -Indexes
+AddType text/css cssgz
+AddType text/javascript jsgz
+AddEncoding x-gzip .cssgz .jsgz

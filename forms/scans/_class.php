@@ -57,36 +57,42 @@ class scansClass extends cmsFormsClass
         if (is_file($file)) {
             $zip = new ZipArchive();
             $path = '/uploads/tmp';
-            $dir = $this->app->vars('_env.path_app').$path;
             if (!is_dir($dir)) mkdir($dir,0777);
             if ($zip->open($file)) {
                 for ($i = 0; $i < $zip->numFiles; $i++) {
                     $fn = $zip->getNameIndex($i);
-                    $name = substr($fn,0, -4);
-                    if (is_numeric(substr($name,0,2))) {
-                        $ser = '';
-                        $num = $name;
-                    } else {
-                        $ser = substr($name, 0, 2);
-                        $num = substr($name, 2);
-                    }
-                    $zip->extractTo($dir, $fn);
-                    $target = $this->app->vars('_env.path_app').'/uploads/sources/';
-                    if (!is_dir($target)) mkdir($dir,0777);
-                    exec('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80  "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
-                    unlink($dir.'/'.$fn);
-                    $sources = glob($target."/{$name}*.jpg");
-                    foreach($sources as &$src) {
-                        $src = str_replace($this->app->vars('_env.path_app'), '', $src);
-                    }
-                    $id = 'id_'.$ser.$num;
-                    $scan = [
+                    $name = substr($fn, 0, -4);
+                    $ext = strtolower(substr($fn, -4));
+                    $dir = $this->app->vars('_env.path_app').$path.'/'.$name;
+                    if ($ext == '.pdf') {
+                        if (is_numeric(substr($name, 0, 2))) {
+                            $ser = '';
+                            $num = $name;
+                        } else {
+                            $ser = substr($name, 0, 2);
+                            $num = substr($name, 2);
+                        }
+                        $zip->extractTo($dir, $fn);
+                        $target = $this->app->vars('_env.path_app').'/uploads/sources/';
+                        if (!is_dir($target)) {
+                            mkdir($dir, 0777);
+                        }
+                        exec('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80  "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
+//                        echo('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80  "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
+                        unlink($dir.'/'.$fn);
+                        $sources = glob($target."/{$name}*.jpg");
+                        foreach ($sources as &$src) {
+                            $src = str_replace($this->app->vars('_env.path_app'), '', $src);
+                        }
+                        $id = 'id_'.$ser.$num;
+                        $scan = [
                         'id' => $id,
                         'sources' => $sources,
                         'doc_ser' => $ser,
                         'doc_num' => $num
-                    ];
-                    $this->app->itemSave('scans', $scan, false);
+                        ];
+                        $this->app->itemSave('scans', $scan, false);
+                    }
                     //echo $ser.'-'.$num;
                 }
                 //$zip->extractTo('.'.$path);

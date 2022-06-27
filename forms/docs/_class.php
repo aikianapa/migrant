@@ -28,7 +28,7 @@ class docsClass extends cmsFormsClass
             }
         }
         if (!isset($item['sources'])) $item['sources'] = [];
-        if ($data->get('order.0.img') == '' && count($item['sources']) > 1) $this->genRegCard($item);
+        if ($data->get('order.0.img') == '' && count($item['sources']) == 2) $this->genRegCard($item);
     }
 
     public function afterItemSave(&$item)
@@ -36,6 +36,7 @@ class docsClass extends cmsFormsClass
     }
 
     function genRegCard(&$item) {
+        // Если нет миграционной карты и регистрации - генерируем
         $url = $this->app->route->host.'/module/export/inprint/';
         $post = [
             'item' => $item,

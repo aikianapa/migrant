@@ -113,7 +113,7 @@
                     break;
                 // Data messages
                 case 'data':
-                    if (result.msg == 'scanblocks') {
+                    if (result !== undefined && result.msg == 'scanblocks') {
                         $('#scansList').find('tr[data-id]').removeClass('d-none');
                         $(result.blocks).each(function(i,id){
                             $('#scansList').find('tr[data-id="'+id+'"]').addClass('d-none');
