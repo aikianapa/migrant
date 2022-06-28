@@ -130,7 +130,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Срок пребывания</label>
-                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания" required>
+                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания">
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                                 Населённый пункт
                             </div>
                             <div class="form-group col-sm-4">
-                                <select name="reg_city_type" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=city_type&parent=false">
+                                <select name="reg_city_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=city_type&parent=false">
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
@@ -187,7 +187,7 @@
                                 Название улицы
                             </div>
                             <div class="form-group col-sm-4">
-                                <select name="reg_street_type" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=street_type&parent=false">
+                                <select name="reg_street_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=street_type&parent=false">
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
@@ -199,7 +199,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-control-label">Тип</label>
-                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" required wb-tree="item=locations&tpl=false&branch=obj_type&parent=false">
+                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" wb-tree="item=locations&tpl=false&branch=obj_type&parent=false">
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
@@ -221,7 +221,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-control-label">Тип (кв/комн/пом)</label>
-                                <select name="reg_flat" class="form-control select2" placeholder="Тип помещения" required wb-tree="item=locations&tpl=false&branch=flat_type&parent=false">
+                                <select name="reg_flat" class="form-control select2" placeholder="Тип помещения" wb-tree="item=locations&tpl=false&branch=flat_type&parent=false">
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
