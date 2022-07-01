@@ -17,17 +17,31 @@
                     <input type="hidden" name="inprint">
                     <input type="hidden" name="status" value='new' wb-if="'{{status}}'==''">
 
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Код конверта с картой</label>
+                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Телефон</label>
+                                    <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
+                                </div>     
+                    </div>
+                    
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Фамилия</label>
-                            <input type="text" name="last_name" class="form-control" required placeholder="Фамилия">
+                            <input type="text" name="last_name" class="form-control" placeholder="Фамилия">
                         </div>
 
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Имя</label>
-                            <input type="text" name="first_name" class="form-control" required placeholder="Имя">
+                            <input type="text" name="first_name" class="form-control" placeholder="Имя">
                         </div>
 
                     </div>
@@ -50,7 +64,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Гражданство</label>
-                            <select name="citizen" class="form-control select2" required placeholder="Гражданство" wb-tree="item=countries&tpl=false">
+                            <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false">
                                 <option value="{{id}}">{{name}}</option>
                             </select>
                         </div>
@@ -59,7 +73,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Дата рождения</label>
-                            <input type="date" name="birth_date" class="form-control" required placeholder="Дата рождения">
+                            <input type="date" name="birth_date" class="form-control" placeholder="Дата рождения">
                         </div>
                     </div>
 
@@ -90,7 +104,7 @@
                             <div class="col-8">
                                 <div class="form-group">
                                     <label class="form-control-label">Номер</label>
-                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер" required>
+                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер">
                                 </div>
                             </div>
                         </div>
@@ -99,7 +113,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Дата выдачи</label>
-                            <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
+                            <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи">
                         </div>
                     </div>
 
@@ -130,7 +144,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Срок пребывания</label>
-                            <input type="date" name="mc_expire" class="form-control" required placeholder="Срок пребывания">
+                            <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания">
                         </div>
                     </div>
 
