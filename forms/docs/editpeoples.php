@@ -23,14 +23,14 @@
                             <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="form-control-label">Телефон</label>
-                                    <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
-                                </div>     
+                        <div class="form-group">
+                            <label class="form-control-label">Телефон</label>
+                            <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
+                        </div>
                     </div>
-                    
+
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Фамилия</label>
@@ -83,6 +83,10 @@
                             <input type="text" name="birth_place" class="form-control" placeholder="Место рождения">
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="divider-text">Паспорт</div>
+                    </div>
+
 
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -124,6 +128,17 @@
                         </div>
                     </div>
 
+                    <div class="col-12">
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Кем выдан</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="doc_who" class="form-control" placeholder="Кем выдан" required>
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label class="form-control-label">Место пребывания</label>
@@ -149,32 +164,6 @@
                     </div>
 
                     <div class="col-12 address d-none">
-                        <div class="divider-text">Миграционная карта</div>
-
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label class="form-control-label">Серия</label>
-                                <input type="text" name="mc_ser" class="form-control" placeholder="Серия">
-                            </div>
-
-                            <div class="form-group col-sm-6">
-                                <label class="form-control-label">Номер</label>
-                                <input type="number" name="mc_num" class="form-control" placeholder="Номер">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label class="form-control-label">Дата выдачи</label>
-                                <input type="date" name="mc_date" class="form-control" placeholder="Дата выдачи">
-                            </div>
-
-                            <div class="form-group col-sm-6">
-                                <label class="form-control-label">Дата окончания</label>
-                                <input type="date" name="mc_expire" class="form-control" placeholder="Дата окончания">
-                            </div>
-                        </div>
-
-
                         <div class="divider-text">Регистрация</div>
                         <div class="row">
                             <div class="form-group col-sm-12">
@@ -245,6 +234,33 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="divider-text">Миграционная карта</div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="form-control-label">Серия</label>
+                                <input type="text" name="mc_ser" class="form-control" placeholder="Серия">
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="form-control-label">Номер</label>
+                                <input type="number" name="mc_num" class="form-control" placeholder="Номер">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label class="form-control-label">Дата выдачи</label>
+                                <input type="date" name="mc_date" class="form-control" placeholder="Дата выдачи">
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="form-control-label">Дата окончания</label>
+                                <input type="date" name="mc_expire" class="form-control" placeholder="Дата окончания">
+                            </div>
+                        </div>
+                    </div>
+
                     <textarea type="json" class="d-none" name="sources"></textarea>
                 </form>
                 <div class="divider-text">Сканы</div>
