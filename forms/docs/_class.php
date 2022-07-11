@@ -33,6 +33,7 @@ class docsClass extends cmsFormsClass
 
     public function afterItemSave(&$item)
     {
+        wbItemRemove('scans',$item['id']);
     }
 
     function genRegCard(&$item) {

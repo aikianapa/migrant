@@ -60,7 +60,7 @@
             </tr>
         </thead>
         <tbody id="{{_form}}List">
-            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.scans&size={{_sett.page_size}}"
+            <wb-foreach wb="table=docs&sort=_created:d&bind=cms.list.docs&size={{_sett.page_size}}"
                 wb-filter="{{_var.filter}}">
                 <tr wb-if="'{{_var.date}}'!=='{{date}}'" class="bg-transparent">
                     <td colspan="5">

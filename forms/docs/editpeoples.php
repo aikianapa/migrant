@@ -149,36 +149,39 @@
                         </div>
                     </div>
 
-
                     <div class="col-12 location">
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Место пребывания</label>
                             <div class="col-sm-9">
-                            <select name="place" class="form-control select2" placeholder="Место пребывания" data-required>
-                                <option value="" data-employer="">Ввод вручную</option>
-                                <wb-foreach wb="table=places">
-                                    <option value="{{id}}" data-employer="{{employer}}">{{title}}</option>
-                                </wb-foreach>
-                            </select>
-                            <input type="hidden" name="employer">
+                                <select name="place" class="form-control select2" placeholder="Место пребывания" data-required>
+                                    <option value="" data-employer="">Ввод вручную</option>
+                                    <wb-foreach wb="table=places">
+                                        <option value="{{id}}" data-employer="{{employer}}">{{title}}</option>
+                                    </wb-foreach>
+                                </select>
+                                <input type="hidden" name="employer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Срок пребывания</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 address d-none">
                         <div class="divider-text">Регистрация</div>
-                        <div class="row">
-                            <div class="form-group col-sm-7">
-                                <label class="form-control-label">Область</label>
+                        <div class="form-group row">
+                            <label class=" col-sm-3 form-control-label">Область</label>
+                            <div class="col-sm-9">
                                 <input type="text" name="region" class="form-control" placeholder="Область" data-required>
                             </div>
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label class="form-control-label">Срок пребывания</label>
-                                    <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания" data-required>
-                                </div>
-                            </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-sm-3">
                                 Населённый пункт
@@ -307,12 +310,12 @@
         }
         $('#modalPeoplesEdit div.address').toggleClass('d-none')
         $('#modalPeoplesEdit div.location').toggleClass('d-none')
-        $('#modalPeoplesEdit [data-required]:visible').prop('required',true)
-        $('#modalPeoplesEdit [data-required]:not(:visible)').prop('required',false)
+        $('#modalPeoplesEdit [data-required]:visible').prop('required', true)
+        $('#modalPeoplesEdit [data-required]:not(:visible)').prop('required', false)
     })
 
-    $('#modalPeoplesEdit [data-required]:visible').prop('required',true)
-    $('#modalPeoplesEdit [data-required]:not(:visible)').prop('required',false)
+    $('#modalPeoplesEdit [data-required]:visible').prop('required', true)
+    $('#modalPeoplesEdit [data-required]:not(:visible)').prop('required', false)
     var ser = $('#docsEditForm [name=doc_ser]').val();
     var num = $('#docsEditForm [name=doc_num]').val();
 
