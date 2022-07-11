@@ -20,28 +20,28 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Код конверта с картой</label>
-                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
+                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой" required>
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Телефон</label>
-                            <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
+                            <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон" required>
                         </div>
                     </div>
 
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Фамилия</label>
-                            <input type="text" name="last_name" class="form-control" placeholder="Фамилия">
+                            <input type="text" name="last_name" class="form-control" placeholder="Фамилия" required>
                         </div>
 
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Имя</label>
-                            <input type="text" name="first_name" class="form-control" placeholder="Имя">
+                            <input type="text" name="first_name" class="form-control" placeholder="Имя" required>
                         </div>
 
                     </div>
@@ -54,7 +54,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Пол</label>
-                            <select name="gender" class="form-control" wb-select2 placeholder="Пол">
+                            <select name="gender" class="form-control" wb-select2 placeholder="Пол" required>
                                 <option value="М">Мужской</option>
                                 <option value="Ж">Женский</option>
                             </select>
@@ -64,7 +64,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Гражданство</label>
-                            <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false">
+                            <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false" required>
                                 <option value="{{id}}">{{name}}</option>
                             </select>
                         </div>
@@ -73,14 +73,14 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Дата рождения</label>
-                            <input type="date" name="birth_date" class="form-control" placeholder="Дата рождения">
+                            <input type="date" name="birth_date" class="form-control" placeholder="Дата рождения" required>
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="form-control-label">Место рождения</label>
-                            <input type="text" name="birth_place" class="form-control" placeholder="Место рождения">
+                            <input type="text" name="birth_place" class="form-control" placeholder="Место рождения" required>
                         </div>
                     </div>
                     <div class="col-12">
@@ -108,7 +108,7 @@
                             <div class="col-8">
                                 <div class="form-group">
                                     <label class="form-control-label">Номер</label>
-                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер">
+                                    <input type="number" name="doc_num" class="form-control" placeholder="Номер" required>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="form-control-label">Дата выдачи</label>
-                            <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи">
+                            <input type="date" name="doc_date" class="form-control" placeholder="Дата выдачи" required>
                         </div>
                     </div>
 
@@ -139,36 +139,44 @@
 
                         </div>
                     </div>
-                    <div class="col-sm-5">
-                        <div class="form-group">
-                            <label class="form-control-label">Место пребывания</label>
-                            <select name="place" class="form-control select2" placeholder="Место пребывания">
+
+                    <div class="col-12">
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Регистрация</label>
+                            <div class="col-sm-3">
+                                <wb-module wb="module=switch" name="reg_flag" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 location">
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Место пребывания</label>
+                            <div class="col-sm-9">
+                            <select name="place" class="form-control select2" placeholder="Место пребывания" data-required>
                                 <option value="" data-employer="">Ввод вручную</option>
                                 <wb-foreach wb="table=places">
                                     <option value="{{id}}" data-employer="{{employer}}">{{title}}</option>
                                 </wb-foreach>
                             </select>
                             <input type="hidden" name="employer">
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <label class="form-control-label">&nbsp;</label>
-                        <a href="javascript:void(0)" class="btn btn-primary btn-address-toggle"><i class="fa fa-home white"></i></a>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Срок пребывания</label>
-                            <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания">
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-12 address d-none">
                         <div class="divider-text">Регистрация</div>
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-7">
                                 <label class="form-control-label">Область</label>
-                                <input type="text" name="region" class="form-control" placeholder="Область">
+                                <input type="text" name="region" class="form-control" placeholder="Область" data-required>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label class="form-control-label">Срок пребывания</label>
+                                    <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания" data-required>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -176,13 +184,13 @@
                                 Населённый пункт
                             </div>
                             <div class="form-group col-sm-4">
-                                <select name="reg_city_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=city_type&parent=false">
+                                <select name="reg_city_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=city_type&parent=false" data-required>
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
 
                             <div class="form-group col-sm-5">
-                                <input type="text" name="reg_city" class="form-control" placeholder="Населённый пункт">
+                                <input type="text" name="reg_city" class="form-control" placeholder="Населённый пункт" data-required>
                             </div>
                         </div>
                         <div class="row">
@@ -190,25 +198,25 @@
                                 Название улицы
                             </div>
                             <div class="form-group col-sm-4">
-                                <select name="reg_street_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=street_type&parent=false">
+                                <select name="reg_street_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=street_type&parent=false" data-required>
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
 
                             <div class="form-group col-sm-5">
-                                <input type="text" name="reg_street" class="form-control" placeholder="Название улицы">
+                                <input type="text" name="reg_street" class="form-control" placeholder="Название улицы" data-required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-control-label">Тип</label>
-                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" wb-tree="item=locations&tpl=false&branch=obj_type&parent=false">
+                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" wb-tree="item=locations&tpl=false&branch=obj_type&parent=false" data-required>
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-control-label">Номер</label>
-                                <input type="text" name="reg_house_num" class="form-control" placeholder="Номер дома">
+                                <input type="text" name="reg_house_num" class="form-control" placeholder="Номер дома" data-required>
                             </div>
                         </div>
                         <div class="row">
@@ -240,23 +248,23 @@
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label class="form-control-label">Серия</label>
-                                <input type="text" name="mc_ser" class="form-control" placeholder="Серия">
+                                <input type="text" name="mc_ser" class="form-control" placeholder="Серия" required>
                             </div>
 
                             <div class="form-group col-sm-6">
                                 <label class="form-control-label">Номер</label>
-                                <input type="number" name="mc_num" class="form-control" placeholder="Номер">
+                                <input type="number" name="mc_num" class="form-control" placeholder="Номер" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label class="form-control-label">Дата выдачи</label>
-                                <input type="date" name="mc_date" class="form-control" placeholder="Дата выдачи">
+                                <input type="date" name="mc_date" class="form-control" placeholder="Дата выдачи" required>
                             </div>
 
                             <div class="form-group col-sm-6">
                                 <label class="form-control-label">Дата окончания</label>
-                                <input type="date" name="mc_expire" class="form-control" placeholder="Дата окончания">
+                                <input type="date" name="mc_expire" class="form-control" placeholder="Дата окончания" required>
                             </div>
                         </div>
                     </div>
@@ -292,15 +300,19 @@
         }
     })
 
-    $('#modalPeoplesEdit').delegate('.btn-address-toggle', 'click', function(ev, data) {
+    $('#modalPeoplesEdit').delegate('[name=reg_flag]', 'change', function(ev, data) {
         if ($('#modalPeoplesEdit div.address').hasClass('d-none')) {
             $('#modalPeoplesEdit [name=employer]').val('')
             $('#modalPeoplesEdit [name=place]').val('').trigger('change')
-
         }
         $('#modalPeoplesEdit div.address').toggleClass('d-none')
+        $('#modalPeoplesEdit div.location').toggleClass('d-none')
+        $('#modalPeoplesEdit [data-required]:visible').prop('required',true)
+        $('#modalPeoplesEdit [data-required]:not(:visible)').prop('required',false)
     })
 
+    $('#modalPeoplesEdit [data-required]:visible').prop('required',true)
+    $('#modalPeoplesEdit [data-required]:not(:visible)').prop('required',false)
     var ser = $('#docsEditForm [name=doc_ser]').val();
     var num = $('#docsEditForm [name=doc_num]').val();
 
