@@ -172,7 +172,8 @@ class docsClass extends cmsFormsClass
         $data = $app->itemList('docs',[
             'filter' => [
                 '_creator' => ['$in'=>$regs],
-                'month' => $month
+                '_created'=> ['$regex'=>"^".$month."-" ]
+                //'month' => $month
             ],
             'sort' => '_created',
             'return' => 'id,_creator,_created,day'
