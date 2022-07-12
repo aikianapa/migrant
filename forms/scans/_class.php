@@ -57,6 +57,7 @@ class scansClass extends cmsFormsClass
         if (is_file($file)) {
             $zip = new ZipArchive();
             $path = '/uploads/tmp';
+            $dir = $this->app->vars('_env.path_app').$path;
             if (!is_dir($dir)) mkdir($dir,0777);
             if ($zip->open($file)) {
                 for ($i = 0; $i < $zip->numFiles; $i++) {
@@ -77,7 +78,7 @@ class scansClass extends cmsFormsClass
                         if (!is_dir($target)) {
                             mkdir($dir, 0777);
                         }
-                        exec('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80  "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
+                        exec('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80 -trim +repage "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
 //                        echo('cd '.$dir.' && /usr/bin/convert -scale 1024 -density 150 -grayscale average -quality 80  "'.$dir.'/'.$fn .'"  "'.$target.'/'.$name.'.jpg" 2>&1');
                         unlink($dir.'/'.$fn);
                         $sources = glob($target."/{$name}*.jpg");

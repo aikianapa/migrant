@@ -62,15 +62,20 @@ class modPdfer
             1 => ['ox'=>rand(10,60), 'oy'=>rand(50,100), 'x'=> 85, 'y'=>125, 'r'=>rand(-1.5,1.5)],
             2 => ['ox'=>rand(5,40), 'oy'=>rand(190,230), 'x'=> 170, 'y'=>170, 'r'=>90+rand(-1.5,1.5)],
             3 => ['ox'=>rand(5,40), 'oy'=>rand(190,230), 'x'=> 170, 'y'=>170, 'r'=>90+rand(-1.5,1.5)],
+            4 => ['ox'=>rand(5,40), 'oy'=>rand(190,230), 'x'=> 165, 'y'=>120, 'r'=>90+rand(-1.5,1.5)],
+            5 => ['ox'=>rand(20,60), 'oy'=>rand(50,100), 'x'=> 130, 'y'=>180, 'r'=>rand(-1.5,1.5)],
         ];
         $fax = $app->route->path_app.'/ocr/faximile.png';
+        $len = count($sources);
         foreach ($sources as $i => $img) {
             $fx = ['ox'=>rand(15, 70), 'oy'=>rand(10,40), 'x'=> 50, 'y'=>20, 'r'=>rand(-5, 5)];
             $rotate = 0;
             $img = wbNormalizePath($app->route->path_app.$img);
             $pdf->AddPage();
             $pdf->RotatedImage($img, $sizes[$i]['ox'], $sizes[$i]['oy'], $sizes[$i]['x'], $sizes[$i]['y'], $sizes[$i]['r']);
-            $pdf->RotatedImage($fax, $fx['ox'], $fx['oy'], $fx['x'], $fx['y'], $fx['r']);
+            if ($i < ($len-2)) {
+                $pdf->RotatedImage($fax, $fx['ox'], $fx['oy'], $fx['x'], $fx['y'], $fx['r']);
+            }
             $img = basename($img);
             $images .= $img.' ';
         }

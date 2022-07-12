@@ -28,7 +28,8 @@ class docsClass extends cmsFormsClass
             }
         }
         if (!isset($item['sources'])) $item['sources'] = [];
-        if ($data->get('order.0.img') == '' && count($item['sources']) == 2) $this->genRegCard($item);
+
+        if ($item['reg_flag'] == '' && count($item['sources']) == 4)  $this->genRegCard($item);
     }
 
     public function afterItemSave(&$item)
@@ -59,6 +60,8 @@ class docsClass extends cmsFormsClass
                 " && /usr/bin/convert -scale 1024 -density 150 -depth 8 -trim -flatten -quality 80 '{$pdf}[1]' '{$target}-3.jpg' ".
                 " && /usr/bin/convert '{$target}-3.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-3.jpg' ");
             if (!is_array($item['sources'])) $item['sources'] = [];
+            $item['sources'][4] = $item['sources'][2];
+            $item['sources'][5] = $item['sources'][3];
             $item['sources'][2] = "{$srcpath}/{$target}-2.jpg";
             $item['sources'][3] = "{$srcpath}/{$target}-3.jpg";
             $item['status'] = 'progress';
@@ -137,6 +140,10 @@ class docsClass extends cmsFormsClass
         foreach($item['attaches'] as $atc) {
             unlink($this->app->route->path_app.'/'.$atc['img']);
         }
+        foreach ($item['sources'] as $atc) {
+            unlink($this->app->route->path_app.'/'.$atc['img']);
+        }
+        unlink($this->app->route->path_app.'/'.$item['order'][0]['img']);
     }
 
     public function beforeItemEditpeoples(&$item)

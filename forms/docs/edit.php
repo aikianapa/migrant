@@ -15,7 +15,6 @@
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
                     <div class="col-lg-6">
-
                         <div class="form-group">
                             <label class="form-control-label">Ф.И.О.</label>
                             <input type="text" name="fullname" class="form-control" placeholder="Ф.И.О." required>
