@@ -71,6 +71,7 @@ class modPdfer
             $fx = ['ox'=>rand(15, 70), 'oy'=>rand(10,40), 'x'=> 50, 'y'=>20, 'r'=>rand(-5, 5)];
             $rotate = 0;
             $img = wbNormalizePath($app->route->path_app.$img);
+            exec("/usr/bin/convert  -scale 1024 -depth 8 -trim '{$img}' '{$img}'");
             $pdf->AddPage();
             $pdf->RotatedImage($img, $sizes[$i]['ox'], $sizes[$i]['oy'], $sizes[$i]['x'], $sizes[$i]['y'], $sizes[$i]['r']);
             if ($i < ($len-2)) {
