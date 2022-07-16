@@ -55,17 +55,19 @@ class docsClass extends cmsFormsClass
             // далее конвертируем pdf в картинки, вырезаем нужное и добавляем в sources
             exec("cd {$dir} ".
                 " && /usr/bin/convert -scale 1024 -density 150 -depth 8 -trim -flatten -quality 80 '{$pdf}[0]' '{$target}-2.jpg' ".
-                " && /usr/bin/convert '{$target}-2.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-2.jpg' ");
+                " && /usr/bin/convert '{$target}-2.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-5.jpg' ");
             exec("cd {$dir} ".
                 " && /usr/bin/convert -scale 1024 -density 150 -depth 8 -trim -flatten -quality 80 '{$pdf}[1]' '{$target}-3.jpg' ".
-                " && /usr/bin/convert '{$target}-3.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-3.jpg' ");
+                " && /usr/bin/convert '{$target}-3.jpg' -crop 800x800+70+550 '{$srcdir}/{$target}-6.jpg' ");
             if (!is_array($item['sources'])) $item['sources'] = [];
             if (count($item['sources']) == 4) {
-                $item['sources'][4] = $item['sources'][2];
-                $item['sources'][5] = $item['sources'][3];   
+                $tmp1 = $item['sources'][2];
+                $tmp2 = $item['sources'][3];
+                $item['sources'][2] = "{$srcpath}/{$target}-5.jpg";
+                $item['sources'][3] = "{$srcpath}/{$target}-6.jpg";
+                $item['sources'][4] = $tmp1;
+                $item['sources'][5] = $tmp2;
             }
-            $item['sources'][2] = "{$srcpath}/{$target}-2.jpg";
-            $item['sources'][3] = "{$srcpath}/{$target}-3.jpg";
             $item['status'] = 'progress';
             $this->app->itemRemove('scans', $item['id']);
         }

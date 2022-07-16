@@ -1805,7 +1805,7 @@ wbapp.tplInit = async function() {
         });
     }
 
-    $(document).find("template").each(async function() {
+    $(document).find("template:not([nowb])").each(async function() {
         if (this.done !== undefined) return
         else this.done = true;
         var tid
