@@ -178,7 +178,7 @@
                         <div class="form-group row">
                             <label class=" col-sm-3 form-control-label">Область</label>
                             <div class="col-sm-9">
-                                <input type="text" name="region" class="form-control" placeholder="Область" data-required>
+                                <input type="text" name="region" class="form-control" placeholder="Область">
                             </div>
                         </div>
 
