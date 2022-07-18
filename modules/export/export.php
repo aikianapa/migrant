@@ -56,7 +56,7 @@ class modExport
         $file = $app->route->path_app.$fname;
         $zip = new ZipArchive();
         if ($zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)!==true) {
-            exit("Невозможно открыть <$filename>\n");
+            exit("Невозможно открыть <$fname>\n");
         }
         foreach ($list['list'] as $item) {
             $Item = $app->dot($item);

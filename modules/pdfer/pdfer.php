@@ -37,7 +37,7 @@ class modPdfer
         $len = count($matches[1]);
         foreach ($matches[1] as $i => $file) {
             $files[] = $this->path.'/'.$file;
-            if ($i+1 <= $len-2) $this->faximile($this->dir.'/'.$file);
+            //if ($i+1 <= $len-2) $this->faximile($this->dir.'/'.$file);
         }
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
