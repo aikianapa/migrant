@@ -1,6 +1,5 @@
 <html>
-<div class="modal fade effect-scale show removable" id="modalDocsEdit" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-hidden="true" wb-allow="admin,partner,reg">
+<div class="modal fade effect-scale show removable" id="modalDocsEdit" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" wb-allow="admin,partner,reg">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header row">
@@ -25,7 +24,7 @@
                             <div>
                                 <div class="form-group">
                                     <label class="form-control-label">Дата рождения</label>
-                                    <input type="date"  name="birth_date" class="form-control" required placeholder="Дата рождения">
+                                    <input type="date" name="birth_date" class="form-control" required placeholder="Дата рождения">
                                 </div>
 
                                 <div class="form-group">
@@ -202,37 +201,25 @@
 
                         <div class="divider-text">Исходные документы</div>
                         <p class="tx-12">Загрузите PDF файл с исходными документами и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
-                        <div id="uploadSources" __wb-if="count({{sources}})<4">
+                        <div id="uploadSources">
                             <wb-module name="attaches" wb="{
                                 'module':'filepicker',
-                                'mode':'multi',
-                                'width':'100',
-                                'height':'60',
+                                'mode':'single',
+                                'width':'120',
+                                'height':'100',
                                 'original': false
                             }" wb-path="/uploads/sources/{{wbDate()}}" />
-                        </div>
-                        <p class="tx-12">Или загрузите исходные документы по отдельности и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
-                        <div>
-                            <wb-module name="sources" wb="{
-                                'module':'filepicker',
-                                'mode':'multi',
-                                'width':'100',
-                                'height':'60',
-                                'original': false
-                            }" wb-path="/uploads/sources" />
-                        </div>
-
-                        <!--div id="uploadSources" wb-if="count({{sources}})>=4">
                             <textarea class="d-none" type="json" name="sources"></textarea>
-                            <div class="row" wb="module=photoswipe&imgset=migreg">
-                                <wb-foreach wb="from=sources&tpl=false">
-                                    <a href="{{_val}}" class="col-3" wb-if="_val > ''">
-                                        <img data-src="/thumbc/70x70/src{{_val}}">
+                        </div>
+                        <div id="listSources" class="row mt-2" wb="module=photoswipe&imgset=migreg">
+                            <div class="srcList">
+                                {{#each srcList}}
+                                    <a data-href="{{.}}" class="col-3">
+                                        <img data-src="/thumbc/70x70/src{{.}}" class="mb-2">
                                     </a>
-                                </wb-foreach>
+                                {{/each}}
                             </div>
-                        </div-->
-
+                        </div>
 
                         <div class="divider-text">Договор</div>
                         <p class="tx-12">Загрузите PDF файл с подписанным <a href="javascript:void(0);" id="docViewPdf">Договором</a>.</p>
@@ -245,7 +232,7 @@
                             }" wb-ext="pdf" wb-path="/uploads/sources/{{wbDate()}}" />
                         </div>
                         <input type="hidden" name="_created">
-<!--
+                        <!--
                         <div class="divider-text">Действия</div>
                         <div class="form-group">
                             <a href="#" class="btn btn-outline-primary my-2">Обработать</a>
@@ -256,10 +243,11 @@
             </div>
             <div class="modal-footer pd-x-20 pd-b-20 pd-t-0 bd-t-0">
                 <wb-include wb="{'form':'common_formsave.php'}" />
-                <a href="javascript:void(0)" class="btn btn-primary print"><svg wb-module="myicons" class="mi mi-printer size-20" stroke="FFFFFF"></svg>&nbsp;Печать</a>                
+                <a href="javascript:void(0)" class="btn btn-primary print"><svg wb-module="myicons" class="mi mi-printer size-20" stroke="FFFFFF"></svg>&nbsp;Печать</a>
             </div>
         </div>
     </div>
 </div>
 <script wbapp remove src="/forms/docs/edit.js"></script>
+
 </html>

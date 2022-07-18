@@ -32,13 +32,12 @@ class modPdfer
         // create a command string
 	    exec('cd '.$this->dir.' && /usr/bin/convert -verbose -scale 1024 -density 150 -depth 8 -quality 100  "'.$pdf .'"  "'.$target.'" 2>&1', $output);
         $files = [];
-        foreach ((array)$output as $out) {
-            preg_match_all('/=>(.*)\[/m', $out, $matches, PREG_PATTERN_ORDER);
-	    if ($matches[1][0] > '')  {
-            $file = $matches[1][0];
+        $output = implode("\n\r",$output);
+        preg_match_all('/=>(.*)\[/m', $output, $matches, PREG_PATTERN_ORDER);
+        $len = count($matches[1]);
+        foreach ($matches[1] as $i => $file) {
             $files[] = $this->path.'/'.$file;
-            $this->faximile($this->dir.'/'.$file);
-	    }
+            if ($i+1 <= $len-2) $this->faximile($this->dir.'/'.$file);
         }
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
