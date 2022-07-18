@@ -210,7 +210,6 @@
                                 'height':'60',
                                 'original': false
                             }" wb-path="/uploads/sources/{{wbDate()}}" />
-                            <textarea class="d-none" type="json" name="sources"></textarea>
                         </div>
                         <p class="tx-12">Или загрузите исходные документы по отдельности и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
                         <div>
