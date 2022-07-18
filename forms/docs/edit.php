@@ -212,6 +212,17 @@
                             }" wb-path="/uploads/sources/{{wbDate()}}" />
                             <textarea class="d-none" type="json" name="sources"></textarea>
                         </div>
+                        <p class="tx-12">Или загрузите исходные документы по отдельности и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
+                        <div>
+                            <wb-module name="sources" wb="{
+                                'module':'filepicker',
+                                'mode':'multi',
+                                'width':'100',
+                                'height':'60',
+                                'original': false
+                            }" wb-path="/uploads/sources" />
+                        </div>
+
                         <!--div id="uploadSources" wb-if="count({{sources}})>=4">
                             <textarea class="d-none" type="json" name="sources"></textarea>
                             <div class="row" wb="module=photoswipe&imgset=migreg">
