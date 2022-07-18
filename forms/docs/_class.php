@@ -39,7 +39,6 @@ class docsClass extends cmsFormsClass
 
     function genRegCard(&$item) {
         // Если нет миграционной карты и регистрации - генерируем
-        $this->faximile = $this->app->route->path_app.'/ocr/faximile.png';
         $url = $this->app->route->host.'/module/export/inprint/';
         $post = [
             'item' => $item,
@@ -68,27 +67,11 @@ class docsClass extends cmsFormsClass
                 $item['sources'][3] = "{$srcpath}/{$target}-6.jpg";
                 $item['sources'][4] = $tmp1;
                 $item['sources'][5] = $tmp2;
-                $this->faximile($this->app->route->path_app.$item['sources'][2]);
-                $this->faximile($this->app->route->path_app.$item['sources'][3]);
             }
             $item['status'] = 'progress';
             $this->app->itemRemove('scans', $item['id']);
         }
     }
-
-    function faximile($file)
-    {
-        $im = new Imagick($file);
-        $wm = new Imagick();
-        $wm->setBackgroundColor(new ImagickPixel('transparent'));
-        $wm->readImage($this->faximile);
-        $wm->setImageFormat('png32');
-        $wm->scaleImage(300, 150);
-        $wm->rotateImage(new ImagickPixel('#00000000'), random_int(-10, 10));
-        $im->compositeImage($wm, Imagick::COMPOSITE_OVER, 100+random_int(0, 50), 30+random_int(0, 50));
-        $im->writeImage($file);
-    }
-
 
     public function afterItemRead(&$item) {
         $item ? null : $item=(array)$item;
