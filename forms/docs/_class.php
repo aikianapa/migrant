@@ -125,6 +125,8 @@ class docsClass extends cmsFormsClass
                 $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры
                 $data->set('tfl', 'Н');
                 $data->set('doc_type', '31');
+                $data->set('country','643');
+                $data->set('parthner','21001');
             } else {
                 $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = 'корп.'.$item['reg_corpse'] : null;
                 $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
@@ -289,7 +291,8 @@ class docsClass extends cmsFormsClass
             ,36 => 'mc_date'
             ,37 => 'mc_expire'
             ,43 => 'tax_resident_outside' // нет
-            ,70 => 'code'
+            ,70 => 'code' // код конверта с картой
+            ,71 => 'parthner'
         ];
     }
 }
