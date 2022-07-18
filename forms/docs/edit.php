@@ -124,7 +124,7 @@
                             <div>
                                 <div class="row">
                                     <div class="form-group col-sm-12">
-                                        <label class="form-control-label">Область</label>
+                                        <label class="form-control-label">Регион</label>
                                         <input type="text" name="region" class="form-control" placeholder="Область">
                                     </div>
                                 </div>

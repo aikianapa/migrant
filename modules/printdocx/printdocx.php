@@ -30,13 +30,27 @@ class modPrintdocx
         $data->set('checked', '☑');
         $data->set('date', date('d.m.Y'));
         $data->set('date', '18.07.2022'); //////////////////////////////////////////////////////////////////////////
-        $data->set('reg_city', ucfirst($data['reg_city']));
-        $data->set('reg_street', ucfirst($data['reg_street']));
+        $data->set('reg_city', ucwords($data['reg_city']));
+        $data->set('reg_street', ucwords($data['reg_street']));
         $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = ', корп.'.$item['reg_corpse'] : null;
         $data->get('reg_flat') > ' ' ? $item['reg_flat'] = ', '.$item['reg_flat'] : null;
         $data->get('doc_ser') > ' ' ? $item['doc_ser'] = 'Серия '.$item['doc_ser'] : null;
 
-        $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type')) : null; // Область + тип города
+        $region = $data->get('region');
+        mb_strtolower($region) == "ленинградская" ? $region = $region.' область' : null;
+        if (mb_strpos(' '.mb_strtolower($region),'санкт-петербург') ) {
+            if (mb_strpos(' '.mb_strtolower($data['reg_city']),'санкт-петербург')) {
+                $data->set('reg_city_type');
+                $data->set('reg_city','');
+            } else {
+                $region .= ', ';
+            }
+        } else {
+            $region = mb_strtolower($region) == "ленинградская" ? "{$region}, " : "Ленинградская область, {$region}, ";
+        }
+       
+        $data->set('region',$region);
+
         $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
         $data->set('reg_house', trim($data->get('reg_house').' '.$data->get('reg_house_num'))); // тип дома + номер дома
         $data->set('reg_flat', trim($data->get('reg_flat').' '.$data->get('reg_flat_num'))); // тип квартиры + номер квартиры

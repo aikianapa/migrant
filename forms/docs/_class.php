@@ -29,7 +29,8 @@ class docsClass extends cmsFormsClass
         }
         if (!isset($item['sources'])) $item['sources'] = [];
 
-        if ($item['reg_flag'] == '' && count($item['sources']) == 4)  $this->genRegCard($item);
+        //if ($item['reg_flag'] == '' && count($item['sources']) == 4)  $this->genRegCard($item);
+        if (count($item['sources']) == 4)  $this->genRegCard($item);
     }
 
     public function afterItemSave(&$item)
@@ -116,8 +117,6 @@ class docsClass extends cmsFormsClass
         if ($this->app->vars('_route.action') !== 'edit') {
             $item ? null : $item=(array)$item;
             $data = $this->app->Dot($item);
-            $data->get('region') > '' ? $data->set('reg_city_type', $data->get('region').' область, '.$data->get('reg_city_type')) : null; // Область + тип города
-
 
             if ($this->app->vars('_route.module') == 'export' && $this->app->vars('_route.mode') == 'process') {
                 $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
@@ -127,6 +126,19 @@ class docsClass extends cmsFormsClass
                 $data->set('doc_type', '31');
                 $data->set('country','643');
                 $data->set('parthner','21001');
+
+
+                $region = $data->get('region');
+                mb_strtolower($region) == "ленинградская" ? $region = $region.' область' : null;
+                if (mb_strpos(' '.mb_strtolower($region),'санкт-петербург')) {
+                    $region = '78';
+                } else {
+                    $data->set('district',$region);
+                    $region = '47';
+                }
+                $data->set('region',$region);
+
+
             } else {
                 $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = 'корп.'.$item['reg_corpse'] : null;
                 $data->get('reg_build') > '' ? $data->set('reg_corpse', $data->get('reg_corpse').', стр. '.$data->get('reg_build')) : null; // Корпус + строение
@@ -271,7 +283,7 @@ class docsClass extends cmsFormsClass
             ,9  => 'doc_code'
             ,10 => 'doc_expire'
             ,11 => 'country' // 643
-            ,12 => 'region' // 78
+            ,12 => 'region' // 78, 47
             ,13 => 'district'
             ,14 => 'reg_city_type'
             ,15 => 'reg_city'

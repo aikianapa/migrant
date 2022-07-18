@@ -176,9 +176,11 @@
                     <div class="col-12 address d-none">
                         <div class="divider-text">Регистрация</div>
                         <div class="form-group row">
-                            <label class=" col-sm-3 form-control-label">Область</label>
+                            <label class=" col-sm-3 form-control-label">Регион</label>
                             <div class="col-sm-9">
-                                <input type="text" name="region" class="form-control" placeholder="Область">
+                                <select name="region" wb-select2 class="form-control" wb-tree="dict=locations&branch=regions&parent=false">
+                                    <option value="{{name}}">{{name}}</option>
+                                </select>
                             </div>
                         </div>
 
