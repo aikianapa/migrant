@@ -178,7 +178,7 @@
                         <div class="form-group row">
                             <label class=" col-sm-3 form-control-label">Регион</label>
                             <div class="col-sm-9">
-                                <select name="region" wb-select2 class="form-control" wb-tree="dict=locations&branch=regions&parent=false">
+                                <select name="region" class="form-control select2" wb-tree="dict=locations&branch=regions&parent=false">
                                     <option value="{{name}}">{{name}}</option>
                                 </select>
                             </div>
