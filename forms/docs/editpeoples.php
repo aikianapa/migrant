@@ -203,13 +203,13 @@
                                 Название улицы
                             </div>
                             <div class="form-group col-sm-4">
-                                <select name="reg_street_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=street_type&parent=false" data-required>
+                                <select name="reg_street_type" class="form-control select2" wb-tree="item=locations&tpl=false&branch=street_type&parent=false">
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
 
                             <div class="form-group col-sm-5">
-                                <input type="text" name="reg_street" class="form-control" placeholder="Название улицы" data-required>
+                                <input type="text" name="reg_street" class="form-control" placeholder="Название улицы">
                             </div>
                         </div>
                         <div class="row">
