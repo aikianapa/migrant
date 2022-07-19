@@ -38,11 +38,11 @@ class modPrintdocx
 
         $region = $data->get('region');
         mb_strtolower($region) == "ленинградская" ? $region = $region.' область' : null;
-        if (mb_strpos(' '.mb_strtolower($region),'санкт-петербург') ) {
-            if (mb_strpos(' '.mb_strtolower($data['reg_city']),'санкт-петербург')) {
+        if (mb_strpos(' '.mb_strtolower($region),'санкт-петербург') or $region == '') {
+            if (mb_strpos(' '.mb_strtolower($data['reg_city']),'санкт-петербург') and $region >'') {
                 $data->set('reg_city_type');
                 $data->set('reg_city','');
-            } else {
+            } else if ($region > '') {
                 $region .= ', ';
             }
         } else {

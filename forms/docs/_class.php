@@ -130,7 +130,7 @@ class docsClass extends cmsFormsClass
 
                 $region = $data->get('region');
                 mb_strtolower($region) == "ленинградская" ? $region = $region.' область' : null;
-                if (mb_strpos(' '.mb_strtolower($region),'санкт-петербург')) {
+                if (mb_strpos(' '.mb_strtolower($region),'санкт-петербург') or $region == '') {
                     $region = '78';
                 } else {
                     $data->set('district',$region);
