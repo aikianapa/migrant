@@ -29,7 +29,6 @@ class modPrintdocx
         $data->get('gender') == 'Ж' ? $data->set('gender', 'женский') : null;
         $data->set('checked', '☑');
         $data->set('date', date('d.m.Y'));
-        $data->set('date', '18.07.2022'); //////////////////////////////////////////////////////////////////////////
         $data->set('reg_city', ucwords($data['reg_city']));
         $data->set('reg_street', ucwords($data['reg_street']));
         $data->get('reg_corpse') > ' ' ? $item['reg_corpse'] = ', корп.'.$item['reg_corpse'] : null;
