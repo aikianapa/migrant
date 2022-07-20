@@ -100,7 +100,6 @@ class modSynapse
                 }
                 break;
             case 'room':
-                print_r($this->worker->rooms);
                 foreach ($this->worker->connections as $conn) {
                     if (isset($this->worker->rooms[$conn->id]) && $this->room == $this->worker->rooms[$conn->id]) {
                         $conn->send($data);

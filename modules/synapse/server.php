@@ -31,11 +31,11 @@ php server.php reload
 use Workerman\Worker;
 
 $context = array(
-   // 'ssl' => array(
-   //     'local_cert'  => '/your/path/of/server.pem',
-   //     'local_pk'    => '/your/path/of/server.key',
-   //     'verify_peer' => false,
-   // )
+    'ssl' => array(
+        'local_cert'  => '/your/path/of/server.pem',
+        'local_pk'    => '/your/path/of/server.key',
+        'verify_peer' => false,
+    )
 );
 
 $port = 4000;
@@ -51,8 +51,7 @@ $worker->params = (object)[
 ];
 
 
-$worker->count = 2;
-$worker->reloadable = true;
+$worker->count = 10;
 $worker->synapse = &$synapse;
 $worker->users = [];
 $worker->rooms = [];
@@ -82,7 +81,6 @@ $worker->onClose = function ($connection) {
     unset($connection->worker->rooms[$connection->id]);
     unset($connection->worker->users[$connection->id]);
     echo "Connection closed\n";
-    $connection->destroy();
 };
 
 // Run worker

@@ -113,7 +113,7 @@
                     break;
                 // Data messages
                 case 'data':
-                    if (result !== undefined && result.msg !== undefined && result.msg == 'scanblocks') {
+                    if (result.msg == 'scanblocks') {
                         $('#scansList').find('tr[data-id]').removeClass('d-none');
                         $(result.blocks).each(function(i,id){
                             $('#scansList').find('tr[data-id="'+id+'"]').addClass('d-none');
@@ -137,7 +137,7 @@
 
 
         $(document).on('wb-ajax-done',function(e,data){
-            if (data !== undefined && data.url !== undefined && data.url == "/cms/ajax/form/scans/list") {
+            if (data.url == "/cms/ajax/form/scans/list") {
                 synapse.put({'type':'ajax','url':document.location.origin+'/api/v2/func/scans/getblock','post':{},'cast':'room'});
             }
         })
