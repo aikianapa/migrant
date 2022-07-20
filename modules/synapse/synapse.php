@@ -6,7 +6,7 @@ if (is_file($tmp)) {
     $tmp = realpath(__DIR__.'/../../engine/lib/vendor/autoload.php');
     require_once($tmp);
 }
-use Workerman\Worker;
+//use Workerman\Worker;
 
 class modSynapse
 {

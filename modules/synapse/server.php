@@ -31,18 +31,19 @@ php server.php reload
 use Workerman\Worker;
 
 $context = array(
-    'ssl' => array(
-        'local_cert'  => '/your/path/of/server.pem',
-        'local_pk'    => '/your/path/of/server.key',
-        'verify_peer' => false,
-    )
+//    'ssl' => array(
+//        'local_cert'  => '/your/path/of/server.pem',
+//        'local_pk'    => '/your/path/of/server.key',
+//        'verify_peer' => false,
+//    )
 );
 
 $port = 4000;
 $project='migrant';
 $secret='accept';
 
-$worker = new Worker("websocket://0.0.0.0:{$port}", $context);
+//$worker = new Worker("websocket://0.0.0.0:{$port}", $context);
+$worker = new Worker("websocket://0.0.0.0:{$port}");
 // $worker->transport = 'ssl';
 
 $worker->params = (object)[
@@ -55,6 +56,7 @@ $worker->count = 10;
 $worker->synapse = &$synapse;
 $worker->users = [];
 $worker->rooms = [];
+$worker->reloadable = true;
 
 $worker->onWorkerStart = function ($worker) {
     echo "Worker starting...\n";
@@ -63,7 +65,6 @@ $worker->onWorkerStart = function ($worker) {
 $worker->onWorkerStop = function ($worker) {
     echo "Worker stopped...\n";
 };
-
 
 $worker->onConnect = function ($connection) {
     $count = count($connection->worker->connections);
