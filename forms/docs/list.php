@@ -12,31 +12,37 @@
         <div class="collapse navbar-collapse order-2" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" data-ajax="{'target':'#{{_form}}List','filter_remove': 'status'}">Все
+                    <a class="nav-link" href="#" data-ajax="{'target':'#{{_form}}List','filter_remove': ['status','flag']}">Все
                         <span class="sr-only">(current)</span>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"
-                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'new'}}">Новые</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'progress'}}">В
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status flag','filter_add':{'flag':'on'}}">Метка</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status flag','filter_add':{'status':'new'}}">Новые</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status flag','filter_add':{'status':'progress'}}">В
                         работе</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'ready'}}">Готовые</a>
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status flag','filter_add':{'status':'ready'}}">Готовые</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'status':'archive'}}">Архив</a>
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status flag','filter_add':{'status':'archive'}}">Архив</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"
-                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status','filter_add':{'@status':'error'}}">Ошибка</a>
+                        data-ajax="{'target':'#{{_form}}List','filter_remove': 'status flag','filter_add':{'status':'error'}}">Ошибка</a>
                 </li>
             </ul>
             <form class="form-inline mg-t-10 mg-lg-0">
@@ -85,7 +91,9 @@
 
 
                 <tr>
-                    <td>{{fullname}}<br /><small>{{birth_date}}</small></td>
+                    <td>{{fullname}}
+                    <img loading="lazy" src="/module/myicons/bookmark-favorite-minus.svg?size=18&stroke=dc3545" wb-if="'{{flag}}'=='on'">    
+                    <br /><small>{{birth_date}}</small></td>
                     <td>{{doc_ser}} №{{doc_num}}</td>
                     <td>{{code}}</td>
                     <td>

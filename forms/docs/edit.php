@@ -14,53 +14,75 @@
             <div class="modal-body pd-20">
                 <form class="row" method="post" id="{{_form}}EditForm">
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Ф.И.О.</label>
-                            <input type="text" name="fullname" class="form-control" placeholder="Ф.И.О." required>
+                        <div class="form-group row">
+                            <label class="form-control-label col-sm-3">Ф.И.О.</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="fullname" class="form-control" placeholder="Ф.И.О." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="form-control-label col-sm-3">Метка</label>
+                            <div class="col-sm-9">
+                                <span wb="module=switch" name="flag" ></span>
+                            </div>
                         </div>
 
                         <div class="accordion">
                             <h6>1. Основное</h6>
                             <div>
-                                <div class="form-group">
-                                    <label class="form-control-label">Дата рождения</label>
-                                    <input type="date" name="birth_date" class="form-control" required placeholder="Дата рождения">
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Дата рождения</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" name="birth_date" class="form-control" required placeholder="Дата рождения">
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Место рождения</label>
-                                    <input type="text" name="birth_place" class="form-control" placeholder="Место рождения">
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Место рождения</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="birth_place" class="form-control" placeholder="Место рождения">
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Пол</label>
-                                    <select name="gender" class="form-control" wb-select2 placeholder="Пол">
-                                        <option value="М">Мужской</option>
-                                        <option value="Ж">Женский</option>
-                                    </select>
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Пол</label>
+                                    <div class="col-sm-8">
+                                        <select name="gender" class="form-control" wb-select2 placeholder="Пол">
+                                            <option value="М">Мужской</option>
+                                            <option value="Ж">Женский</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-
-                                <div class="form-group">
-                                    <label class="form-control-label">Гражданство</label>
-                                    <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false">
-                                        <option value="{{id}}">{{name}}</option>
-                                    </select>
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Гражданство</label>
+                                    <div class="col-sm-8">
+                                        <select name="citizen" class="form-control select2" placeholder="Гражданство" wb-tree="item=countries&tpl=false">
+                                            <option value="{{id}}">{{name}}</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Эл.почта</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Эл.почта">
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Эл.почта</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" name="email" class="form-control" placeholder="Эл.почта">
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Телефон</label>
-                                    <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Телефон</label>
+                                    <div class="col-sm-8">
+                                        <input wb-module="mask" wb-mask="89999999999" name="phone" class="form-control" placeholder="Телефон">
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-control-label">Телефон (дополнительный)</label>
-                                    <input wb-module="mask" wb-mask="89999999999" name="phone_alt" class="form-control" placeholder="Телефон">
+                                <div class="form-group row">
+                                    <label class="form-control-label col-sm-4">Телефон (дополнительный)</label>
+                                    <div class="col-sm-8">
+                                        <input wb-module="mask" wb-mask="89999999999" name="phone_alt" class="form-control" placeholder="Телефон">
+                                    </div>
                                 </div>
 
                             </div>
@@ -187,16 +209,20 @@
 
                     </div>
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Код конверта с картой</label>
-                            <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
+                        <div class="form-group row">
+                            <label class="form-control-label col-sm-4">Код конверта с картой</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="code" class="form-control" placeholder="Код конверта с картой">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-control-label">Источник</label>
-                            <select name="team" class="form-control select2" placeholder="От кого" wb-tree="item=teams">
-                                <option value="{{id}}">{{name}}</option>
-                            </select>
+                        <div class="form-group row">
+                            <label class="form-control-label col-sm-4">Источник</label>
+                            <div class="col-sm-8">
+                                <select name="team" class="form-control select2" placeholder="От кого" wb-tree="item=teams">
+                                    <option value="{{id}}">{{name}}</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="divider-text">Исходные документы</div>
