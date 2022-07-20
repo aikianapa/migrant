@@ -31,11 +31,11 @@ php server.php reload
 use Workerman\Worker;
 
 $context = array(
-    'ssl' => array(
-        'local_cert'  => '/your/path/of/server.pem',
-        'local_pk'    => '/your/path/of/server.key',
-        'verify_peer' => false,
-    )
+   // 'ssl' => array(
+   //     'local_cert'  => '/your/path/of/server.pem',
+   //     'local_pk'    => '/your/path/of/server.key',
+   //     'verify_peer' => false,
+   // )
 );
 
 $port = 4000;
@@ -51,7 +51,7 @@ $worker->params = (object)[
 ];
 
 
-$worker->count = 1;
+$worker->count = 2;
 $worker->reloadable = true;
 $worker->synapse = &$synapse;
 $worker->users = [];

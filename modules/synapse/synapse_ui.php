@@ -17,11 +17,9 @@
             var synapse_connect = function() {
                 if (document.modSynapse && document.modSynapse.readyState !== undefined) return document.modSynapse;
                 try {
-                    console.log(conn);
+                    alert(1)
                     conn.room = hash;
                     conn.user = user;
-
-
                     if (!conn.readyState) {
                         wbapp.toast("Ошибка","Нет соединения с сервером. Подождите 2-3 минуты...",{delay:2000,bgcolor:'warning'});
                         setTimeout(function(){
