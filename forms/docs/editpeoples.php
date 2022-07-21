@@ -215,13 +215,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label class="form-control-label">Тип</label>
-                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" wb-tree="item=locations&tpl=false&branch=obj_type&parent=false" data-required>
+                                <select name="reg_house" placeholder="Дом/участок/владение" class="form-control select2" wb-tree="item=locations&tpl=false&branch=obj_type&parent=false">
                                     <option value="{{data.short}}">{{name}}</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-control-label">Номер</label>
-                                <input type="text" name="reg_house_num" class="form-control" placeholder="Номер дома" data-required>
+                                <input type="text" name="reg_house_num" class="form-control" placeholder="Номер дома">
                             </div>
                         </div>
                         <div class="row">
@@ -298,6 +298,15 @@
         let employer = $(data.element).attr('data-employer');
         $('#modalPeoplesEdit [name=employer]').val(employer).attr('value', employer);
     })
+
+    $('#modalPeoplesEdit input[name=doc_date]').on('change', function(e) {
+        let expire = $(this).val();
+        expire = new Date(new Date(expire).setDate(new Date(expire).getDate() - 1)).toISOString().substring(0,10).split('-');
+        expire[0] = expire[0]*1 + 10
+        expire = expire.join('-')
+        $('#modalPeoplesEdit [name=doc_expire]').val(expire).attr('value',expire).trigger('change')
+    })
+
 
     $('#modalPeoplesEdit').delegate('.btn-save', 'wb-save-done', function(ev, data) {
         if ($('#docsEditForm meta[name=scan]').attr('content') == "true") {
