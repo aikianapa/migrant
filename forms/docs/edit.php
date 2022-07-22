@@ -24,7 +24,7 @@
                         <div class="form-group row">
                             <label class="form-control-label col-sm-3">Метка</label>
                             <div class="col-sm-9">
-                                <span wb="module=switch" name="flag" ></span>
+                                <span wb="module=switch" name="flag"></span>
                             </div>
                         </div>
 
@@ -82,6 +82,13 @@
                                     <label class="form-control-label col-sm-4">Телефон (дополнительный)</label>
                                     <div class="col-sm-8">
                                         <input wb-module="mask" wb-mask="89999999999" name="phone_alt" class="form-control" placeholder="Телефон">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-4 form-control-label">Срок пребывания</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания" required>
                                     </div>
                                 </div>
 
