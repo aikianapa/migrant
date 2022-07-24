@@ -168,7 +168,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Срок пребывания</label>
                             <div class="col-sm-9">
-                                <input type="date" name="mc_expire" class="form-control" placeholder="Срок пребывания" required>
+                                <input type="date" name="date_out" class="form-control" placeholder="Срок пребывания" required>
                             </div>
                         </div>
                     </div>

@@ -83,6 +83,7 @@ class docsClass extends cmsFormsClass
         $data->get('source.0.img') > '' OR $data->get('code') > '' ? $item['status'] = 'progress' : null;
         $data->get('order.0.img') > '' AND $data->get('code') > '' ? $item['status'] = 'ready' : null;
         $data->get('archive') == 'on' ? $item['status'] = 'archive' : null;
+        $data->get('date_out') == '' ? $data->set('date_out',$data->get('mc_expire')) : null;
         isset($item['_created']) ? null : $item['_created'] = date('Y-m-d');
         $item['date'] = date('Y-m-d', strtotime($item['_created']));
         $item['pasp'] = preg_replace('/[^a-zA-Z0-9]/ui', '', $data->get('doc_ser').$data->get('doc_num'));
