@@ -57,13 +57,7 @@ class modPrintdocx
         $ccodes = $app->treeRead('countries');
         $country = wbTreeFindBranch($ccodes['tree']['data'], $item['citizen']);
         isset($country[0]['name']) ? $item['citizen'] = $country[0]['name'] : null;
-        $data->set('fullname', translit(null, mb_convert_case($data->get('fullname'), MB_CASE_TITLE, 'UTF-8')));
-
-        if ($data->get('reg_flag') == 'on') {
-            $data->set('birth_place', translit(null, mb_convert_case($data->get('birth_place'), MB_CASE_TITLE, 'UTF-8')));
-        } else {
-            $data->set('birth_place', str_replace('TADJI','TAJI',strtoupper(wbTranslit($data->get('birth_place')))));
-        }
+        $data->set('birth_place', str_replace('TADJI','TAJI',strtoupper(wbTranslit($data->get('birth_place')))));
 
         $data = $item;
         $pdfsrc = '';
