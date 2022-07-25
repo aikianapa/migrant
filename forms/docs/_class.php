@@ -97,6 +97,9 @@ class docsClass extends cmsFormsClass
         } else if ($data->get('fullname') == '' && $data->get('first_name')>'') {
             $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
         }
+        $data->set('fullname', translit(null, mb_convert_case($data->get('fullname'), MB_CASE_TITLE, 'UTF-8')));
+        $data->set('birth_place', translit(null, mb_convert_case($data->get('birth_place'), MB_CASE_TITLE, 'UTF-8')));
+
         if ( $this->app->vars('_route.action') == 'rep_reg') {
             $item['month'] = wbDate('Y-m', $item['_created']);
             $item['day'] = wbDate('d', $item['_created']);

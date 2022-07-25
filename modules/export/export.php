@@ -231,6 +231,12 @@ class modExport
             $this->sheet = &$sheet;
 
 
+            $item['last_name'] =  translit(null, mb_convert_case($item['last_name'], MB_CASE_TITLE, 'UTF-8'));
+            $item['first_name'] =  translit(null, mb_convert_case($item['first_name'], MB_CASE_TITLE, 'UTF-8'));
+            $item['middle_name'] =  translit(null, mb_convert_case($item['middle_name'], MB_CASE_TITLE, 'UTF-8'));
+            $item['birth_place'] =  translit(null, mb_convert_case($item['birth_place'], MB_CASE_TITLE, 'UTF-8'));
+
+
             $this->boxedField('N:31', $item['last_name']); // Фамилия
             $this->boxedField('N:33', $item['first_name']); // Имя
             $this->boxedField('AH:35', $item['middle_name']); // Отчество
@@ -272,10 +278,11 @@ class modExport
             $this->lineField('B:65', $place['reg_flat']); // Тип квартиры
             $this->boxedField('AJ:65', $place['reg_flat_num']); // Номер квартиры
 
+            (!isset($item['date_out']) OR $item['date_out'] == '') ? $item['date_out'] = $item['mc_expire'] : null;
 
-            $this->boxedField('I:68', date('d', strtotime($item['mc_expire']))); // Число Срок пребывания
-            $this->boxedField('AA:68', date('m', strtotime($item['mc_expire']))); // Месяц Срок пребывания
-            $this->boxedField('AM:68', date('Y', strtotime($item['mc_expire']))); // Год Срок пребывания
+            $this->boxedField('I:68', date('d', strtotime($item['date_out']))); // Число Срок пребывания
+            $this->boxedField('AA:68', date('m', strtotime($item['date_out']))); // Месяц Срок пребывания
+            $this->boxedField('AM:68', date('Y', strtotime($item['date_out']))); // Год Срок пребывания
 
             //=== СТРАНИЦА 4
             $sheet = $spreadsheet->getSheetByName('стр.4');
