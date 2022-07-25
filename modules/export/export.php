@@ -230,12 +230,12 @@ class modExport
             $sheet = $spreadsheet->getSheetByName('стр.3');
             $this->sheet = &$sheet;
 
-
-            $item['last_name'] =  translit(null, mb_convert_case($item['last_name'], MB_CASE_TITLE, 'UTF-8'));
-            $item['first_name'] =  translit(null, mb_convert_case($item['first_name'], MB_CASE_TITLE, 'UTF-8'));
-            $item['middle_name'] =  translit(null, mb_convert_case($item['middle_name'], MB_CASE_TITLE, 'UTF-8'));
-            $item['birth_place'] =  translit(null, mb_convert_case($item['birth_place'], MB_CASE_TITLE, 'UTF-8'));
-
+            if (isset($item['reg_flag']) && $item['reg_flag'] == 'on') {
+                $item['last_name'] =  translit(null, mb_convert_case($item['last_name'], MB_CASE_TITLE, 'UTF-8'));
+                $item['first_name'] =  translit(null, mb_convert_case($item['first_name'], MB_CASE_TITLE, 'UTF-8'));
+                $item['middle_name'] =  translit(null, mb_convert_case($item['middle_name'], MB_CASE_TITLE, 'UTF-8'));
+                $item['birth_place'] =  translit(null, mb_convert_case($item['birth_place'], MB_CASE_TITLE, 'UTF-8'));
+            }
 
             $this->boxedField('N:31', $item['last_name']); // Фамилия
             $this->boxedField('N:33', $item['first_name']); // Имя
