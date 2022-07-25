@@ -247,8 +247,8 @@
                         <div id="listSources" class="row mt-2" wb="module=photoswipe&imgset=migreg">
                             <div class="srcList">
                                 {{#each srcList}}
-                                    <a data-href="{{.}}" class="col-3">
-                                        <img data-src="/thumbc/70x70/src{{.}}" class="mb-2">
+                                    <a data-href="{{.}}?{{~/uid}}" class="col-3">
+                                        <img data-src="/thumbc/70x70/src{{.}}?{{~/uid}}" class="mb-2">
                                     </a>
                                 {{/each}}
                             </div>

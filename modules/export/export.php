@@ -230,12 +230,12 @@ class modExport
             $sheet = $spreadsheet->getSheetByName('стр.3');
             $this->sheet = &$sheet;
 
-            if (isset($item['reg_flag']) && $item['reg_flag'] == 'on') {
+            //if (isset($item['reg_flag']) && $item['reg_flag'] == 'on') {
                 $item['last_name'] =  translit(null, mb_convert_case($item['last_name'], MB_CASE_TITLE, 'UTF-8'));
                 $item['first_name'] =  translit(null, mb_convert_case($item['first_name'], MB_CASE_TITLE, 'UTF-8'));
                 $item['middle_name'] =  translit(null, mb_convert_case($item['middle_name'], MB_CASE_TITLE, 'UTF-8'));
                 $item['birth_place'] =  translit(null, mb_convert_case($item['birth_place'], MB_CASE_TITLE, 'UTF-8'));
-            }
+            //}
 
             $this->boxedField('N:31', $item['last_name']); // Фамилия
             $this->boxedField('N:33', $item['first_name']); // Имя
@@ -365,7 +365,7 @@ class modExport
             //$this->sheet->getStyle('BD37')->applyFromArray(['font'=>['size'=>8]]);
             $sign_num = (isset($item['sign_num'])) ? intval($item['sign_num']) : 0;
             $sign = $emplr['sign_prefix'].'/'.date('y').'/'.str_pad($sign_num,5,0,0);
-            $sign .=PHP_EOL.date('d.m.Y H:i');
+            $sign .=PHP_EOL.date('d.m.Y H:i',strtotime(date('d.m.Y H:i').' -10 days') );
             $this->lineField('BD:37', $sign);
             $this->lineField('BD:39', $emplr['title']);
             $this->lineField('BD:42', $emplr['last_name'].' '.$emplr['first_name'].' '.$emplr['middle_name']);

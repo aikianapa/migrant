@@ -8,6 +8,7 @@ $(document).ready(function () {
         el: '#listSources .srcList',
         template: $('#listSources .srcList').html(),
         data: {
+            uid: wbapp.newId(),
             srcList: []
         },
         on: {
@@ -56,8 +57,8 @@ $(document).ready(function () {
 
     $('#modalDocsEdit').on('wb-save-done', function (ev, data) {
         if (data.params.form !== '#docsEditForm') return
-        console.log(data.data.sources);
         docsListSources.set('srcList', data.data.sources)
+        docsListSources.set('uid', wbapp.newId())
         docsListSources.update()
     });
 
