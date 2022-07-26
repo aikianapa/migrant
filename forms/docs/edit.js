@@ -9,6 +9,7 @@ $(document).ready(function () {
         template: $('#listSources .srcList').html(),
         data: {
             uid: wbapp.newId(),
+            count: 0,
             srcList: []
         },
         on: {
@@ -30,6 +31,7 @@ $(document).ready(function () {
 
     docsListSources.set('srcList', srclist)
     docsListSources.update()
+    docsListSources.set('count', srclist.length)
 
     $('#modalDocsEdit').delegate('.btn.print', wbapp.evClick, function () {
         let data = $('#docsEditForm').serializeJson();
@@ -59,8 +61,27 @@ $(document).ready(function () {
         if (data.params.form !== '#docsEditForm') return
         docsListSources.set('srcList', data.data.sources)
         docsListSources.set('uid', wbapp.newId())
+        docsListSources.set('count', data.data.sources.length)
         docsListSources.update()
     });
+
+
+    $('#docsEditForm').undelegate('button#regRegen',wbapp.evClick);
+    $('#docsEditForm').delegate('button#regRegen',wbapp.evClick,function(){
+        let srclist = $('#uploadSources').children('textarea[name=sources]').val()
+        srclist = $.parseJSON($('#uploadSources').children('textarea[name=sources]').val())
+        if (srclist.length !== 6) return
+        let newlist = []
+        $.each(srclist, function(k,v){
+            if (k !== 2 && k !== 3) newlist.push(v)
+        })
+
+        $('#uploadSources').children('textarea[name=sources]').val(JSON.stringify(newlist)).trigger('change')
+        docsListSources.set('srcList', newlist)
+        docsListSources.set('count', newlist.length)
+        docsListSources.update()
+        $('#modalDocsEdit .btn-save').trigger('click');
+    })
 
     $('#docsEditForm #uploadOrder').off('mod-filepicker-done');
     // После загрузки договора

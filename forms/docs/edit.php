@@ -235,6 +235,7 @@
                         <div class="divider-text">Исходные документы</div>
                         <p class="tx-12">Загрузите PDF файл с исходными документами и <a href="javascript:void(0);" onclick="$('#modalDocsEdit .btn.print').trigger('click');">распечатайте Договор.</p>
                         <div id="uploadSources">
+
                             <wb-module name="attaches" wb="{
                                 'module':'filepicker',
                                 'mode':'single',
@@ -244,6 +245,7 @@
                             }" wb-path="/uploads/sources/{{wbDate()}}" />
                             <textarea class="d-none" type="json" name="sources"></textarea>
                         </div>
+
                         <div id="listSources" class="row mt-2" wb="module=photoswipe&imgset=migreg">
                             <div class="srcList">
                                 {{#each srcList}}
@@ -251,8 +253,16 @@
                                         <img data-src="/thumbc/70x70/src{{.}}?{{~/uid}}" class="mb-2">
                                     </a>
                                 {{/each}}
+
+                                {{#if ~/count == 6}}
+                                <div>
+                                    <button id="regRegen" class="btn btn-primary btn-sm" type="button">Обновить регистрацию</button>
+                                    <p class="tx-12 pt-1">Будьте внимательны, не выполняйте обновление на реальной регистрации.</p>
+                                </div>
+                                {{/if}}
                             </div>
                         </div>
+
 
                         <div class="divider-text">Договор</div>
                         <p class="tx-12">Загрузите PDF файл с подписанным <a href="javascript:void(0);" id="docViewPdf">Договором</a>.</p>
