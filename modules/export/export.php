@@ -104,6 +104,7 @@ class modExport
         foreach ($list['list'] as $item) {
             $this->docs->beforeItemShow($item);
             $item['tax_resident_outside'] = 'нет';
+            $item['mc_expire'] = ($item['mc_expire']>$item['date_out']) ? $item['mc_expire'] : $item['date_out'];
             $c=0;
             foreach ($item as $fld => $val) {
                 if (isset($schema[$fld])) {
