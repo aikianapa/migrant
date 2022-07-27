@@ -13,6 +13,17 @@ class docsClass extends cmsFormsClass
         if ($data->get('fullname') == '' && $data->get('first_name')>'') {
             $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
         }
+        $fullname = implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]);
+        if ($data->get('fullname') > '' && $fullname !== $data->get('fullname')) {
+            $tmp = explode(' ',$data->get('fullname'));
+            isset($tmp[0]) ? $data->set('last_name', $tmp[0]) : $data->set('last_name', '');
+            isset($tmp[1]) ? $data->set('first_name', $tmp[1]) : $data->set('first_name', '');
+            $middlename = '';
+            foreach($tmp as $i => $v) {
+                if ($i>1) $middlename .= $v;
+            }
+            $data->set('middle_name', $middlename);
+        }
         if ($data->get('sign_num') =='' && $data->get('employer') > '') {
             $emplr = $this->app->itemRead('employers', $data->get('employer'));
             $year = date('y');
