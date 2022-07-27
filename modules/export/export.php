@@ -248,7 +248,7 @@ class modExport
             $this->boxedField('BC:39', date('Y', strtotime($item['birth_date']))); // Год рождения
 
             if (intval($item['citizen']) == '860') {
-                $item['birth_place'] = 'UZBEKISTAN, '.$item['birth_place'];
+                $item['birth_place'] = 'РЕСПУБЛИКА УЗБЕКИСТАН, '.$item['birth_place'];
             }
             $this->boxedField('Z:41', $item['birth_place'], 24, 3); // Место рождения
 
