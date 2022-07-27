@@ -21,7 +21,7 @@ function translit($textcyr = null, $textlat = null)
 'yu', 'Yu', 'YU',
 'kh', 'Kh', 'KH',
 'ya', 'Ya', 'YA',
-'ay','Ay','AY',
+'y ','y ','Y ',
 'yo', 'j', 'ch', 'sch', 'sh', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', '`', 'y', '', 'e', 'ya',
 'yo', 'J', 'Ch', 'Sch', 'Sh', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'c', '`', 'Y', '', 'E', 'ya', );
     if ($textcyr) {
