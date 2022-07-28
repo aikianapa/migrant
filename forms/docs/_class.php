@@ -10,6 +10,7 @@ class docsClass extends cmsFormsClass
         $item['reg_street'] = ucfirst($item['reg_street']);
         $item['checksum'] = $this->checksum($item);
         $data = $this->app->Dot($item);
+        $data->get('order.0.img') > '' AND $data->get('code') > '' ? $item['status'] = 'ready' : null;
         if ($data->get('fullname') == '' && $data->get('first_name')>'') {
             $data->set('fullname', implode(' ', [$data->get('last_name'),$data->get('first_name'),$data->get('middle_name')]));
         }
