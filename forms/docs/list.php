@@ -120,10 +120,10 @@
                             class="d-inline">
                             <img src="/module/myicons/content-edit-pen.svg?size=24&stroke=323232">
                         </a>
-                        <a href="javascript:"
+                        <a href="javascript:" wb-if="'{{_sess.user.role}}'!=='doc'"
                             data-ajax="{'url':'/ajax/rmitem/docs/{{id}}','update':'cms.list.docs','html':'#yongerDocs modals'}"
                             class="d-inline">
-                            <img src="/module/myicons/trash-delete-bin.2.svg?size=24&stroke=323232" class="d-inline">
+                            <img src="/module/myicons/trash-delete-bin.2.svg?size=24&stroke=dc3545" class="d-inline">
                         </a>
                     </td>
                 </tr>

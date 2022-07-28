@@ -254,11 +254,13 @@
                                     </a>
                                 {{/each}}
 
-                                {{#if ~/count == 6}}
-                                <div>
+                                {{#if ~/role == 'admin'}}
+                                {{#if ~/count == 6 }}
+                                <div class="regRegenBlock">
                                     <button id="regRegen" class="btn btn-primary btn-sm" type="button">Обновить регистрацию</button>
                                     <p class="tx-12 pt-1">Будьте внимательны, не выполняйте обновление на реальной регистрации.</p>
                                 </div>
+                                {{/if}}
                                 {{/if}}
                             </div>
                         </div>

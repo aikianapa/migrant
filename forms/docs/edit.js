@@ -9,6 +9,7 @@ $(document).ready(function () {
         template: $('#listSources .srcList').html(),
         data: {
             uid: wbapp.newId(),
+            role: wbapp._session.user.role,
             count: 0,
             srcList: []
         },
