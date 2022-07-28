@@ -20,9 +20,9 @@ class docsClass extends cmsFormsClass
             isset($tmp[1]) ? $data->set('first_name', $tmp[1]) : $data->set('first_name', '');
             $middlename = '';
             foreach($tmp as $i => $v) {
-                if ($i>1) $middlename .= $v;
+                if ($i>1) $middlename .= $v.' ';
             }
-            $data->set('middle_name', $middlename);
+            $data->set('middle_name', trim($middlename));
         }
         if ($data->get('sign_num') =='' && $data->get('employer') > '') {
             $emplr = $this->app->itemRead('employers', $data->get('employer'));
