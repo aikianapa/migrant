@@ -61,8 +61,9 @@
     </nav>
 
     <wb-var date="" />
-    <wb-var filter="" />
-    <wb-var filter="'$or' : [
+    <wb-var filter="{'_site' : {'$ne': '???'}}" />
+    <wb-var filter="{'_site' : {'$ne': '???'},
+            '$or' : [
                 {'_role':'reg'},
                 {'_creator':'{{_sess.user.id}}'}
             ]
