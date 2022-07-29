@@ -254,7 +254,7 @@
                                     </a>
                                 {{/each}}
 
-                                {{#if ~/role == 'doc'}}
+                                {{#if ~/role == 'admin'}}
                                 {{#if ~/count == 6 }}
                                 <div class="regRegenBlock">
                                     <button id="regRegen" class="btn btn-primary btn-sm" type="button">Обновить регистрацию</button>
