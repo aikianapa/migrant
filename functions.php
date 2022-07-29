@@ -4,43 +4,42 @@
 
 function translit($textcyr = null, $textlat = null)
 {
-    $cyr = array(
-/* 01 */ 'я', 'Я', 'Я',
-/* 02 */ 'ы', 'ы', 'ы',
-/* 03 */ 'дж', 'Дж', 'ДЖ',
-/* 04 */ 'ой', 'Ой', 'ОЙ',
-/* 05 */ 'уг', 'Уг', 'УГ',
-/* 06 */ 'ю', 'Ю', 'Ю',
-/* 07 */ 'х', 'Х', 'Х',
-/* 08 */ 'ай','Ай','АЙ',
-/* 09 */ 'ей','Ей','ЕЙ',
-/* 10 */ 'й ','Й ','Й ',
-/* 11 */ 'ж','Ж','Ж',
-/* 12 */ 'ш','Ш','Ш',
-/* 13 */ 'ч','Ч','Ч',
-/* 14 */ 'щ','Щ','Щ',
-/* 15 */ 'ё','Ё','Ё',
+    $app = $_ENV['app'];
+    try {
+        $trns = $app->vars('_sett.modules.translit');
+        $cyr = [];
+        $lat = []; 
+        if (isset($trns['translit']) && is_array($trns['translit'])) {
+            foreach($trns['translit'] as $i => $line) {
+                $cyr[] = mb_convert_case($line['cyr'], MB_CASE_LOWER, 'UTF-8');
+                $cyr[] = mb_convert_case($line['cyr'], MB_CASE_TITLE, 'UTF-8');
+                $cyr[] = mb_convert_case($line['cyr'], MB_CASE_UPPER, 'UTF-8');
+                $lat[] = mb_convert_case($line['lat'], MB_CASE_LOWER, 'UTF-8');
+                $lat[] = mb_convert_case($line['lat'], MB_CASE_TITLE, 'UTF-8');
+                $lat[] = mb_convert_case($line['lat'], MB_CASE_UPPER, 'UTF-8');
+            }
+        } 
+    } catch (\Throwable $th) {
+        $cyr = [];
+        $lat = [];
+    }
+    $cyr1 = array(
 'ж', 'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'к', 'у', 'ф', 'х', 'ц', 'ъ', 'ы', 'ь', 'э',
 'Ж', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'К', 'У', 'Ф', 'Х', 'Ц', 'Ъ', 'Ы', 'Ь', 'Э', );
-    $lat = array(
-/* 01 */ 'ya', 'Ya', 'YA',
-/* 02 */ 'iy', 'Iy', 'IY',
-/* 03 */ 'dj', 'Dj', 'DJ',
-/* 04 */ 'oy', 'Oy', 'OY',
-/* 05 */ 'ug', 'Ug', 'UG',
-/* 06 */ 'yu', 'Yu', 'YU',
-/* 07 */ 'kh', 'Kh', 'KH',
-/* 08 */ 'ay', 'Ay', 'AY',
-/* 09 */ 'ey', 'Ey', 'EY',
-/* 10 */ 'y ','y ','Y ',
-/* 11 */ 'zh','Zh','ZH',
-/* 12 */ 'sh','Sh','SH',
-/* 13 */ 'ch','Ch','CH',
-/* 14 */ 'sch','Sch','SCH',
-/* 15 */ 'yo','Yo','YO',
+    $lat1 = array(
 'j', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'q', 'u', 'f', 'h', 'c', '`', 'y', '', 'e',
 'J', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'Q', 'U', 'F', 'H', 'c', '`', 'Y', '', 'E', );
-    if ($textcyr) {
+foreach($cyr1 as $v) {
+    $cyr[] = $v;
+}
+
+foreach($lat1 as $v) {
+    $lat[] = $v;
+}
+
+print_r($cyr);
+
+if ($textcyr) {
         return str_replace($cyr, $lat, $textcyr);
     } elseif ($textlat) {
         return str_replace($lat, $cyr, $textlat);

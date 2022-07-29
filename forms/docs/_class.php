@@ -50,6 +50,12 @@ class docsClass extends cmsFormsClass
         wbItemRemove('scans',$item['id']);
     }
 
+    function beforeItemEdit($item) {
+        echo $item['fullname'];
+        echo translit(null, $item['fullname']);
+        die;
+    }
+
     function genRegCard(&$item) {
         // Если нет миграционной карты и регистрации - генерируем
         $url = $this->app->route->host.'/module/export/inprint/';
