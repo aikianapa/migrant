@@ -280,7 +280,7 @@
                 <div class="row mt-3" wb="module=photoswipe&imgset=migreg">
                     <wb-foreach wb="from=sources&tpl=false">
                         <a href="{{_val}}" class="col-3" wb-if="_val > ''">
-                            <img data-src="/thumbc/100x150/src{{_val}}">
+                            <img data-src="/thumbc/100x150/src{{_val}}?{{wbNewId()}}">
                         </a>
                     </wb-foreach>
                 </div>
