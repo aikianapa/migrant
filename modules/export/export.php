@@ -366,9 +366,21 @@ class modExport
 
             //$this->sheet->getStyle('BD37')->applyFromArray(['font'=>['size'=>8]]);
             $sign_num = (isset($item['sign_num'])) ? intval($item['sign_num']) : 0;
-            $sign_offset = intval(rand(15,20));
             $sign = $emplr['sign_prefix'].'/'.date('y').'/'.str_pad($sign_num,5,0,0);
-            $sign .=PHP_EOL.date('d.m.Y H:i',strtotime(date('d.m.Y H:i')." -{$sign_offset} days") );
+
+            if ($app->vars('_sett.signOffset')>'') {
+                $tmp = wbArrayAttr($app->vars('_sett.signOffset'));
+                if (count($tmp) == 2) {
+                    $sign_offset = intval(rand(intval($tmp[0]),intval($tmp[2])));
+                } else {
+                    $sign_offset = intval($tmp[0]);
+                }
+                $signdate = date('d.m.Y H:i')." {$sign_offset} days";
+            } else {
+                $signdate = date('d.m.Y H:i');
+            }
+
+            $sign .=PHP_EOL.date('d.m.Y H:i',strtotime($signdate));
             $this->lineField('BD:37', $sign);
             $this->lineField('BD:39', $emplr['title']);
             $this->lineField('BD:42', $emplr['last_name'].' '.$emplr['first_name'].' '.$emplr['middle_name']);
