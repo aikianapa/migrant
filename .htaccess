@@ -2,13 +2,13 @@ DirectoryIndex index.php
 AddDefaultCharset UTF-8
 
 
-AuthType Basic
-AuthName "Restricted Area"
-AuthUserFile /var/www/migrant/.htpasswd
-Require valid-user
-<Files .htpasswd>
-   deny from all
-</Files>
+#AuthType Basic
+#AuthName "Restricted Area"
+#AuthUserFile /var/www/migrant/.htpasswd
+#Require valid-user
+#<Files .htpasswd>
+#   deny from all
+#</Files>
 
 <IfModule mod_headers.c>
 <FilesMatch ".(webp|gif|jpg|jpeg|png|ico|svg|js|css|pdf)$">
