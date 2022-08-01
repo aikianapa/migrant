@@ -212,9 +212,9 @@ class docsClass extends cmsFormsClass
             $creator = array_pop($tmp)['_creator'];
             $d = $app->json($d)->sortBy('day')->groupBy('day')->get();
             foreach($d as $i => $day) {
-                $d[$i] = count($day);
+                $d[$i*1] = count($day);
             }
-            $result[$creator] = ['creator'=>$users[$creator], 'name'=>$name, 'days' => $d, 'mds' => $mds];
+            $result[$creator] = ['creator'=>$users[$creator], 'days' => $d, 'mds' => $mds];
         }
         echo $dom->fetch(['result'=>$result]);
     }
