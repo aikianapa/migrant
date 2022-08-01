@@ -37,8 +37,6 @@ foreach($lat1 as $v) {
     $lat[] = $v;
 }
 
-print_r($cyr);
-
 if ($textcyr) {
         return str_replace($cyr, $lat, $textcyr);
     } elseif ($textlat) {
