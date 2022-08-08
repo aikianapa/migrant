@@ -37,6 +37,9 @@
                     <a class="pos-absolute r-40 t-10" href="javascript:void(0);" onclick="window.open('{{order.0.img}}', '_blank');$(this).prev('input').prop('checked','true')">
                         <img data-src="/module/myicons/printer.svg?size=24&stroke=0168fa"> {{code}}
                     </a>
+                    <a class="pos-absolute t-10 btn-refresh" style="right:200px;" href="javascript:void(0);" data-img="{{order.0.img}}" data-id="{{id}}">
+                        <img data-src="/module/myicons/arrows-transfer-onversion-exchange.svg?size=24&stroke=0168fa">
+                    </a>
 
                     <span class="d-block tx-11 text-muted">{{birth_date}} {{doc_ser}} {{doc_num}}</span>
 
@@ -158,6 +161,21 @@
                     });
                 }
             });
+        });
+
+        $("#moduleExportXlsAccept").undelegate('.btn-refresh','click');
+        $("#moduleExportXlsAccept").delegate('.btn-refresh','click',function(){
+            let id = $(this).data('id')
+            let that = this;
+            wbapp.get('/module/pdfer/recover/'+id,function(data){
+                if (!data.error) {
+                    window.open($(that).data('img'), '_blank');$(that).prev('a').prev('input').prop('checked','true')
+                } else {
+                    wbapp.toast('Ошибка', data.msg, {
+                        bgcolor: 'danger'
+                    });
+                }
+            })
         });
     </script>
 </div>
