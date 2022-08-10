@@ -139,7 +139,8 @@ class docsClass extends cmsFormsClass
                 $data->set('doc_type', '31');
                 $data->set('country','643');
                 $data->set('parthner','21001');
-
+                $data->set('card_type',46);
+                $data->set('mc_type',39);
 
                 $region = $data->get('region');
                 mb_strtolower($region) == "ленинградская" ? $region = $region.' область' : null;
@@ -160,6 +161,7 @@ class docsClass extends cmsFormsClass
 
             }
             $item['birth_date'] = wbDate('d.m.Y', $item['birth_date']);
+            $item['gender'] = str_replace(['M','F'],['М','Ж'],$item['gender']);
         }
     }
 
@@ -258,7 +260,7 @@ class docsClass extends cmsFormsClass
                 $data['opertime'] = $item['opertime'] = date('Y-m-d H:i:s');
                 $item['oper'] = $data['oper'];
                 $app->itemSave('docs', $item, true);
-//                $item = $app->itemRead('docs', $data['id']);
+            //                $item = $app->itemRead('docs', $data['id']);
                 if ($item['opertime'] == $data['opertime'] && $item['oper'] == $data['oper']) $res = true;
             } else {
                 $res = true;
@@ -307,7 +309,7 @@ class docsClass extends cmsFormsClass
             ,20 => 'reg_flat'
             ,22 => 'phone_alt'
             ,23 => 'phone'
-            ,27 => 'card_type' // 32
+            ,27 => 'card_type' // 46
             ,28 => 'gender'
             ,29 => 'birth_place'
             ,33 => 'mc_type' // 39
