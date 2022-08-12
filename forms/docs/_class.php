@@ -161,7 +161,8 @@ class docsClass extends cmsFormsClass
 
             }
             $item['birth_date'] = wbDate('d.m.Y', $item['birth_date']);
-            $item['gender'] = str_replace(['м','ж'],['M','F'],strtolower( $item['gender']));
+            $item['gender'] = mb_strtolower($item['gender']);
+            $item['gender'] = str_replace(['м','ж'],['M','F'], $item['gender']);
         }
     }
 
