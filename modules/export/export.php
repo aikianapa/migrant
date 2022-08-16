@@ -103,6 +103,11 @@ class modExport
         $list['list'] = array_intersect_key($list['list'], array_flip($checked));
         foreach ($list['list'] as $item) {
             $this->docs->beforeItemShow($item);
+
+            if (substr(trim($item['birth_place']),0,1) == '-') {
+                $item['birth_place'] = substr(trim($item['birth_place']),1);
+            }
+
             $item['tax_resident_outside'] = 'нет';
             $item['mc_expire'] = ($item['mc_expire']>$item['date_out']) ? $item['mc_expire'] : $item['date_out'];
             $c=0;
