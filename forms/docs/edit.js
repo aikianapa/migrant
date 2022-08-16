@@ -64,6 +64,7 @@ $(document).ready(function () {
         docsListSources.set('uid', wbapp.newId())
         docsListSources.set('count', data.data.sources.length)
         docsListSources.update()
+        $('#uploadSources').children('textarea[name=sources]').val(json_encode(data.data.sources));
     });
 
 

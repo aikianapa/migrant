@@ -132,7 +132,7 @@ class modExport
     }
 
     public function inprint() {
-
+        // форма регистрации
         header('Content-Type: charset=utf-8');
         header('Content-Type: application/json');
 
@@ -247,8 +247,10 @@ class modExport
             $this->boxedField('AQ:39', date('m', strtotime($item['birth_date']))); // Месяц рождения
             $this->boxedField('BC:39', date('Y', strtotime($item['birth_date']))); // Год рождения
 
-            if (intval($item['citizen']) == '860') {
-                $item['birth_place'] = 'РЕСПУБЛИКА УЗБЕКИСТАН, '.$item['birth_place'];
+            if (intval($item['citizen']) == '860' && substr(trim($item['birth_place']),0,1) !== '-') {
+                $item['birth_place'] = trim('РЕСПУБЛИКА УЗБЕКИСТАН, '.$item['birth_place']);
+            } else if (substr(trim($item['birth_place']),0,1) == '-') {
+                $item['birth_place'] = substr(trim($item['birth_place']),1);
             }
             $this->boxedField('Z:41', $item['birth_place'], 24, 3); // Место рождения
 
