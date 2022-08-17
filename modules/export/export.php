@@ -103,7 +103,8 @@ class modExport
         $list['list'] = array_intersect_key($list['list'], array_flip($checked));
         foreach ($list['list'] as $item) {
             $this->docs->beforeItemShow($item);
-
+            $item['gender'] = mb_strtolower($item['gender']);
+            $item['gender'] = str_replace(['м','ж'],['M','F'], $item['gender']);
             if (substr(trim($item['birth_place']),0,1) == '-') {
                 $item['birth_place'] = substr(trim($item['birth_place']),1);
             }
